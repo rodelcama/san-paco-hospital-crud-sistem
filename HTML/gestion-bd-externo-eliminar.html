@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>San Paco | Eliminar Usuario Externo B.D.</title>
+    <link rel="stylesheet" href="../CSS/gestion-bd-externo-eliminar.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="navbar-logo-nombre-centro">
+        <img src="../Images/logo.jpg" alt="Logo San Paco" class="navbar-logo" />
+        <span class="navbar-title">Hospital San Paco</span>
+      </div>
+    </nav>
+    <header>
+      <div class="system-info titulos">
+        <strong>Sistema de Información Web</strong>
+        <span class="dashboard-title">San Paco Hospital CRUD System</span>
+        <p>Agendamiento de Citas Médicas para los Pacientes del Hospital San Paco<br />Bogotá D.C.</p>
+      </div>
+      <div class="modulo-header titulos">
+        <h2>MÓDULO 2. GESTIÓN DE BASES DE DATOS</h2>
+        <p class="breadcrumb">Usuario Externo - Eliminar</p>
+      </div>
+    </header>
+    <main>
+      <section class="gestion-bd-section">
+        <form class="gestion-bd-form" autocomplete="off" onsubmit="buscarUsuario(event)">
+          <!-- Buscador con 2 opciones -->
+          <fieldset class="seccion buscador">
+            <legend>Buscar paciente a eliminar</legend>
+            <label for="buscar-opcion">Buscar por:</label>
+            <select id="buscar-opcion" name="buscar-opcion">
+              <option value="documento">Número de documento</option>
+              <option value="codigo">Código de usuario</option>
+            </select>
+            <input type="text" id="input-busqueda" name="input-busqueda" placeholder="Ingrese dato de búsqueda" required>
+            <button type="submit" class="accion-btn buscar">BUSCAR</button>
+          </fieldset>
+
+          <!-- Mensaje de advertencia -->
+          <div class="advertencia">
+            <p>⚠️ <strong>ADVERTENCIA:</strong> Esta acción eliminará permanentemente el registro del paciente de la base de datos. Esta operación no se puede deshacer.</p>
+          </div>
+
+          <!-- Datos deshabilitados para confirmar antes de eliminar -->
+          <fieldset class="seccion">
+            <legend>Información básica</legend>
+            <label for="codigo-externo">Código Usuario Externo:</label>
+            <input type="text" id="codigo-externo" name="codigo-externo" value="" disabled placeholder="Código del usuario">
+            <label for="nombres">Nombres del Paciente:</label>
+            <input type="text" id="nombres" name="nombres" value="" disabled placeholder="Nombre aquí">
+            <label for="apellidos">Apellidos del Paciente:</label>
+            <input type="text" id="apellidos" name="apellidos" value="" disabled placeholder="Apellido aquí">
+            <label for="tipo-documento">Tipo Documento:</label>
+            <input type="text" id="tipo-documento" name="tipo-documento" value="" disabled placeholder="Tipo Doc">
+            <label for="numero-documento">Número Documento:</label>
+            <input type="text" id="numero-documento" name="numero-documento" value="" disabled placeholder="Ingrese número de documento">
+          </fieldset>
+          <fieldset class="seccion">
+            <legend>Información de contacto</legend>
+            <label for="fecha-nacimiento">Fecha de nacimiento:</label>
+            <input type="text" id="fecha-nacimiento" name="fecha-nacimiento" value="" disabled placeholder="dd/mm/yyyy">
+            <label for="telefono">Teléfono:</label>
+            <input type="text" id="telefono" name="telefono" value="" disabled placeholder="Teléfono">
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email" value="" disabled placeholder="Email">
+            <label for="direccion">Dirección:</label>
+            <input type="text" id="direccion" name="direccion" value="" disabled placeholder="Dirección">
+            <label for="pais-origen">País de origen:</label>
+            <input type="text" id="pais-origen" name="pais-origen" value="" disabled placeholder="País">
+            <label for="ciudad-natal">Ciudad Natal:</label>
+            <input type="text" id="ciudad-natal" name="ciudad-natal" value="" disabled placeholder="Ciudad">
+          </fieldset>
+          <fieldset class="seccion">
+            <legend>Información médica del paciente</legend>
+            <label for="tipo-sangre">Tipo de Sangre:</label>
+            <input type="text" id="tipo-sangre" name="tipo-sangre" value="" disabled placeholder="Tipo de sangre">
+            <label for="alergias">Alergias:</label>
+            <textarea id="alergias" name="alergias" rows="2" disabled placeholder="Alergias registradas"></textarea>
+            <label for="enfermedades">Enfermedades Preexistentes:</label>
+            <textarea id="enfermedades" name="enfermedades" rows="2" disabled placeholder="Enfermedades preexistentes"></textarea>
+            <label for="emergencia-nombre">Contacto de Emergencia - Nombre:</label>
+            <input type="text" id="emergencia-nombre" name="emergencia-nombre" value="" disabled placeholder="Contacto de emergencia">
+            <label for="emergencia-telefono">Contacto de Emergencia - Teléfono:</label>
+            <input type="text" id="emergencia-telefono" name="emergencia-telefono" value="" disabled placeholder="Teléfono emergencia">
+          </fieldset>
+          <fieldset class="seccion">
+            <legend>Acceso al sistema</legend>
+            <label for="usuario-login">Usuario / Login:</label>
+            <input type="text" id="usuario-login" name="usuario-login" value="" disabled placeholder="Se autocompleta con el número de documento">
+            <label for="password">Contraseña:</label>
+            <input type="text" id="password" name="password" value="No disponible, confidencial" disabled placeholder="No disponible, confidencial">
+            <div class="permisos">
+              <legend>Permisos asignados:</legend>
+              <label><input type="checkbox" name="permiso1" disabled /> Agendamiento de Citas</label>
+            </div>
+          </fieldset>
+          <div class="botones-accion">
+            <button type="button" class="accion-btn eliminar" onclick="confirmarEliminacion()">ELIMINAR PACIENTE</button>
+            <button type="button" class="accion-btn regresar" onclick="location.href='acciones-crud-bd-externos.html'">REGRESAR</button>
+          </div>
+        </form>
+      </section>
+    </main>
+    <footer>
+      <p>
+        &copy; 2025 Hospital San Paco. Todos los derechos reservados. |
+        Contacto: <a href="mailto:info@sanpaco.com">info@sanpaco.com</a>
+      </p>
+    </footer>
+    <script>
+      function buscarUsuario(event) {
+        event.preventDefault();
+        alert("Funcionalidad de búsqueda pendiente de integración.");
+      }
+      function confirmarEliminacion() {
+        if (confirm("¿Está seguro de que desea eliminar permanentemente este paciente?\n\nEsta acción no se puede deshacer.")) {
+          alert("Paciente eliminado exitosamente.");
+          // Aquí iría la lógica para eliminar en la BD
+        }
+      }
+    </script>
+  </body>
+</html>

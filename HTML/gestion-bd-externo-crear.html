@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>San Paco | Crear Usuario Externo B.D.</title>
+    <link rel="stylesheet" href="../CSS/gestion-bd-externo-crear.css" />
+  </head>
+  <body>
+    <!-- Barra de navegación -->
+    <nav class="navbar">
+      <div class="navbar-logo-nombre-centro">
+        <img src="../Images/logo.jpg" alt="Logo San Paco" class="navbar-logo" />
+        <span class="navbar-title">Hospital San Paco</span>
+      </div>
+    </nav>
+
+    <!-- Encabezado -->
+    <header>
+      <div class="system-info titulos">
+        <strong>Sistema de Información Web</strong>
+        <span class="dashboard-title">San Paco Hospital CRUD System</span>
+        <p>
+          Agendamiento de Citas Médicas para los Pacientes del Hospital San Paco<br />Bogotá D.C.
+        </p>
+      </div>
+      <div class="modulo-header titulos">
+        <h2>MÓDULO 2. GESTIÓN DE BASES DE DATOS</h2>
+        <p class="breadcrumb">Usuario Externo - Crear</p>
+      </div>
+    </header>
+    
+    <main>
+      <section class="gestion-bd-section">
+        <form class="gestion-bd-form" autocomplete="off">
+          <!-- SECCIÓN 1: INFORMACIÓN BÁSICA -->
+          <fieldset class="seccion">
+            <legend>Información Básica</legend>
+            <label for="codigo-externo">Código Usuario Externo:</label>
+            <input type="text" id="codigo-externo" name="codigo-externo" value="PAC-00234" disabled placeholder="Se genera automáticamente">
+            
+            <label for="nombres">Nombres del Paciente:</label>
+            <input type="text" id="nombres" name="nombres" placeholder="Ingrese nombres del paciente" required>
+
+            <label for="apellidos">Apellidos del Paciente:</label>
+            <input type="text" id="apellidos" name="apellidos" placeholder="Ingrese apellidos del paciente" required>
+
+            <label for="tipo-documento">Tipo Documento:</label>
+            <select id="tipo-documento" name="tipo-documento" required>
+              <option value="">Seleccione...</option>
+              <option value="CC">Cédula de Ciudadanía (CC)</option>
+              <option value="CE">Cédula de Extranjería (CE)</option>
+              <option value="Pasaporte">Pasaporte</option>
+              <option value="TI">Tarjeta de Identidad (TI)</option>
+            </select>
+
+            <label for="numero-documento">Número Documento:</label>
+            <input type="text" id="numero-documento" name="numero-documento" placeholder="Ingrese número de documento" onblur="actualizarUsuarioLogin()" required>
+          </fieldset>
+
+          <!-- SECCIÓN 2: INFORMACIÓN DE CONTACTO -->
+          <fieldset class="seccion">
+            <legend>Información de Contacto</legend>
+            <label for="fecha-nacimiento">Fecha de Nacimiento:</label>
+            <input type="date" id="fecha-nacimiento" name="fecha-nacimiento" required>
+
+            <label for="telefono">Teléfono:</label>
+            <input type="tel" id="telefono" name="telefono" placeholder="Ej: 3001234567" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Ej: paciente@email.com" required>
+
+            <label for="direccion">Dirección:</label>
+            <input type="text" id="direccion" name="direccion" placeholder="Ej: Calle 123 #45-67" required>
+
+            <label for="pais-origen">País de Origen:</label>
+            <select id="pais-origen" name="pais-origen" required>
+              <option value="">Seleccione...</option>
+              <option value="Colombia">Colombia</option>
+              <option value="Venezuela">Venezuela</option>
+              <option value="Ecuador">Ecuador</option>
+              <option value="Perú">Perú</option>
+              <option value="Argentina">Argentina</option>
+              <option value="México">México</option>
+              <option value="Otro">Otro</option>
+            </select>
+
+            <label for="ciudad-natal">Ciudad Natal:</label>
+            <input type="text" id="ciudad-natal" name="ciudad-natal" placeholder="Ej: Bogotá" required>
+          </fieldset>
+
+          <!-- SECCIÓN 3: INFORMACIÓN MÉDICA DEL PACIENTE -->
+          <fieldset class="seccion">
+            <legend>Información Médica</legend>
+            <label for="tipo-sangre">Tipo de Sangre:</label>
+            <select id="tipo-sangre" name="tipo-sangre" required>
+              <option value="">Seleccione...</option>
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+              <option value="O+">O+</option>
+              <option value="O-">O-</option>
+            </select>
+            <label for="alergias">Alergias:</label>
+            <textarea id="alergias" name="alergias" rows="2" placeholder="Describa cualquier alergia"></textarea>
+
+            <label for="enfermedades">Enfermedades Preexistentes:</label>
+            <textarea id="enfermedades" name="enfermedades" rows="2" placeholder="Describa enfermedades preexistentes"></textarea>
+            
+            <label for="emergencia-nombre">Contacto de Emergencia - Nombre:</label>
+            <input type="text" id="emergencia-nombre" name="emergencia-nombre" placeholder="Nombres y apellidos de contacto">
+
+            <label for="emergencia-telefono">Contacto de Emergencia - Teléfono:</label>
+            <input type="tel" id="emergencia-telefono" name="emergencia-telefono" placeholder="Teléfono de emergencia">
+          </fieldset>
+
+          <!-- SECCIÓN 4: ACCESO AL SISTEMA -->
+          <fieldset class="seccion">
+            <legend>Acceso al Sistema</legend>
+            <label for="usuario-login">Usuario / Login:</label>
+            <input type="text" id="usuario-login" name="usuario-login" value="" placeholder="Se autocompleta con el número de documento" disabled>
+
+            <label for="password">Contraseña (autogenerada):</label>
+            <input type="text" id="password" name="password" value="HospPac2025#234" disabled placeholder="Se genera automáticamente">
+
+            <div class="permisos">
+              <legend>Permisos Asignados:</legend>
+              <label><input type="checkbox" name="permiso" value="agendamiento" checked disabled/> Agendamiento de Citas</label>
+            </div>
+          </fieldset>
+
+          <div class="botones-accion">
+            <button type="submit" class="accion-btn guardar">GUARDAR</button>
+            <button type="reset" class="accion-btn limpiar">LIMPIAR FORMULARIO</button>
+            <button type="button" class="accion-btn regresar" onclick="location.href='acciones-crud-bd-externos.html'">REGRESAR</button>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        &copy; 2025 Hospital San Paco. Todos los derechos reservados. |
+        Contacto: <a href="mailto:info@sanpaco.com">info@sanpaco.com</a>
+      </p>
+    </footer>
+
+    <script>
+      // Autocompletar usuario/login
+      function actualizarUsuarioLogin() {
+        const numeroDocumento = document.getElementById('numero-documento').value;
+        const usuarioLogin = document.getElementById('usuario-login');
+        usuarioLogin.value = numeroDocumento.trim();
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>San Paco | Consultar Usuario Interno B.D.</title>
+    <link rel="stylesheet" href="../CSS/gestion-bd-interno-consultar.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="navbar-logo-nombre-centro">
+        <img src="../Images/logo.jpg" alt="Logo San Paco" class="navbar-logo" />
+        <span class="navbar-title">Hospital San Paco</span>
+      </div>
+    </nav>
+    <header>
+      <div class="system-info titulos">
+        <strong>Sistema de Información Web</strong>
+        <span class="dashboard-title">San Paco Hospital CRUD System</span>
+        <p>Agendamiento de Citas Médicas para los Pacientes del Hospital San Paco<br />Bogotá D.C.</p>
+      </div>
+      <div class="modulo-header titulos">
+        <h2>MÓDULO 2. GESTIÓN DE BASES DE DATOS</h2>
+        <p class="breadcrumb">Usuario Interno - Consultar</p>
+      </div>
+    </header>
+    <main>
+      <section class="gestion-bd-section">
+        <form class="gestion-bd-form" autocomplete="off" onsubmit="buscarUsuario(event)">
+          <!-- Buscador con 3 opciones -->
+          <fieldset class="seccion buscador">
+            <legend>Buscar usuario</legend>
+            <label for="buscar-opcion">Buscar por:</label>
+            <select id="buscar-opcion" name="buscar-opcion">
+              <option value="documento">Número de documento</option>
+              <option value="codigo">Código de usuario</option>
+              <option value="idmedico">ID Médico</option>
+            </select>
+            <input type="text" id="input-busqueda" name="input-busqueda" placeholder="Ingrese dato de búsqueda" required>
+            <button type="submit" class="accion-btn buscar">BUSCAR</button>
+          </fieldset>
+          <!-- Datos deshabilitados -->
+          <fieldset class="seccion">
+            <legend>Información básica</legend>
+            <label for="codigo-interno">Código Usuario Interno:</label>
+            <input type="text" id="codigo-interno" name="codigo-interno" value="" disabled placeholder="Código del usuario">
+            <label for="nombres">Nombres del Usuario:</label>
+            <input type="text" id="nombres" name="nombres" value="" disabled placeholder="Nombre aquí">
+            <label for="apellidos">Apellidos del Usuario:</label>
+            <input type="text" id="apellidos" name="apellidos" value="" disabled placeholder="Apellido aquí">
+            <label for="tipo-documento">Tipo Documento:</label>
+            <input type="text" id="tipo-documento" name="tipo-documento" value="" disabled placeholder="Tipo Doc">
+            <label for="numero-documento">Número Documento:</label>
+            <input type="text" id="numero-documento" name="numero-documento" value="" disabled placeholder="Se autocompleta con el número de documento">
+          </fieldset>
+          <fieldset class="seccion">
+            <legend>Información de contacto</legend>
+            <label for="fecha-nacimiento">Fecha de nacimiento:</label>
+            <input type="text" id="fecha-nacimiento" name="fecha-nacimiento" value="" disabled placeholder="dd/mm/yyyy">
+            <label for="telefono">Teléfono:</label>
+            <input type="text" id="telefono" name="telefono" value="" disabled placeholder="Teléfono">
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email" value="" disabled placeholder="Email">
+            <label for="direccion">Dirección:</label>
+            <input type="text" id="direccion" name="direccion" value="" disabled placeholder="Dirección">
+            <label for="pais-origen">País de origen:</label>
+            <input type="text" id="pais-origen" name="pais-origen" value="" disabled placeholder="País">
+            <label for="ciudad-natal">Ciudad Natal:</label>
+            <input type="text" id="ciudad-natal" name="ciudad-natal" value="" disabled placeholder="Ciudad">
+          </fieldset>
+          <fieldset class="seccion">
+            <legend>Información laboral</legend>
+            <label for="estado-laboral">Estado Laboral:</label>
+            <input type="text" id="estado-laboral" name="estado-laboral" value="" disabled placeholder="Estado">
+            <label for="area-operacion">Área de Operación:</label>
+            <input type="text" id="area-operacion" name="area-operacion" value="" disabled placeholder="Área">
+          </fieldset>
+          <fieldset class="seccion seccion-medica">
+            <legend>Información Médica</legend>
+            <label for="id-medico">ID Médico:</label>
+            <input type="text" id="id-medico" name="id-medico" value="" disabled placeholder="ID Médico">
+            <label for="especialidad">Especialidad:</label>
+            <input type="text" id="especialidad" name="especialidad" value="" disabled placeholder="Especialidad">
+            <label for="registro-medico">Registro Médico:</label>
+            <input type="text" id="registro-medico" name="registro-medico" value="" disabled placeholder="Registro Médico">
+          </fieldset>
+          <fieldset class="seccion">
+            <legend>Acceso al sistema</legend>
+            <label for="usuario-login">Usuario / Login:</label>
+            <input type="text" id="usuario-login" name="usuario-login" value="" disabled placeholder="Se autocompleta con el número de documento">
+            <label for="password">Contraseña:</label>
+            <input type="text" id="password" name="password" value="No disponible, confidencial" disabled placeholder="No disponible, confidencial">
+            <div class="permisos">
+              <legend>Permisos asignados:</legend>
+              <label><input type="checkbox" name="permiso1" disabled /> Gestión de Usuarios</label>
+              <label><input type="checkbox" name="permiso2" disabled /> Gestión de Bases de Datos</label>
+              <label><input type="checkbox" name="permiso3" disabled /> Agendamiento de Citas</label>
+              <label><input type="checkbox" name="permiso4" disabled /> Reportes y Consultas</label>
+            </div>
+          </fieldset>
+          <div class="botones-accion">
+            <button type="button" class="accion-btn regresar" onclick="location.href='acciones-crud-bd-internos.html'">REGRESAR</button>
+          </div>
+        </form>
+      </section>
+    </main>
+    <footer>
+      <p>
+        &copy; 2025 Hospital San Paco. Todos los derechos reservados. |
+        Contacto: <a href="mailto:info@sanpaco.com">info@sanpaco.com</a>
+      </p>
+    </footer>
+    <script>
+      function buscarUsuario(event) {
+        event.preventDefault();
+        alert("Funcionalidad de búsqueda pendiente de integración.");
+      }
+    </script>
+  </body>
+</html>

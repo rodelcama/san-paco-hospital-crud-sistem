@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>San Paco | Gestión de Bases de Datos</title>
+    <link rel="stylesheet" href="../CSS/menu-gestion-bd.css" />
+  </head>
+  <body>
+    <!-- Barra de navegación -->
+    <nav class="navbar">
+      <div class="navbar-logo-nombre-centro">
+        <img src="../Images/logo.jpg" alt="Logo San Paco" class="navbar-logo" />
+        <span class="navbar-title">Hospital San Paco</span>
+      </div>
+    </nav>
+
+    <!-- Encabezado del Sistema -->
+    <header>
+      <div class="system-info titulos">
+        <strong>Sistema de Información Web</strong>
+        <span class="dashboard-title">San Paco Hospital CRUD System</span>
+        <p>
+          Agendamiento de Citas Médicas para los Pacientes del Hospital San Paco<br />Bogotá D.C.
+        </p>
+      </div>
+      <div class="modulo-header titulos">
+        <h2>MÓDULO 2. GESTIÓN DE BASES DE DATOS</h2>
+        <p class="breadcrumb">Menú Gestión de Bases de Datos</p>
+      </div>
+    </header>
+
+    <main>
+      <!-- Sección de opciones de gestión de BD -->
+      <section class="opciones-gestion-bd">
+        
+        <!-- Opción 2.1: Gestión B.D. Usuarios Internos -->
+        <div class="opcion-card">
+          <div class="opcion-icon">👥</div>
+          <h3>2.1 Gestión B.D. Usuarios Internos</h3>
+          <p>Gestión completa de datos de usuarios internos (administrativos y personal médico)</p>
+          <button class="opcion-btn" onclick="location.href='acciones-crud-bd-internos.html'">
+            ACCEDER
+          </button>
+        </div>
+
+        <!-- Opción 2.2: Gestión B.D. Usuarios Externos -->
+        <div class="opcion-card">
+          <div class="opcion-icon">🏥</div>
+          <h3>2.2 Gestión B.D. Usuarios Externos</h3>
+          <p>Gestión completa de datos de pacientes del hospital</p>
+          <button class="opcion-btn" onclick="location.href='acciones-crud-bd-externos.html'">
+            ACCEDER
+          </button>
+        </div>
+
+        <!-- Opción 2.3: Gestión B.D. Citas Médicas -->
+        <div class="opcion-card">
+          <div class="opcion-icon">📅</div>
+          <h3>2.3 Gestión B.D. Citas Médicas</h3>
+          <p>Gestión completa del sistema de agendamiento de citas médicas</p>
+          <button class="opcion-btn" onclick="location.href='acciones-crud-bd-citas.html'">
+            ACCEDER
+          </button>
+        </div>
+
+      </section>
+
+      <!-- Botón para regresar al menú principal -->
+      <div class="regresar-container">
+        <button class="btn-regresar" onclick="location.href='dashboard.html'">
+          REGRESAR AL MENÚ PRINCIPAL
+        </button>
+      </div>
+    </main>
+
+    <footer>
+      <p>
+        &copy; 2025 Hospital San Paco. Todos los derechos reservados. |
+        Contacto: <a href="mailto:info@sanpaco.com">info@sanpaco.com</a>
+      </p>
+    </footer>
+  </body>
+</html>

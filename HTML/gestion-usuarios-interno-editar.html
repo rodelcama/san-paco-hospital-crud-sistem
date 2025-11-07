@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>San Paco | Editar Usuario Interno</title>
+    <link rel="stylesheet" href="../CSS/gestion-usuarios-interno-editar.css" />
+  </head>
+  <body>
+    <!-- Barra de navegación -->
+    <nav class="navbar">
+      <div class="navbar-logo-nombre-centro">
+        <img src="../Images/logo.jpg" alt="Logo San Paco" class="navbar-logo" />
+        <span class="navbar-title">Hospital San Paco</span>
+      </div>
+    </nav>
+
+    <!-- Encabezado del Sistema -->
+    <header>
+      <div class="system-info titulos">
+        <strong>Sistema de Información Web</strong>
+        <span class="dashboard-title">San Paco Hospital CRUD System</span>
+        <p>
+          Agendamiento de Citas Médicas para los Pacientes del Hospital San Paco<br />Bogotá D.C.
+        </p>
+      </div>
+      <div class="modulo-header titulos">
+        <h2>MÓDULO 1. GESTIÓN USUARIOS</h2>
+        <p class="breadcrumb">Gestión de Usuario Interno - Editar</p>
+      </div>
+    </header>
+    
+    <main>
+      <!-- Formulario central de edición de usuarios internos -->
+      <section class="gestion-usuarios-section">
+        <form class="gestion-usuarios-form" autocomplete="off">
+          
+          <!-- Seleccionar código de usuario existente o escribir -->
+          <label for="codigo-interno">Código Usuario Interno:</label>
+          <input 
+            type="text" 
+            id="codigo-interno" 
+            name="codigo-interno" 
+            list="lista-codigos-internos"
+            placeholder="Escriba o seleccione un código..."
+            required>
+          <datalist id="lista-codigos-internos">
+            <option value="EMP-00123">EMP-00123 - Juan Pérez</option>
+            <option value="EMP-00124">EMP-00124 - María González</option>
+            <option value="EMP-00125">EMP-00125 - Carlos Rodríguez</option>
+          </datalist>
+
+          <!-- Tipo de usuario interno (editable) -->
+          <label for="tipo-interno">Tipo Usuario Interno:</label>
+          <select id="tipo-interno" name="tipo-interno" required>
+            <option value="">Seleccione...</option>
+            <option value="administrador" selected>Administrador</option>
+            <option value="operario">Operario del Sistema</option>
+            <option value="recepcionista">Recepcionista</option>
+            <option value="medico">Médico</option>
+          </select>
+
+          <!-- Datos personales (solo lectura) -->
+          <label for="nombre">Nombres del Usuario:</label>
+          <input type="text" id="nombre" name="nombre" value="Juan Carlos" disabled>
+          
+          <label for="apellido">Apellidos del Usuario:</label>
+          <input type="text" id="apellido" name="apellido" value="Pérez López" disabled>
+          
+          <label for="tipo-documento">Tipo Documento:</label>
+          <input type="text" id="tipo-documento" name="tipo-documento" value="Cédula de Ciudadanía (CC)" disabled>
+          
+          <label for="numero-documento">Número Documento:</label>
+          <input type="text" id="numero-documento" name="numero-documento" value="1234567890" disabled>
+
+          <!-- Usuario/Login (solo lectura) -->
+          <label for="login">Usuario / Login:</label>
+          <input type="text" id="login" name="login" value="1234567890" disabled>
+
+          <!-- Cambio de contraseña (opcional) -->
+          <label for="password">Contraseña (opcional):</label>
+          <input type="password" id="password" name="password" placeholder="Dejar en blanco para mantener la actual">
+
+          <label for="confirmar-password">Confirmar Contraseña:</label>
+          <input type="password" id="confirmar-password" name="confirmar-password" placeholder="Dejar en blanco para mantener la actual">
+
+          <!-- Permisos asignados (editables) -->
+          <fieldset class="permisos">
+            <legend>Permisos Asignados:</legend>
+            <label><input type="checkbox" name="permiso" value="reportes" checked/> Acceso a reportes</label>
+            <label><input type="checkbox" name="permiso" value="agendas"/> Gestión de agendas</label>
+            <label><input type="checkbox" name="permiso" value="usuarios" checked/> Gestión de usuarios</label>
+            <label><input type="checkbox" name="permiso" value="config" checked/> Configuración de sistema</label>
+          </fieldset>
+
+          <!-- Botones de acción -->
+          <div class="botones-accion">
+            <button type="submit" class="accion-btn guardar">GUARDAR CAMBIOS</button>
+            <button type="button" class="accion-btn regresar">REGRESAR</button>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        &copy; 2025 Hospital San Paco. Todos los derechos reservados. |
+        Contacto: <a href="mailto:info@sanpaco.com">info@sanpaco.com</a>
+      </p>
+    </footer>
+  </body>
+</html>

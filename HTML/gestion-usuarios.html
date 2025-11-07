@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>San Paco | Gestión de Usuarios</title>
+    <link rel="stylesheet" href="../CSS/gestion-usuarios.css" />
+  </head>
+  <body>
+    <!-- Barra de navegación -->
+    <nav class="navbar">
+      <div class="navbar-logo-nombre-centro">
+        <img src="../Images/logo.jpg" alt="Logo San Paco" class="navbar-logo" />
+        <span class="navbar-title">Hospital San Paco</span>
+      </div>
+    </nav>
+
+    <!-- Encabezado del Sistema -->
+    <header>
+      <div class="system-info titulos">
+        <strong>Sistema de Información Web</strong>
+        <span class="dashboard-title">San Paco Hospital CRUD System</span>
+        <p>
+          Agendamiento de Citas Médicas para los Pacientes del Hospital San Paco<br> Bogotá D.C.
+        </p>
+      </div>
+      <div class="modulo-header titulos">
+        <h2>MODULO 1. GESTION USUARIOS</h2>
+      </div>
+    </header>
+    
+    <main>
+      <!-- Formulario central de gestión de usuarios -->
+      <section class="gestion-usuarios-section">
+        <form class="gestion-usuarios-form" autocomplete="off">
+          <!-- Tipo de usuario a gestionar -->
+          <label for="tipo-usuario">Tipo de Usuario:</label>
+          <select id="tipo-usuario" name="tipo-usuario" required>
+            <option value="">Seleccione...</option>
+            <option value="interno">Usuario Interno (Empleado)</option>
+            <option value="externo">Usuario Externo (Paciente)</option>
+          </select>
+
+          <!-- Campos para usuario interno -->
+          <div class="campos-interno">
+            <label for="codigo-interno">Código Usuario Interno:</label>
+            <input type="text" id="codigo-interno" name="codigo-interno" placeholder="El sistema despliega los códigos de los usuarios internos">
+
+            <label for="tipo-interno">Tipo Usuario Interno:</label>
+            <select id="tipo-interno" name="tipo-interno">
+              <option value="">Seleccione...</option>
+              <option value="administrador">Administrador</option>
+              <option value="operario">Operario del Sistema</option>
+              <option value="recepcionista">Recepcionista</option>
+              <option value="medico">Médico</option>
+            </select>
+          </div>
+
+          <!-- Campos para usuario externo -->
+          <div class="campos-externo">
+            <label for="codigo-externo">Código Usuario Externo:</label>
+            <input type="text" id="codigo-externo" name="codigo-externo" placeholder="El sistema despliega los códigos de los usuarios externos">
+
+            <label for="tipo-externo">Tipo Usuario Externo:</label>
+            <input type="text" id="tipo-externo" name="tipo-externo" value="Paciente" disabled>
+          </div>
+
+          <!-- Datos personales (solo lectura en edición) -->
+          <div class="campos-personales">
+            <label for="nombre">Nombres del Usuario:</label>
+            <input type="text" id="nombre" name="nombre" placeholder="El sistema lo da, creado en módulo 2" disabled>
+            
+            <label for="apellido">Apellidos del Usuario:</label>
+            <input type="text" id="apellido" name="apellido" placeholder="El sistema lo da, creado en módulo 2" disabled>
+            
+            <label for="tipo-documento">Tipo Documento:</label>
+            <input type="text" id="tipo-documento" name="tipo-documento" placeholder="El sistema lo da" disabled>
+            
+            <label for="numero-documento">Número Documento:</label>
+            <input type="text" id="numero-documento" name="numero-documento" placeholder="El sistema lo da" disabled>
+          </div>
+
+          <!-- Credenciales de acceso -->
+          <label for="login">Usuario / Login:</label>
+          <input type="text" id="login" name="login" placeholder="Id/Login o Número de Cedula">
+
+          <label for="password">Contraseña / Password:</label>
+          <input type="password" id="password" name="password" placeholder="Dato privado/personal">
+
+          <label for="confirmar-password">Confirmar Contraseña / Password:</label>
+          <input type="password" id="confirmar-password" name="confirmar-password" placeholder="Repita la contraseña">
+
+          <!-- Permisos asignados -->
+          <fieldset class="permisos">
+            <legend>Permisos Asignados:</legend>
+            <label><input type="checkbox" name="permiso" value="reportes"/> Acceso a reportes</label>
+            <label><input type="checkbox" name="permiso" value="agendas"/> Gestión de agendas</label>
+            <label><input type="checkbox" name="permiso" value="usuarios"/> Gestión de usuarios</label>
+            <label><input type="checkbox" name="permiso" value="config"/> Configuración de sistema</label>
+          </fieldset>
+
+          <!-- Botonera CRUD -->
+          <div class="crud-botones">
+            <button type="submit" class="accion-btn crear">CREAR</button>
+            <button type="button" class="accion-btn editar">EDITAR</button>
+            <button type="button" class="accion-btn eliminar">ELIMINAR</button>
+            <button type="button" class="accion-btn consultar">CONSULTAR</button>
+          </div>
+          <button type="button" class="accion-btn salir">SALIR</button>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        &copy; 2025 Hospital San Paco. Todos los derechos reservados. |
+        Contacto: <a href="mailto:info@sanpaco.com">info@sanpaco.com</a>
+      </p>
+    </footer>
+  </body>
+</html>

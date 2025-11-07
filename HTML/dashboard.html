@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>San Paco | Dashboard</title>
+    <link rel="stylesheet" href="../CSS/dashboard.css" />
+  </head>
+  <body>
+    <!-- Barra de navegación -->
+    <nav class="navbar">
+      <div class="navbar-logo-nombre-centro">
+        <img src="../Images/logo.jpg" alt="Logo San Paco" class="navbar-logo" />
+        <span class="navbar-title">Hospital San Paco</span>
+      </div>
+    </nav>
+
+    <!-- Encabezado del Sistema -->
+    <header>
+      <div class="system-info titulos">
+        <strong>Sistema de Información Web</strong>
+        <span class="dashboard-title">San Paco Hospital CRUD System</span>
+        <p>
+          Agendamiento de Citas Médicas para los Pacientes del Hospital San Paco<br />Bogotá D.C.
+        </p>
+      </div>
+      <div class="modulo-header titulos">
+        <h2>MENÚ PRINCIPAL</h2>
+      </div>
+    </header>
+
+    <main>
+      <!-- Sección de módulos del sistema con tarjetas mejoradas -->
+      <section class="modulos-sistema">
+        
+        <!-- Módulo 1 -->
+        <div class="modulo-card">
+          <div class="modulo-icon">👤</div>
+          <h3>1. Gestión Usuarios</h3>
+          <p>Creación y administración de usuarios internos y externos del sistema</p>
+          <button class="modulo-btn" onclick="location.href='tipo-usuario.html'">
+            ACCEDER
+          </button>
+        </div>
+
+        <!-- Módulo 2 -->
+        <div class="modulo-card">
+          <div class="modulo-icon">🗄️</div>
+          <h3>2. Gestión B.D. Usuarios - B.D. Citas Médicas</h3>
+          <p>Gestión completa de bases de datos de usuarios y citas médicas del hospital</p>
+          <button class="modulo-btn" onclick="location.href='menu-gestion-bd.html'">
+            ACCEDER
+          </button>
+        </div>
+
+        <!-- Módulo 3 -->
+        <div class="modulo-card">
+          <div class="modulo-icon">📅</div>
+          <h3>3. Agendamiento Citas Médicas Pacientes</h3>
+          <p>Sistema de agendamiento de citas medicas para pacientes del hospital</p>
+          <button class="modulo-btn" onclick="location.href='#'">
+            ACCEDER
+          </button>
+        </div>
+
+        <!-- Módulo 4 -->
+        <div class="modulo-card">
+          <div class="modulo-icon">📊</div>
+          <h3>4. Ver Informes, Reportes, Consultas</h3>
+          <p>Generación de informes, reportes estadísticos y consultas del sistema</p>
+          <button class="modulo-btn" onclick="location.href='#'">
+            ACCEDER
+          </button>
+        </div>
+
+      </section>
+
+                   <!-- Botón Cerrar Sesión -->
+      <div class="cerrar-sesion-container">
+        <button class="btn-cerrar-sesion" onclick="location.href='../index.html'">
+          ← CERRAR SESIÓN
+        </button>
+      </div>
+
+    </main>
+
+    <footer>
+      <p>
+        &copy; 2025 Hospital San Paco. Todos los derechos reservados. |
+        Contacto: <a href="mailto:info@sanpaco.com">info@sanpaco.com</a>
+      </p>
+    </footer>
+  </body>
+</html>

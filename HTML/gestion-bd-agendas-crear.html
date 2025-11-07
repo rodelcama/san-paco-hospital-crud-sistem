@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>San Paco | Crear Agenda Médica B.D.</title>
+    <link rel="stylesheet" href="../CSS/gestion-bd-agendas-crear.css" />
+  </head>
+  <body>
+    <!-- Barra de navegación -->
+    <nav class="navbar">
+      <div class="navbar-logo-nombre-centro">
+        <img src="../Images/logo.jpg" alt="Logo San Paco" class="navbar-logo" />
+        <span class="navbar-title">Hospital San Paco</span>
+      </div>
+    </nav>
+
+    <!-- Encabezado -->
+    <header>
+      <div class="system-info titulos">
+        <strong>Sistema de Información Web</strong>
+        <span class="dashboard-title">San Paco Hospital CRUD System</span>
+        <p>
+          Agendamiento de Citas Médicas para los Pacientes del Hospital San Paco<br />Bogotá D.C.
+        </p>
+      </div>
+      <div class="modulo-header titulos">
+        <h2>MÓDULO 2. GESTIÓN DE BASES DE DATOS</h2>
+        <p class="breadcrumb">Agendas Médicas - Crear</p>
+      </div>
+    </header>
+    
+    <main>
+      <section class="gestion-section">
+        <form class="gestion-form" autocomplete="off">
+          <!-- Código de Agenda (autogenerado) -->
+          <fieldset class="seccion">
+            <legend>Identificación de la Agenda</legend>
+            <label for="codigo-agenda">Código de Agenda:</label>
+            <input type="text" id="codigo-agenda" name="codigo-agenda" value="AGD-00125" disabled placeholder="Código de la agenda">
+          </fieldset>
+
+          <!-- Datos del Médico -->
+          <fieldset class="seccion">
+            <legend>Asignación del Médico</legend>
+            <label for="medico">Médico:</label>
+            <select id="medico" name="medico" onchange="autocompletarEspecialidad()" required>
+              <option value="">Seleccione un médico...</option>
+              <option value="EMP-00145" data-especialidad="Cardiología">Dr. Carlos Mendoza - EMP-00145</option>
+              <option value="EMP-00156" data-especialidad="Pediatría">Dra. Ana López - EMP-00156</option>
+              <option value="EMP-00178" data-especialidad="Neurología">Dr. Juan Pérez - EMP-00178</option>
+              <option value="EMP-00192" data-especialidad="Dermatología">Dra. María García - EMP-00192</option>
+            </select>
+
+            <label for="especialidad">Especialidad:</label>
+            <input type="text" id="especialidad" name="especialidad" value="" disabled placeholder="Se autocompleta al seleccionar médico">
+          </fieldset>
+
+          <!-- Período de Vigencia -->
+          <fieldset class="seccion">
+            <legend>Período de Vigencia</legend>
+            <label for="fecha-inicio">Fecha Inicio Agenda:</label>
+            <input type="date" id="fecha-inicio" name="fecha-inicio" required>
+
+            <label for="fecha-fin">Fecha Finalización Agenda:</label>
+            <input type="date" id="fecha-fin" name="fecha-fin" required>
+          </fieldset>
+
+          <!-- Clasificación -->
+          <fieldset class="seccion">
+            <legend>Clasificación y Observaciones</legend>
+            <label for="motivo">Motivo:</label>
+            <select id="motivo" name="motivo" required>
+              <option value="">Seleccione el motivo...</option>
+              <option value="creacion-periodica">Creación de Agenda Periódica</option>
+              <option value="reemplazo-temporal">Reemplazo Temporal</option>
+              <option value="ampliacion-cupo">Ampliación de Cupo</option>
+              <option value="agenda-especial">Agenda Especial</option>
+              <option value="ajuste-disponibilidad">Ajuste por Disponibilidad</option>
+            </select>
+
+            <label for="observaciones">Observaciones:</label>
+            <textarea id="observaciones" name="observaciones" rows="3" placeholder="Notas adicionales sobre la agenda (máx. 500 caracteres)" maxlength="500"></textarea>
+            <small class="contador-caracteres">0 / 500 caracteres</small>
+          </fieldset>
+
+          <!-- Botones de acción -->
+          <div class="botones-accion">
+            <button type="submit" class="accion-btn guardar">GUARDAR</button>
+            <button type="reset" class="accion-btn limpiar">LIMPIAR FORMULARIO</button>
+            <button type="button" class="accion-btn regresar" onclick="location.href='acciones-crud-agendas-medicas.html'">REGRESAR</button>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        &copy; 2025 Hospital San Paco. Todos los derechos reservados. |
+        Contacto: <a href="mailto:info@sanpaco.com">info@sanpaco.com</a>
+      </p>
+    </footer>
+
+    <script>
+      // Autocompletar especialidad cuando se selecciona médico
+      function autocompletarEspecialidad() {
+        const medicoSelect = document.getElementById('medico');
+        const especialidadInput = document.getElementById('especialidad');
+        const selectedOption = medicoSelect.options[medicoSelect.selectedIndex];
+        
+        if (selectedOption.value) {
+          const especialidad = selectedOption.getAttribute('data-especialidad');
+          especialidadInput.value = especialidad;
+        } else {
+          especialidadInput.value = '';
+        }
+      }
+
+      // Contador de caracteres para observaciones
+      const observaciones = document.getElementById('observaciones');
+      const contador = document.querySelector('.contador-caracteres');
+      
+      observaciones.addEventListener('input', function() {
+        const length = this.value.length;
+        contador.textContent = `${length} / 500 caracteres`;
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>San Paco | Gestión Citas y Agendas</title>
+    <link rel="stylesheet" href="../CSS/menu-gestion-citas-agendas.css" />
+  </head>
+  <body>
+    <!-- Barra de navegación -->
+    <nav class="navbar">
+      <div class="navbar-logo-nombre-centro">
+        <img src="../Images/logo.jpg" alt="Logo San Paco" class="navbar-logo" />
+        <span class="navbar-title">Hospital San Paco</span>
+      </div>
+    </nav>
+
+    <!-- Encabezado -->
+    <header>
+      <div class="system-info titulos">
+        <strong>Sistema de Información Web</strong>
+        <span class="dashboard-title">San Paco Hospital CRUD System</span>
+        <p>
+          Agendamiento de Citas Médicas para los Pacientes del Hospital San Paco<br />Bogotá D.C.
+        </p>
+      </div>
+      <div class="modulo-header titulos">
+        <h2>MÓDULO 2. GESTIÓN DE BASES DE DATOS</h2>
+        <p class="breadcrumb">Gestión de Citas Médicas y Agendas</p>
+      </div>
+    </header>
+
+    <main>
+      <section class="acciones-section">
+        <h3 class="seccion-titulo">Seleccione el tipo de gestión:</h3>
+        <div class="acciones-container">
+          <!-- Botón 1: Gestión de Agendas Médicas -->
+          <button class="accion-card" onclick="location.href='acciones-crud-agendas-medicas.html'">
+            <div class="icono">📅</div>
+            <h3>GESTIÓN DE AGENDAS MÉDICAS</h3>
+            <p>Configurar disponibilidad y horarios de atención de los médicos</p>
+          </button>
+
+          <!-- Botón 2: Gestión de Citas Médicas -->
+          <button class="accion-card" onclick="location.href='acciones-crud-citas-medicas.html'">
+            <div class="icono">🩺</div>
+            <h3>GESTIÓN DE CITAS MÉDICAS</h3>
+            <p>Central de agendamiento de citas para pacientes</p>
+          </button>
+        </div>
+
+        <div class="boton-regresar-container">
+          <button class="boton-regresar" onclick="location.href='menu-gestion-bd.html'">
+            REGRESAR AL MENÚ GESTIÓN B.D.
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        &copy; 2025 Hospital San Paco. Todos los derechos reservados. |
+        Contacto: <a href="mailto:info@sanpaco.com">info@sanpaco.com</a>
+      </p>
+    </footer>
+  </body>
+</html>

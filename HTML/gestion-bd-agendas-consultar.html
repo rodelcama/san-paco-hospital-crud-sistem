@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>San Paco | Consultar Agenda Médica B.D.</title>
+    <link rel="stylesheet" href="../CSS/gestion-bd-agendas-consultar.css" />
+  </head>
+  <body>
+    <!-- Barra de navegación -->
+    <nav class="navbar">
+      <div class="navbar-logo-nombre-centro">
+        <img src="../Images/logo.jpg" alt="Logo San Paco" class="navbar-logo" />
+        <span class="navbar-title">Hospital San Paco</span>
+      </div>
+    </nav>
+
+    <!-- Encabezado -->
+    <header>
+      <div class="system-info titulos">
+        <strong>Sistema de Información Web</strong>
+        <span class="dashboard-title">San Paco Hospital CRUD System</span>
+        <p>
+          Agendamiento de Citas Médicas para los Pacientes del Hospital San Paco<br />Bogotá D.C.
+        </p>
+      </div>
+      <div class="modulo-header titulos">
+        <h2>MÓDULO 2. GESTIÓN DE BASES DE DATOS</h2>
+        <p class="breadcrumb">Agendas Médicas - Consultar</p>
+      </div>
+    </header>
+    
+    <main>
+      <section class="gestion-section">
+        <form class="gestion-form" autocomplete="off" onsubmit="buscarAgenda(event)">
+          <!-- Buscador -->
+          <fieldset class="seccion buscador">
+            <legend>Buscar agenda médica</legend>
+            <label for="buscar-opcion">Buscar por:</label>
+            <select id="buscar-opcion" name="buscar-opcion">
+              <option value="codigo-agenda">Código de agenda</option>
+              <option value="codigo-medico">Código de médico</option>
+              <option value="id-medico">ID de médico</option>
+            </select>
+            <input type="text" id="input-busqueda" name="input-busqueda" placeholder="Ingrese dato de búsqueda" required>
+            <button type="submit" class="accion-btn buscar">BUSCAR</button>
+          </fieldset>
+
+          <!-- Código de Agenda (disabled) -->
+          <fieldset class="seccion">
+            <legend>Identificación de la Agenda</legend>
+            <label for="codigo-agenda">Código de Agenda:</label>
+            <input type="text" id="codigo-agenda" name="codigo-agenda" value="" disabled placeholder="Código de la agenda">
+          </fieldset>
+
+          <!-- Datos del Médico (disabled) -->
+          <fieldset class="seccion">
+            <legend>Asignación del Médico</legend>
+            <label for="medico">Médico:</label>
+            <input type="text" id="medico" name="medico" value="" disabled placeholder="Nombre del médico">
+
+            <label for="especialidad">Especialidad:</label>
+            <input type="text" id="especialidad" name="especialidad" value="" disabled placeholder="Especialidad del médico">
+          </fieldset>
+
+          <!-- Período de Vigencia (disabled) -->
+          <fieldset class="seccion">
+            <legend>Período de Vigencia</legend>
+            <label for="fecha-inicio">Fecha Inicio Agenda:</label>
+            <input type="text" id="fecha-inicio" name="fecha-inicio" value="" disabled placeholder="Fecha de inicio">
+
+            <label for="fecha-fin">Fecha Finalización Agenda:</label>
+            <input type="text" id="fecha-fin" name="fecha-fin" value="" disabled placeholder="Fecha de finalización">
+          </fieldset>
+
+          <!-- Clasificación (disabled) -->
+          <fieldset class="seccion">
+            <legend>Clasificación y Observaciones</legend>
+            <label for="motivo">Motivo:</label>
+            <input type="text" id="motivo" name="motivo" value="" disabled placeholder="Motivo de la agenda">
+
+            <label for="observaciones">Observaciones:</label>
+            <textarea id="observaciones" name="observaciones" rows="3" disabled placeholder="Observaciones de la agenda"></textarea>
+          </fieldset>
+
+          <!-- Botón regresar -->
+          <div class="botones-accion">
+            <button type="button" class="accion-btn regresar" onclick="location.href='acciones-crud-agendas-medicas.html'">REGRESAR</button>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        &copy; 2025 Hospital San Paco. Todos los derechos reservados. |
+        Contacto: <a href="mailto:info@sanpaco.com">info@sanpaco.com</a>
+      </p>
+    </footer>
+
+    <script>
+      function buscarAgenda(event) {
+        event.preventDefault();
+        alert("Funcionalidad de búsqueda pendiente de integración.");
+        // Aquí iría la lógica para buscar y cargar los datos
+      }
+    </script>
+  </body>
+</html>

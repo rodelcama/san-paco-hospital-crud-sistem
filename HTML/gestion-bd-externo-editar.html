@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>San Paco | Editar Usuario Externo B.D.</title>
+    <link rel="stylesheet" href="../CSS/gestion-bd-externo-editar.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="navbar-logo-nombre-centro">
+        <img src="../Images/logo.jpg" alt="Logo San Paco" class="navbar-logo" />
+        <span class="navbar-title">Hospital San Paco</span>
+      </div>
+    </nav>
+    <header>
+      <div class="system-info titulos">
+        <strong>Sistema de Información Web</strong>
+        <span class="dashboard-title">San Paco Hospital CRUD System</span>
+        <p>Agendamiento de Citas Médicas para los Pacientes del Hospital San Paco<br />Bogotá D.C.</p>
+      </div>
+      <div class="modulo-header titulos">
+        <h2>MÓDULO 2. GESTIÓN DE BASES DE DATOS</h2>
+        <p class="breadcrumb">Usuario Externo - Editar</p>
+      </div>
+    </header>
+    <main>
+      <section class="gestion-bd-section">
+        <form class="gestion-bd-form" autocomplete="off" onsubmit="guardarCambios(event)">
+          <!-- Buscador -->
+          <fieldset class="seccion buscador">
+            <legend>Buscar paciente a editar</legend>
+            <label for="buscar-opcion">Buscar por:</label>
+            <select id="buscar-opcion" name="buscar-opcion">
+              <option value="documento">Número de documento</option>
+              <option value="codigo">Código de usuario</option>
+            </select>
+            <input type="text" id="input-busqueda" name="input-busqueda" placeholder="Ingrese dato de búsqueda" required>
+            <button type="button" class="accion-btn buscar" onclick="buscarUsuario(event)">BUSCAR</button>
+          </fieldset>
+
+          <!-- Información Básica -->
+          <fieldset class="seccion">
+            <legend>Información Básica</legend>
+            <label for="codigo-externo">Código Usuario Externo:</label>
+            <input type="text" id="codigo-externo" name="codigo-externo" value="" disabled placeholder="Código del paciente">
+
+            <label for="nombres">Nombres del Paciente:</label>
+            <input type="text" id="nombres" name="nombres" value="" disabled placeholder="Nombres del paciente">
+
+            <label for="apellidos">Apellidos del Paciente:</label>
+            <input type="text" id="apellidos" name="apellidos" value="" disabled placeholder="Apellidos del paciente">
+
+            <label for="tipo-documento">Tipo Documento:</label>
+            <input type="text" id="tipo-documento" name="tipo-documento" value="" disabled placeholder="Tipo de documento">
+
+            <label for="numero-documento">Número Documento:</label>
+            <input type="text" id="numero-documento" name="numero-documento" value="" disabled placeholder="Número de documento">
+          </fieldset>
+
+          <!-- Información de Contacto -->
+          <fieldset class="seccion">
+            <legend>Información de Contacto</legend>
+            <label for="fecha-nacimiento">Fecha de Nacimiento:</label>
+            <input type="date" id="fecha-nacimiento" name="fecha-nacimiento" disabled>
+
+            <label for="telefono">Teléfono:</label>
+            <input type="tel" id="telefono" name="telefono" placeholder="Ej: 3001234567" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Ej: paciente@email.com" required>
+
+            <label for="direccion">Dirección:</label>
+            <input type="text" id="direccion" name="direccion" placeholder="Ej: Calle 123 #45-67" required>
+
+            <label for="pais-origen">País de Origen:</label>
+            <input type="text" id="pais-origen" name="pais-origen" value="" disabled placeholder="País de origen">
+
+            <label for="ciudad-natal">Ciudad Natal:</label>
+            <input type="text" id="ciudad-natal" name="ciudad-natal" value="" disabled placeholder="Ciudad natal">
+          </fieldset>
+
+          <!-- Información Médica del Paciente -->
+          <fieldset class="seccion">
+            <legend>Información Médica</legend>
+            <label for="tipo-sangre">Tipo de Sangre:</label>
+            <input type="text" id="tipo-sangre" name="tipo-sangre" value="" disabled placeholder="Tipo de sangre">
+
+
+            <label for="alergias">Alergias:</label>
+            <textarea id="alergias" name="alergias" rows="2" placeholder="Describa cualquier alergia"></textarea>
+
+            <label for="enfermedades">Enfermedades Preexistentes:</label>
+            <textarea id="enfermedades" name="enfermedades" rows="2" placeholder="Describa enfermedades preexistentes"></textarea>
+
+            <label for="emergencia-nombre">Contacto de Emergencia - Nombre:</label>
+            <input type="text" id="emergencia-nombre" name="emergencia-nombre" placeholder="Nombres y apellidos de contacto">
+
+            <label for="emergencia-telefono">Contacto de Emergencia - Teléfono:</label>
+            <input type="tel" id="emergencia-telefono" name="emergencia-telefono" placeholder="Teléfono de emergencia">
+          </fieldset>
+
+          <!-- Acceso al Sistema -->
+          <fieldset class="seccion">
+            <legend>Acceso al Sistema</legend>
+            <label for="usuario-login">Usuario / Login:</label>
+            <input type="text" id="usuario-login" name="usuario-login" value="" disabled placeholder="Se autocompleta con el número de documento">
+
+            <label for="password">Contraseña:</label>
+            <input type="text" id="password" name="password" value="No disponible, confidencial" disabled placeholder="No disponible, confidencial">
+
+            <div class="permisos">
+              <legend>Permisos Asignados:</legend>
+              <label><input type="checkbox" name="permiso" value="agendamiento" checked disabled/> Agendamiento de Citas</label>
+            </div>
+          </fieldset>
+
+          <!-- Botones de Acción -->
+          <div class="botones-accion">
+            <button type="submit" class="accion-btn guardar">GUARDAR CAMBIOS</button>
+            <button type="reset" class="accion-btn limpiar">LIMPIAR FORMULARIO</button>
+            <button type="button" class="accion-btn regresar" onclick="location.href='acciones-crud-bd-externos.html'">REGRESAR</button>
+          </div>
+        </form>
+      </section>
+    </main>
+    <footer>
+      <p>
+        &copy; 2025 Hospital San Paco. Todos los derechos reservados. |
+        Contacto: <a href="mailto:info@sanpaco.com">info@sanpaco.com</a>
+      </p>
+    </footer>
+    <script>
+      function buscarUsuario(event) {
+        event.preventDefault();
+        alert("Funcionalidad de búsqueda pendiente de integración.");
+        // Aquí se cargarían los datos desde la BD
+      }
+
+      function guardarCambios(event) {
+        event.preventDefault();
+        alert("Cambios guardados (funcionalidad pendiente de integración).");
+      }
+    </script>
+  </body>
+</html>

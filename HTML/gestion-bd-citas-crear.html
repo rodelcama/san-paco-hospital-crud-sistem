@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>San Paco | Crear Cita Médica B.D.</title>
+    <link rel="stylesheet" href="../CSS/gestion-bd-citas-crear.css" />
+  </head>
+  <body>
+    <!-- Barra de navegación -->
+    <nav class="navbar">
+      <div class="navbar-logo-nombre-centro">
+        <img src="../Images/logo.jpg" alt="Logo San Paco" class="navbar-logo" />
+        <span class="navbar-title">Hospital San Paco</span>
+      </div>
+    </nav>
+
+    <!-- Encabezado -->
+    <header>
+      <div class="system-info titulos">
+        <strong>Sistema de Información Web</strong>
+        <span class="dashboard-title">San Paco Hospital CRUD System</span>
+        <p>
+          Agendamiento de Citas Médicas para los Pacientes del Hospital San Paco<br />Bogotá D.C.
+        </p>
+      </div>
+      <div class="modulo-header titulos">
+        <h2>MÓDULO 2. GESTIÓN DE BASES DE DATOS</h2>
+        <p class="breadcrumb">Citas Médicas - Crear</p>
+      </div>
+    </header>
+    
+    <main>
+      <section class="gestion-section">
+        <form class="gestion-form" autocomplete="off" onsubmit="guardarCita(event)">
+          
+          <!-- Código de Cita (autogenerado) -->
+          <fieldset class="seccion">
+            <legend>Identificación de la Cita</legend>
+            <label for="codigo-cita">Código de Cita Médica:</label>
+            <input type="text" id="codigo-cita" name="codigo-cita" value="CIT-00245" disabled placeholder="Código de la cita">
+          </fieldset>
+
+          <!-- Tipo de Cita y Especialidad -->
+          <fieldset class="seccion">
+            <legend>Tipo de Cita y Especialización</legend>
+            
+            <label for="tipo-cita">Tipo de Cita Médica:</label>
+            <select id="tipo-cita" name="tipo-cita" required>
+              <option value="">Seleccione el tipo de cita...</option>
+              <option value="primera-vez">Primera Vez</option>
+              <option value="control">Control</option>
+              <option value="consulta">Consulta</option>
+              <option value="especialista">Especialista</option>
+              <option value="urgencia">Urgencia</option>
+            </select>
+
+            <label for="especialidad">Especialidad:</label>
+            <select id="especialidad" name="especialidad" onchange="filtrarMedicos()" required>
+              <option value="">Seleccione la especialidad...</option>
+              <option value="cardiologia">Cardiología</option>
+              <option value="pediatria">Pediatría</option>
+              <option value="neurologia">Neurología</option>
+              <option value="dermatologia">Dermatología</option>
+              <option value="traumatologia">Traumatología</option>
+              <option value="oftalmologia">Oftalmología</option>
+            </select>
+
+            <label for="medico">Médico:</label>
+            <select id="medico" name="medico" onchange="cargarDisponibilidad()" required>
+              <option value="">Primero seleccione una especialidad...</option>
+            </select>
+          </fieldset>
+
+          <!-- Fecha, Hora y Estado -->
+          <fieldset class="seccion">
+            <legend>Programación de la Cita</legend>
+            
+            <label for="fecha-cita">Fecha de la Cita:</label>
+            <input type="date" id="fecha-cita" name="fecha-cita" onchange="verificarDisponibilidad()" required>
+
+            <label for="hora-cita">Hora de la Cita:</label>
+            <select id="hora-cita" name="hora-cita" required>
+              <option value="">Seleccione fecha y médico primero...</option>
+            </select>
+
+            <label for="estado-cita">Estado de la Cita:</label>
+            <select id="estado-cita" name="estado-cita" required>
+              <option value="agendada">Agendada</option>
+              <option value="confirmada">Confirmada por paciente</option>
+              <option value="en-espera">Paciente en espera</option>
+              <option value="en-consulta">En consulta</option>
+            </select>
+          </fieldset>
+
+          <!-- Datos del Paciente -->
+          <fieldset class="seccion seccion-paciente">
+            <legend>Datos del Paciente</legend>
+            
+            <div class="buscar-paciente">
+              <label for="id-paciente">ID Paciente o Número de Documento:</label>
+              <div class="input-buscar">
+                <input type="text" id="id-paciente" name="id-paciente" placeholder="Ingrese código o documento del paciente" required>
+                <button type="button" class="btn-buscar-paciente" onclick="buscarPaciente()">🔍 BUSCAR</button>
+              </div>
+            </div>
+
+            <label for="tipo-doc-paciente">Tipo de Documento:</label>
+            <input type="text" id="tipo-doc-paciente" name="tipo-doc-paciente" disabled placeholder="Tipo de documento">
+
+            <label for="num-doc-paciente">Número de Documento:</label>
+            <input type="text" id="num-doc-paciente" name="num-doc-paciente" disabled placeholder="Número de documento">
+
+            <label for="nombres-paciente">Nombres del Paciente:</label>
+            <input type="text" id="nombres-paciente" name="nombres-paciente" disabled placeholder="Nombres">
+
+            <label for="apellidos-paciente">Apellidos del Paciente:</label>
+            <input type="text" id="apellidos-paciente" name="apellidos-paciente" disabled placeholder="Apellidos">
+          </fieldset>
+
+          <!-- Motivo y Observaciones -->
+          <fieldset class="seccion">
+            <legend>Clasificación y Observaciones</legend>
+            
+            <label for="motivo">Motivo de la Cita:</label>
+            <select id="motivo" name="motivo" required>
+              <option value="">Seleccione el motivo...</option>
+              <option value="cita-recurrente">Cita Recurrente Mensual</option>
+              <option value="cita-adicional">Cita Adicional</option>
+              <option value="seguimiento">Seguimiento Médico</option>
+              <option value="revision-resultados">Revisión de Resultados</option>
+              <option value="otro">Otro</option>
+            </select>
+
+            <label for="observaciones">Observaciones:</label>
+            <textarea id="observaciones" name="observaciones" rows="3" placeholder="Notas administrativas sobre la cita (máx. 500 caracteres)" maxlength="500"></textarea>
+            <small class="contador-caracteres">0 / 500 caracteres</small>
+          </fieldset>
+
+          <!-- Botones de acción -->
+          <div class="botones-accion">
+            <button type="submit" class="accion-btn guardar">GUARDAR CITA</button>
+            <button type="reset" class="accion-btn limpiar">LIMPIAR FORMULARIO</button>
+            <button type="button" class="accion-btn regresar" onclick="location.href='acciones-crud-citas-medicas.html'">REGRESAR</button>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        &copy; 2025 Hospital San Paco. Todos los derechos reservados. |
+        Contacto: <a href="mailto:info@sanpaco.com">info@sanpaco.com</a>
+      </p>
+    </footer>
+
+    <script>
+      // Datos simulados de médicos por especialidad
+      const medicosPorEspecialidad = {
+        'cardiologia': [
+          { codigo: 'EMP-00145', nombre: 'Dr. Carlos Mendoza' },
+          { codigo: 'EMP-00167', nombre: 'Dra. Patricia Ruiz' }
+        ],
+        'pediatria': [
+          { codigo: 'EMP-00156', nombre: 'Dra. Ana López' },
+          { codigo: 'EMP-00189', nombre: 'Dr. Luis Gómez' }
+        ],
+        'neurologia': [
+          { codigo: 'EMP-00178', nombre: 'Dr. Juan Pérez' }
+        ],
+        'dermatologia': [
+          { codigo: 'EMP-00192', nombre: 'Dra. María García' }
+        ],
+        'traumatologia': [
+          { codigo: 'EMP-00201', nombre: 'Dr. Roberto Silva' }
+        ],
+        'oftalmologia': [
+          { codigo: 'EMP-00215', nombre: 'Dra. Carmen Torres' }
+        ]
+      };
+
+      // Filtrar médicos por especialidad
+      function filtrarMedicos() {
+        const especialidad = document.getElementById('especialidad').value;
+        const medicoSelect = document.getElementById('medico');
+        
+        // Limpiar select de médicos
+        medicoSelect.innerHTML = '<option value="">Seleccione un médico...</option>';
+        
+        if (especialidad && medicosPorEspecialidad[especialidad]) {
+          medicosPorEspecialidad[especialidad].forEach(medico => {
+            const option = document.createElement('option');
+            option.value = medico.codigo;
+            option.textContent = `${medico.nombre} - ${medico.codigo}`;
+            medicoSelect.appendChild(option);
+          });
+        }
+        
+        // Limpiar horarios disponibles
+        document.getElementById('hora-cita').innerHTML = '<option value="">Seleccione fecha y médico primero...</option>';
+      }
+
+      // Cargar disponibilidad de horarios
+      function cargarDisponibilidad() {
+        verificarDisponibilidad();
+      }
+
+      // Verificar disponibilidad de horarios
+      function verificarDisponibilidad() {
+        const medico = document.getElementById('medico').value;
+        const fecha = document.getElementById('fecha-cita').value;
+        const horaSelect = document.getElementById('hora-cita');
+        
+        if (medico && fecha) {
+          // Simulación de horarios disponibles
+          const horarios = [
+            '08:00', '08:30', '09:00', '09:30', '10:00', '10:30',
+            '11:00', '11:30', '14:00', '14:30', '15:00', '15:30',
+            '16:00', '16:30', '17:00', '17:30'
+          ];
+          
+          horaSelect.innerHTML = '<option value="">Seleccione un horario...</option>';
+          horarios.forEach(hora => {
+            const option = document.createElement('option');
+            option.value = hora;
+            option.textContent = hora;
+            horaSelect.appendChild(option);
+          });
+        }
+      }
+
+      // Buscar paciente
+      function buscarPaciente() {
+        const idPaciente = document.getElementById('id-paciente').value;
+        
+        if (!idPaciente) {
+          alert('Por favor ingrese un ID o número de documento.');
+          return;
+        }
+        
+        // Simulación de búsqueda (datos de ejemplo)
+        document.getElementById('tipo-doc-paciente').value = 'Cédula de Ciudadanía (CC)';
+        document.getElementById('num-doc-paciente').value = '1234567890';
+        document.getElementById('nombres-paciente').value = 'Juan Carlos';
+        document.getElementById('apellidos-paciente').value = 'Rodríguez Pérez';
+        
+        alert('Paciente encontrado exitosamente.');
+      }
+
+      // Guardar cita
+      function guardarCita(event) {
+        event.preventDefault();
+        
+        // Validar que se haya buscado un paciente
+        const nombresPaciente = document.getElementById('nombres-paciente').value;
+        if (!nombresPaciente) {
+          alert('Por favor busque un paciente antes de guardar la cita.');
+          document.getElementById('id-paciente').focus();
+          return;
+        }
+        
+        alert('¡Cita médica guardada exitosamente!\n\nEl paciente recibirá una confirmación.');
+        // Aquí iría la lógica para guardar en la BD
+      }
+
+      // Contador de caracteres
+      const observaciones = document.getElementById('observaciones');
+      const contador = document.querySelector('.contador-caracteres');
+      
+      observaciones.addEventListener('input', function() {
+        const length = this.value.length;
+        contador.textContent = `${length} / 500 caracteres`;
+      });
+    </script>
+  </body>
+</html>

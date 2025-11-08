@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>San Paco | Eliminar Cita Médica B.D.</title>
+  <link rel="stylesheet" href="../CSS/gestion-bd-citas-eliminar.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-logo-nombre-centro">
+      <img src="../Images/logo.jpg" alt="Logo San Paco" class="navbar-logo" />
+      <span class="navbar-title">Hospital San Paco</span>
+    </div>
+  </nav>
+  <header>
+    <div class="system-info titulos">
+      <strong>Sistema de Información Web</strong>
+      <span class="dashboard-title">San Paco Hospital CRUD System</span>
+      <p>
+        Agendamiento de Citas Médicas para los Pacientes del Hospital San Paco<br />Bogotá D.C.
+      </p>
+    </div>
+    <div class="modulo-header titulos">
+      <h2>MÓDULO 2. GESTIÓN DE BASES DE DATOS</h2>
+      <p class="breadcrumb">Citas Médicas - Eliminar</p>
+    </div>
+  </header>
+  <main>
+    <section class="gestion-section">
+      <form class="gestion-form" autocomplete="off" onsubmit="buscarCita(event)">
+        <fieldset class="seccion buscador">
+          <legend>Buscar cita médica a eliminar</legend>
+          <label for="buscar-opcion">Buscar por:</label>
+          <select id="buscar-opcion" name="buscar-opcion">
+            <option value="codigo-cita">Código de cita</option>
+            <option value="documento-paciente">Documento del paciente</option>
+            <option value="id-paciente">ID del paciente</option>
+          </select>
+          <input type="text" id="input-busqueda" name="input-busqueda" placeholder="Ingrese dato de búsqueda" required>
+          <button type="submit" class="accion-btn buscar">BUSCAR</button>
+          <div id="mensaje-busqueda" class="mensaje-paciente"></div>
+        </fieldset>
+        <div class="advertencia">
+          <p>⚠️ <strong>ADVERTENCIA:</strong> Esta acción eliminará la cita y liberará el horario reservado. No se puede deshacer.</p>
+        </div>
+        <fieldset class="seccion seccion-paciente">
+          <legend>Datos del Paciente</legend>
+          <label for="nombres-paciente">Nombres del Paciente:</label>
+          <input type="text" id="nombres-paciente" disabled>
+          <label for="apellidos-paciente">Apellidos del Paciente:</label>
+          <input type="text" id="apellidos-paciente" disabled>
+          <label for="tipo-doc-paciente">Tipo de Documento:</label>
+          <input type="text" id="tipo-doc-paciente" disabled>
+          <label for="num-doc-paciente">Número de Documento:</label>
+          <input type="text" id="num-doc-paciente" disabled>
+        </fieldset>
+        <fieldset class="seccion">
+          <legend>Identificación de la Cita</legend>
+          <label for="codigo-cita">Código de Cita Médica:</label>
+          <input type="text" id="codigo-cita" disabled>
+        </fieldset>
+        <fieldset class="seccion">
+          <legend>Tipo de Cita y Especialización</legend>
+          <label for="tipo-cita">Tipo de Cita Médica:</label>
+          <input type="text" id="tipo-cita" disabled>
+          <label for="especialidad">Especialidad:</label>
+          <input type="text" id="especialidad" disabled>
+          <label for="medico">Médico:</label>
+          <input type="text" id="medico" disabled>
+        </fieldset>
+        <fieldset class="seccion">
+          <legend>Programación de la Cita</legend>
+          <label for="fecha-cita">Fecha de la Cita:</label>
+          <input type="text" id="fecha-cita" disabled>
+          <label for="hora-cita">Hora de la Cita:</label>
+          <input type="text" id="hora-cita" disabled>
+          <label for="estado-cita">Estado de la Cita:</label>
+          <input type="text" id="estado-cita" disabled>
+        </fieldset>
+        <fieldset class="seccion">
+          <legend>Clasificación y Observaciones</legend>
+          <label for="motivo">Motivo de la Cita:</label>
+          <input type="text" id="motivo" disabled>
+          <label for="observaciones">Observaciones:</label>
+          <textarea id="observaciones" rows="3" disabled></textarea>
+        </fieldset>
+        <div class="botones-accion">
+          <button type="button" class="accion-btn eliminar" onclick="confirmarEliminacion()">ELIMINAR CITA</button>
+          <button type="button" class="accion-btn regresar" onclick="location.href='acciones-crud-citas-medicas.html'">REGRESAR</button>
+        </div>
+      </form>
+    </section>
+  </main>
+  <footer>
+    <p>
+      &copy; 2025 Hospital San Paco. Todos los derechos reservados. |
+      Contacto: <a href="mailto:info@sanpaco.com">info@sanpaco.com</a>
+    </p>
+  </footer>
+  <script>
+    function limpiarCampos() {
+      ['nombres-paciente','apellidos-paciente','tipo-doc-paciente','num-doc-paciente','codigo-cita','tipo-cita','especialidad','medico','fecha-cita','hora-cita','estado-cita','motivo','observaciones']
+        .forEach(id=>{ let el=document.getElementById(id); if(el) el.value=''; });
+    }
+    document.getElementById('input-busqueda').addEventListener('keydown',function(e){
+      if(e.key === 'Enter'){ e.preventDefault(); realizarBusqueda(); }
+    });
+    function buscarCita(e){
+      e.preventDefault(); realizarBusqueda();
+    }
+    function realizarBusqueda(){
+      limpiarCampos();
+      const valor = document.getElementById('input-busqueda').value.trim();
+      const msg = document.getElementById('mensaje-busqueda');
+      msg.textContent=''; msg.className='mensaje-paciente';
+      if(!valor){
+        msg.textContent='Debe ingresar un dato de búsqueda.'; msg.classList.add('error'); return;
+      }
+      document.getElementById('nombres-paciente').value='Carolina Andrea';
+      document.getElementById('apellidos-paciente').value='Gómez Rivas';
+      document.getElementById('tipo-doc-paciente').value='Cédula de Ciudadanía (CC)';
+      document.getElementById('num-doc-paciente').value=valor;
+      document.getElementById('codigo-cita').value='CIT-'+Math.floor(Math.random()*1000+1000);
+      document.getElementById('tipo-cita').value='Consulta';
+      document.getElementById('especialidad').value='Medicina Interna';
+      document.getElementById('medico').value='Dra. Luisa Martínez';
+      document.getElementById('fecha-cita').value='2025-11-22';
+      document.getElementById('hora-cita').value='10:30';
+      document.getElementById('estado-cita').value='Agendada';
+      document.getElementById('motivo').value='Control general';
+      document.getElementById('observaciones').value='Paciente solicita exámenes complementarios.';
+      msg.textContent='Cita encontrada exitosamente.'; msg.classList.add('exito');
+    }
+    function confirmarEliminacion(){
+      const codigoCita = document.getElementById('codigo-cita').value;
+      if (!codigoCita) {
+        alert("Por favor busque una cita antes de intentar eliminarla."); return;
+      }
+      if (confirm("⚠️ ADVERTENCIA\n\n¿Desea eliminar esta cita médica? Esta operación no se puede deshacer.")) {
+        alert("La cita médica ha sido eliminada.");
+        limpiarCampos();
+      }
+    }
+  </script>
+</body>
+</html>

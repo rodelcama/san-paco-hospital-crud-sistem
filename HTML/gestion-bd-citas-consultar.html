@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>San Paco | Consultar Cita Médica B.D.</title>
+  <link rel="stylesheet" href="../CSS/gestion-bd-citas-consultar.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-logo-nombre-centro">
+      <img src="../Images/logo.jpg" alt="Logo San Paco" class="navbar-logo" />
+      <span class="navbar-title">Hospital San Paco</span>
+    </div>
+  </nav>
+
+  <header>
+    <div class="system-info titulos">
+      <strong>Sistema de Información Web</strong>
+      <span class="dashboard-title">San Paco Hospital CRUD System</span>
+      <p>
+        Agendamiento de Citas Médicas para los Pacientes del Hospital San Paco<br />Bogotá D.C.
+      </p>
+    </div>
+    <div class="modulo-header titulos">
+      <h2>MÓDULO 2. GESTIÓN DE BASES DE DATOS</h2>
+      <p class="breadcrumb">Citas Médicas - Consultar</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="gestion-section">
+      <form class="gestion-form" autocomplete="off" onsubmit="buscarCita(event)">
+        <!-- Buscador -->
+        <fieldset class="seccion buscador">
+          <legend>Buscar cita médica</legend>
+          <label for="buscar-opcion">Buscar por:</label>
+          <select id="buscar-opcion" name="buscar-opcion">
+            <option value="codigo-cita">Código de cita</option>
+            <option value="documento-paciente">Documento del paciente</option>
+            <option value="id-paciente">ID del paciente</option>
+            <option value="fecha">Fecha de la cita</option>
+          </select>
+          <input type="text" id="input-busqueda" name="input-busqueda" placeholder="Ingrese dato de búsqueda" required>
+          <button type="submit" class="accion-btn buscar">BUSCAR</button>
+          <div id="mensaje-busqueda" class="mensaje-paciente"></div>
+        </fieldset>
+
+        <!-- Datos del Paciente (justo luego del buscador) -->
+        <fieldset class="seccion seccion-paciente">
+          <legend>Datos del Paciente</legend>
+          <label for="nombres-paciente">Nombres del Paciente:</label>
+          <input type="text" id="nombres-paciente" name="nombres-paciente" value="" disabled placeholder="Nombres">
+          <label for="apellidos-paciente">Apellidos del Paciente:</label>
+          <input type="text" id="apellidos-paciente" name="apellidos-paciente" value="" disabled placeholder="Apellidos">
+          <label for="tipo-doc-paciente">Tipo de Documento:</label>
+          <input type="text" id="tipo-doc-paciente" name="tipo-doc-paciente" value="" disabled placeholder="Tipo de documento">
+          <label for="num-doc-paciente">Número de Documento:</label>
+          <input type="text" id="num-doc-paciente" name="num-doc-paciente" value="" disabled placeholder="Número de documento">
+        </fieldset>
+
+        <!-- Código de Cita -->
+        <fieldset class="seccion">
+          <legend>Identificación de la Cita</legend>
+          <label for="codigo-cita">Código de Cita Médica:</label>
+          <input type="text" id="codigo-cita" name="codigo-cita" value="" disabled placeholder="Código de la cita">
+        </fieldset>
+
+        <!-- Tipo de Cita y Especialidad -->
+        <fieldset class="seccion">
+          <legend>Tipo de Cita y Especialización</legend>
+          <label for="tipo-cita">Tipo de Cita Médica:</label>
+          <input type="text" id="tipo-cita" name="tipo-cita" value="" disabled placeholder="Tipo de cita">
+          <label for="especialidad">Especialidad:</label>
+          <input type="text" id="especialidad" name="especialidad" value="" disabled placeholder="Especialidad">
+          <label for="medico">Médico:</label>
+          <input type="text" id="medico" name="medico" value="" disabled placeholder="Nombre del médico">
+        </fieldset>
+
+        <!-- Fecha, Hora y Estado -->
+        <fieldset class="seccion">
+          <legend>Programación de la Cita</legend>
+          <label for="fecha-cita">Fecha de la Cita:</label>
+          <input type="text" id="fecha-cita" name="fecha-cita" value="" disabled placeholder="Fecha">
+          <label for="hora-cita">Hora de la Cita:</label>
+          <input type="text" id="hora-cita" name="hora-cita" value="" disabled placeholder="Hora">
+          <label for="estado-cita">Estado de la Cita:</label>
+          <input type="text" id="estado-cita" name="estado-cita" value="" disabled placeholder="Estado">
+        </fieldset>
+
+        <!-- Motivo y Observaciones -->
+        <fieldset class="seccion">
+          <legend>Clasificación y Observaciones</legend>
+          <label for="motivo">Motivo de la Cita:</label>
+          <input type="text" id="motivo" name="motivo" value="" disabled placeholder="Motivo">
+          <label for="observaciones">Observaciones:</label>
+          <textarea id="observaciones" name="observaciones" rows="3" disabled placeholder="Observaciones"></textarea>
+        </fieldset>
+
+        <!-- Botón regresar -->
+        <div class="botones-accion">
+          <button type="button" class="accion-btn regresar" onclick="location.href='acciones-crud-citas-medicas.html'">REGRESAR</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>
+      &copy; 2025 Hospital San Paco. Todos los derechos reservados. |
+      Contacto: <a href="mailto:info@sanpaco.com">info@sanpaco.com</a>
+    </p>
+  </footer>
+
+  <script>
+    function limpiarCampos() {
+      document.getElementById('nombres-paciente').value = '';
+      document.getElementById('apellidos-paciente').value = '';
+      document.getElementById('tipo-doc-paciente').value = '';
+      document.getElementById('num-doc-paciente').value = '';
+      document.getElementById('codigo-cita').value = '';
+      document.getElementById('tipo-cita').value = '';
+      document.getElementById('especialidad').value = '';
+      document.getElementById('medico').value = '';
+      document.getElementById('fecha-cita').value = '';
+      document.getElementById('hora-cita').value = '';
+      document.getElementById('estado-cita').value = '';
+      document.getElementById('motivo').value = '';
+      document.getElementById('observaciones').value = '';
+    }
+
+    document.getElementById('input-busqueda').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        realizarBusqueda();
+      }
+    });
+
+    function buscarCita(event) {
+      event.preventDefault();
+      realizarBusqueda();
+    }
+
+    function realizarBusqueda() {
+      const valor = document.getElementById('input-busqueda').value.trim();
+      const msg = document.getElementById('mensaje-busqueda');
+      limpiarCampos();
+      msg.textContent = '';
+      msg.className = 'mensaje-paciente';
+
+      if (!valor) {
+        msg.textContent = 'Debe ingresar un dato de búsqueda.';
+        msg.classList.add('error');
+        return;
+      }
+
+      // Cualquier valor rellena todos los campos (prueba/demo)
+      document.getElementById('nombres-paciente').value = 'Carolina Andrea';
+      document.getElementById('apellidos-paciente').value = 'Gómez Rivas';
+      document.getElementById('tipo-doc-paciente').value = 'Cédula de Ciudadanía (CC)';
+      document.getElementById('num-doc-paciente').value = valor;
+      document.getElementById('codigo-cita').value = 'CIT-' + Math.floor(Math.random()*1000 + 1000);
+      document.getElementById('tipo-cita').value = 'Consulta';
+      document.getElementById('especialidad').value = 'Medicina Interna';
+      document.getElementById('medico').value = 'Dra. Luisa Martínez';
+      document.getElementById('fecha-cita').value = '2025-11-22';
+      document.getElementById('hora-cita').value = '10:30';
+      document.getElementById('estado-cita').value = 'Agendada';
+      document.getElementById('motivo').value = 'Control general';
+      document.getElementById('observaciones').value = 'Paciente solicita exámenes complementarios.';
+
+      msg.textContent = 'Cita encontrada exitosamente.';
+      msg.classList.add('exito');
+    }
+  </script>
+</body>
+</html>

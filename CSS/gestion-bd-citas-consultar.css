@@ -108,6 +108,12 @@ main {
   gap: 0.9rem;
 }
 
+.buscador {
+  background: #f1f8e9;
+  border-color: #aed581;
+  margin-bottom: 1.5rem;
+}
+
 .seccion-paciente {
   background: #fff3e0;
   border-color: #ffb74d;
@@ -129,7 +135,7 @@ label {
 }
 
 /* Inputs, textarea y select */
-input[type="text"], 
+input[type="text"],
 input[type="date"],
 select, textarea {
   width: 100%;
@@ -146,49 +152,6 @@ input:disabled, textarea:disabled {
   background-color: #e3eaec;
   color: #383838;
   cursor: not-allowed;
-}
-
-/* Buscar Paciente */
-.buscar-paciente {
-  margin-bottom: 1rem;
-}
-
-.input-buscar {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-}
-
-.input-buscar input {
-  flex: 1;
-  margin-bottom: 0;
-}
-
-.btn-buscar-paciente {
-  padding: 0.6rem 1.2rem;
-  background: #1565c0;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-size: 0.95rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s;
-  white-space: nowrap;
-}
-
-.btn-buscar-paciente:hover {
-  background: #0d47a1;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(13, 71, 161, 0.3);
-}
-
-/* Contador de caracteres */
-.contador-caracteres {
-  font-size: 0.85rem;
-  color: #666;
-  text-align: right;
-  margin-top: -0.5rem;
 }
 
 /* Botones de acción */
@@ -215,8 +178,7 @@ input:disabled, textarea:disabled {
   letter-spacing: 0.3px;
 }
 
-.accion-btn.guardar { background: #4caf50; }
-.accion-btn.limpiar { background: #ff9800; }
+.accion-btn.buscar { background: #1565c0; }
 .accion-btn.regresar { background: #0d47a1; }
 
 .accion-btn:hover {
@@ -224,7 +186,7 @@ input:disabled, textarea:disabled {
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
-/* FOOTER */
+/* Footer */
 footer {
   background: #e5e5e5;
   width: 100%;
@@ -239,56 +201,7 @@ footer {
   box-shadow: 0 -2px 6px rgba(0,0,0,0.04);
 }
 
-/* RESPONSIVE */
-@media (max-width: 900px) {
-  .gestion-section {
-    max-width: 99vw;
-    width: 94vw;
-    padding: 1rem 1.5rem 1.5rem 1.5rem;
-  }
-  
-  .seccion {
-    padding: 1rem;
-  }
-}
-
-@media (max-width: 600px) {
-  .botones-accion {
-    flex-direction: column;
-  }
-  
-  .accion-btn {
-    width: 100%;
-    min-width: unset;
-  }
-  
-  .input-buscar {
-    flex-direction: column;
-  }
-  
-  .btn-buscar-paciente {
-    width: 100%;
-  }
-  
-  .dashboard-title, .modulo-header h2 {
-    font-size: 1.2rem;
-  }
-}
-
-@media (max-width: 450px) {
-  .navbar-logo {
-    width: 28px;
-    height: 28px;
-  }
-  .navbar-title {
-    font-size: 1rem;
-  }
-  
-  .gestion-section {
-    padding: 0.8rem 1rem;
-  }
-}
-
+/* Feedback Visual */
 .mensaje-paciente {
   min-height: 1.3em;
   margin-top: 0.2em;
@@ -297,7 +210,6 @@ footer {
   font-weight: 600;
   text-align: left;
   padding-left: 2px;
-  /* Se adapta a su estado (error o éxito) */
 }
 .mensaje-paciente.exito {
   color: #388e3c;
@@ -312,4 +224,45 @@ footer {
   border-left: 4px solid #f44336;
   padding: 2px 6px;
   border-radius: 5px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .gestion-section {
+    max-width: 99vw;
+    width: 94vw;
+    padding: 1rem 1.5rem 1.5rem 1.5rem;
+  }
+  .seccion {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .botones-accion {
+    flex-direction: column;
+  }
+
+  .accion-btn {
+    width: 100%;
+    min-width: unset;
+  }
+
+  .dashboard-title, .modulo-header h2 {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 450px) {
+  .navbar-logo {
+    width: 28px;
+    height: 28px;
+  }
+  .navbar-title {
+    font-size: 1rem;
+  }
+
+  .gestion-section {
+    padding: 0.8rem 1rem;
+  }
 }

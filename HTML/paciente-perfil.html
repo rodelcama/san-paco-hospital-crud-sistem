@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>San Paco | Mi Perfil</title>
+  <link rel="stylesheet" href="../CSS/paciente-perfil.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-logo-nombre-centro">
+      <img src="../Images/logo.jpg" alt="Logo San Paco" class="navbar-logo" />
+      <span class="navbar-title">Hospital San Paco</span>
+    </div>
+  </nav>
+  <header>
+    <div class="system-info titulos">
+      <strong>Sistema de Información Web</strong>
+      <span class="dashboard-title">San Paco Hospital CRUD System</span>
+      <p>Gestión de Perfil del Paciente<br />Bogotá D.C.</p>
+    </div>
+    <div class="modulo-header titulos">
+      <h2>MÓDULO 3. Paciente: Mi Perfil</h2>
+      <p class="breadcrumb">Mi perfil personal y médico</p>
+    </div>
+  </header>
+  <main>
+    <section class="perfil-section">
+      <form class="perfil-form" autocomplete="off" onsubmit="guardarPerfil(event)">
+        <!-- DATOS PERSONALES -->
+        <fieldset class="seccion">
+          <legend>Datos personales</legend>
+          <div class="campo-grupo">
+            <label for="nombres">Nombres:</label>
+            <input type="text" id="nombres" name="nombres" value="Juan Carlos" disabled>
+          </div>
+          <div class="campo-grupo">
+            <label for="apellidos">Apellidos:</label>
+            <input type="text" id="apellidos" name="apellidos" value="García Martínez" disabled>
+          </div>
+          <div class="campo-grupo">
+            <label for="tipo-documento">Tipo de documento:</label>
+            <input type="text" id="tipo-documento" name="tipo-documento" value="CC" disabled>
+          </div>
+          <div class="campo-grupo">
+            <label for="numero-documento">Número de documento:</label>
+            <input type="text" id="numero-documento" name="numero-documento" value="1057890123" disabled oninput="sincronizarUsuarioLogin()">
+          </div>
+          <div class="campo-grupo">
+            <label for="fecha-nacimiento">Fecha de nacimiento:</label>
+            <input type="date" id="fecha-nacimiento" name="fecha-nacimiento" value="1990-06-25" disabled>
+          </div>
+          <div class="campo-grupo">
+            <label for="direccion">Dirección:</label>
+            <input type="text" id="direccion" name="direccion" value="Cra 10 #20-34" required>
+          </div>
+          <div class="campo-grupo">
+            <label for="pais-origen">País de origen:</label>
+            <input type="text" id="pais-origen" name="pais-origen" value="Colombia" disabled>
+          </div>
+          <div class="campo-grupo">
+            <label for="ciudad-natal">Ciudad natal:</label>
+            <input type="text" id="ciudad-natal" name="ciudad-natal" value="Bogotá" disabled>
+          </div>
+        </fieldset>
+
+        <!-- DATOS DE CONTACTO -->
+        <fieldset class="seccion">
+          <legend>Datos de contacto</legend>
+          <div class="campo-grupo">
+            <label for="telefono">Teléfono:</label>
+            <input type="tel" id="telefono" name="telefono" value="3201234567" required>
+          </div>
+          <div class="campo-grupo">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="jcarlos@email.com" required>
+          </div>
+          <div class="campo-grupo">
+            <label for="emergencia-nombre">Contacto de emergencia - Nombre:</label>
+            <input type="text" id="emergencia-nombre" name="emergencia-nombre" value="Ana García" required>
+          </div>
+          <div class="campo-grupo">
+            <label for="emergencia-telefono">Contacto de emergencia - Teléfono:</label>
+            <input type="tel" id="emergencia-telefono" name="emergencia-telefono" value="3112334455" required>
+          </div>
+        </fieldset>
+
+        <!-- INFORMACIÓN MÉDICA -->
+        <fieldset class="seccion">
+          <legend>Información médica</legend>
+          <div class="campo-grupo">
+            <label for="tipo-sangre">Tipo de sangre:</label>
+            <input type="text" id="tipo-sangre" name="tipo-sangre" value="O+" disabled>
+          </div>
+          <div class="campo-grupo">
+            <label for="alergias">Alergias:</label>
+            <textarea id="alergias" name="alergias" rows="2" placeholder="Ej: Penicilina">Ninguna</textarea>
+          </div>
+          <div class="campo-grupo">
+            <label for="enfermedades">Enfermedades preexistentes:</label>
+            <textarea id="enfermedades" name="enfermedades" rows="2" placeholder="Describa enfermedades preexistentes"></textarea>
+          </div>
+        </fieldset>
+
+        <!-- ACCESO AL SISTEMA -->
+        <fieldset class="seccion">
+          <legend>Acceso al sistema</legend>
+          <div class="campo-grupo">
+            <label for="usuario-login">Usuario / Login (Número de documento):</label>
+            <input type="text" id="usuario-login" name="usuario-login" value="1057890123" disabled>
+          </div>
+          <div class="campo-grupo">
+            <label for="nueva-password">Nueva contraseña:</label>
+            <input type="password" id="nueva-password" name="nueva-password" autocomplete="new-password" placeholder="Ingrese nueva contraseña">
+          </div>
+          <div class="campo-grupo">
+            <label for="confirm-password">Confirmar contraseña:</label>
+            <input type="password" id="confirm-password" name="confirm-password" autocomplete="new-password" placeholder="Repita la nueva contraseña">
+            <span id="msg-password" class="msg-error" style="display:none;">Las contraseñas no coinciden.</span>
+          </div>
+        </fieldset>
+
+        <div class="botones-accion">
+          <button type="submit" class="accion-btn guardar">GUARDAR CAMBIOS</button>
+          <button type="button" class="accion-btn regresar" onclick="location.href='menu-agendamiento-pacientes.html'">REGRESAR</button>
+        </div>
+        <div id="msg-exito" class="msg-exito" style="display:none;">¡Perfil actualizado exitosamente!</div>
+      </form>
+    </section>
+  </main>
+  <footer>
+    <p>
+      &copy; 2025 Hospital San Paco. Todos los derechos reservados. |
+      Contacto: <a href="mailto:info@sanpaco.com">info@sanpaco.com</a>
+    </p>
+  </footer>
+  <script>
+    function sincronizarUsuarioLogin() {
+      document.getElementById('usuario-login').value = document.getElementById('numero-documento').value;
+    }
+    function guardarPerfil(event) {
+      event.preventDefault();
+      const pass1 = document.getElementById("nueva-password").value;
+      const pass2 = document.getElementById("confirm-password").value;
+      const msg = document.getElementById("msg-password");
+      if (pass1 !== pass2) {
+        msg.style.display = "block";
+        return false;
+      } else {
+        msg.style.display = "none";
+      }
+      document.getElementById("msg-exito").style.display = "block";
+      setTimeout(() => {
+        document.getElementById("msg-exito").style.display = "none";
+      }, 2300);
+      // Aquí llamarías la API/backend en producción.
+    }
+  </script>
+</body>
+</html>

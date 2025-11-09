@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>San Paco | Crear Reporte</title>
+    <link rel="stylesheet" href="../CSS/reportes-crear.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="navbar-logo-nombre-centro">
+        <img src="../Images/logo.jpg" alt="Logo San Paco" class="navbar-logo" />
+        <span class="navbar-title">Hospital San Paco</span>
+      </div>
+    </nav>
+
+    <header>
+      <div class="system-info titulos">
+        <strong>Sistema de Información Web</strong>
+        <span class="dashboard-title">San Paco Hospital CRUD System</span>
+        <p>
+          Inteligencia de negocios y gestión de información<br />Bogotá D.C.
+        </p>
+      </div>
+      <div class="modulo-header titulos">
+        <h2>MÓDULO 4. CREAR NUEVO REPORTE</h2>
+        <p class="breadcrumb">
+          Registro y generación de informes personalizados
+        </p>
+      </div>
+    </header>
+
+    <main>
+      <section class="form-section">
+        <form class="crear-reporte-form">
+          <!-- Sección 1: Configuración del Reporte -->
+          <fieldset class="seccion">
+            <legend>Configuración del Reporte</legend>
+            <div class="input-duo">
+              <div class="input-group">
+                <label for="id-reporte">I.d. Reporte</label>
+                <input
+                  type="text"
+                  id="id-reporte"
+                  readonly
+                  value="RPT-000613"
+                />
+              </div>
+              <div class="input-group">
+                <label for="tipo-reporte">Tipo de Reporte</label>
+                <select id="tipo-reporte" required>
+                  <option value="">Seleccione...</option>
+                  <option value="citas">R. Citas Médicas</option>
+                  <option value="atendidos">R. Pacientes Atendidos</option>
+                  <option value="especialidad">R. por Especialidad</option>
+                  <option value="pagos">R. Pagos/Facturación</option>
+                </select>
+              </div>
+            </div>
+            <div class="input-group">
+              <label for="descripcion-reporte">Descripción</label>
+              <textarea
+                id="descripcion-reporte"
+                rows="2"
+                placeholder="Describa el propósito y alcance del reporte"
+              ></textarea>
+            </div>
+          </fieldset>
+
+          <!-- Sección 2: Metadatos y Exportación -->
+          <fieldset class="seccion">
+            <legend>Metadatos y Exportación</legend>
+            <div class="input-duo">
+              <div class="input-group">
+                <label for="generado-por">Generado por</label>
+                <input
+                  type="text"
+                  id="generado-por"
+                  readonly
+                  value="admin_jdiaz"
+                />
+              </div>
+              <div class="input-group">
+                <label for="fecha-gen">Fecha Generación</label>
+                <input type="text" id="fecha-gen" readonly value="2025-11-09" />
+              </div>
+              <div class="input-group">
+                <label for="hora-gen">Hora Generación</label>
+                <input type="text" id="hora-gen" readonly value="12:14 PM" />
+              </div>
+            </div>
+            <div class="input-duo">
+              <div class="input-group">
+                <label for="formato">Formato</label>
+                <select id="formato">
+                  <option>PDF</option>
+                  <option>Excel (XLSX)</option>
+                  <option>CSV</option>
+                  <option>HTML</option>
+                </select>
+              </div>
+              <div class="input-group">
+                <label for="ubicacion-archivo">Ubicación del Archivo</label>
+                <select id="ubicacion-archivo">
+                  <option>Descarga directa</option>
+                  <option>Servidor Hospital</option>
+                  <option>Carpeta usuario</option>
+                  <option>Correo electrónico</option>
+                </select>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- Sección 3: Auditoría y IDs Asociados -->
+          <fieldset class="seccion">
+            <legend>Auditoría y IDs Asociados</legend>
+            <div class="input-duo">
+              <div class="input-group">
+                <label for="id-hospital">I.d. Hospital</label>
+                <input type="text" id="id-hospital" readonly value="HSP-002" />
+              </div>
+              <div class="input-group">
+                <label for="id-citas">I.d. Citas</label>
+                <input
+                  type="text"
+                  id="id-citas"
+                  readonly
+                  value="CITAS-2025-11"
+                />
+              </div>
+              <div class="input-group">
+                <label for="id-pagos">I.d. Pagos</label>
+                <input type="text" id="id-pagos" readonly value="PGS-0039" />
+              </div>
+            </div>
+            <div class="input-group">
+              <label for="observaciones">Observaciones del Sistema</label>
+              <input
+                type="text"
+                id="observaciones"
+                readonly
+                value="Reporte incompleto por fallas en el sistema."
+              />
+            </div>
+          </fieldset>
+
+          <!-- Sección 4: Vista previa del reporte -->
+          <fieldset class="seccion">
+            <legend>Vista Previa del Reporte</legend>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Fecha Cita</th>
+                    <th>Hora</th>
+                    <th>Estado</th>
+                    <th>Código Paciente</th>
+                    <th>Nombre y Apellido</th>
+                    <th>Especialidad</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Agosto 05 2025</td>
+                    <td>09:00</td>
+                    <td>Cancelada</td>
+                    <td>02054</td>
+                    <td>Leonardo Luistro Saguil</td>
+                    <td>Pediatría</td>
+                  </tr>
+                  <tr>
+                    <td>Agosto 07 2025</td>
+                    <td>10:15</td>
+                    <td>Cancelada</td>
+                    <td>04816</td>
+                    <td>María Camila Torregia</td>
+                    <td>Cardiología</td>
+                  </tr>
+                  <tr>
+                    <td>Agosto 14 2025</td>
+                    <td>11:20</td>
+                    <td>Agendada</td>
+                    <td>00647</td>
+                    <td>Harold Ernesto Gaviria</td>
+                    <td>Ortopedia</td>
+                  </tr>
+                  <tr>
+                    <td>Agosto 14 2025</td>
+                    <td>15:50</td>
+                    <td>Confirmada</td>
+                    <td>77401</td>
+                    <td>John Freddy Vanegas P</td>
+                    <td>Pediatría</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </fieldset>
+
+          <div class="acciones-crud">
+            <button
+              type="submit"
+              class="accion-btn crear"
+              onclick="crearReporte(event)"
+            >
+              CREAR REPORTE
+            </button>
+            <button
+              type="button"
+              class="accion-btn regresar"
+              onclick="location.href='acciones-crud-reportes.html'"
+            >
+              REGRESAR
+            </button>
+          </div>
+          <div id="msg-creado" class="msg-guardado" style="display: none">
+            ¡Reporte creado exitosamente!
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        &copy; 2025 Hospital San Paco. Todos los derechos reservados. |
+        Contacto: <a href="mailto:info@sanpaco.com">info@sanpaco.com</a>
+      </p>
+    </footer>
+    <script>
+      function crearReporte(e) {
+        e.preventDefault(); // Evita envío real si es un form
+        let el = document.getElementById("msg-creado");
+        el.style.display = "block";
+        setTimeout(() => {
+          el.style.display = "none";
+        }, 2600);
+        
+      }
+    </script>
+  </body>
+</html>

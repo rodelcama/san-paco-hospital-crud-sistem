@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>San Paco | Eliminar Reporte</title>
+    <link rel="stylesheet" href="../CSS/reportes-eliminar.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="navbar-logo-nombre-centro">
+        <img src="../Images/logo.jpg" alt="Logo San Paco" class="navbar-logo" />
+        <span class="navbar-title">Hospital San Paco</span>
+      </div>
+    </nav>
+
+    <header>
+      <div class="system-info titulos">
+        <strong>Sistema de Información Web</strong>
+        <span class="dashboard-title">San Paco Hospital CRUD System</span>
+        <p>
+          Inteligencia de negocios y gestión de información<br />Bogotá D.C.
+        </p>
+      </div>
+      <div class="modulo-header titulos">
+        <h2>MÓDULO 4. ELIMINAR REPORTE</h2>
+        <p class="breadcrumb">Remueve reportes del sistema de forma segura</p>
+      </div>
+    </header>
+
+    <main>
+      <section class="form-section">
+        <form class="eliminar-reporte-form" onsubmit="return false">
+          <!-- Sección: Búsqueda solo por ID Reporte -->
+          <fieldset class="seccion busqueda">
+            <legend>Búsqueda de Reporte</legend>
+            <div class="input-group">
+              <label for="buscar-id">I.d. Reporte</label>
+              <input
+                type="text"
+                id="buscar-id"
+                placeholder="Ej: RPT-000582"
+                autocomplete="off"
+              />
+            </div>
+            <div class="acciones-crud">
+              <button
+                type="button"
+                class="accion-btn buscar"
+                onclick="activarResultados()"
+              >
+                BUSCAR
+              </button>
+            </div>
+          </fieldset>
+
+          <!-- Sección: Datos del Reporte -->
+          <fieldset class="seccion">
+            <legend>Datos del Reporte</legend>
+            <div class="input-duo">
+              <div class="input-group">
+                <label for="id-reporte">I.d. Reporte</label>
+                <input type="text" id="id-reporte" readonly disabled />
+              </div>
+              <div class="input-group">
+                <label for="tipo-reporte">Tipo de Reporte</label>
+                <input type="text" id="tipo-reporte" readonly disabled />
+              </div>
+            </div>
+            <div class="input-group">
+              <label for="descripcion-reporte">Descripción</label>
+              <textarea id="descripcion-reporte" rows="2" disabled></textarea>
+            </div>
+          </fieldset>
+
+          <!-- Sección: Metadatos y Exportación -->
+          <fieldset class="seccion">
+            <legend>Metadatos y Exportación</legend>
+            <div class="input-duo">
+              <div class="input-group">
+                <label for="generado-por">Generado por</label>
+                <input type="text" id="generado-por" readonly disabled />
+              </div>
+              <div class="input-group">
+                <label for="fecha-gen">Fecha Generación</label>
+                <input type="text" id="fecha-gen" readonly disabled />
+              </div>
+              <div class="input-group">
+                <label for="hora-gen">Hora Generación</label>
+                <input type="text" id="hora-gen" readonly disabled />
+              </div>
+            </div>
+            <div class="input-duo">
+              <div class="input-group">
+                <label for="formato">Formato</label>
+                <select id="formato" disabled>
+                  <option>PDF</option>
+                  <option>Excel (XLSX)</option>
+                  <option>CSV</option>
+                  <option>HTML</option>
+                </select>
+              </div>
+              <div class="input-group">
+                <label for="ubicacion-archivo">Ubicación del Archivo</label>
+                <select id="ubicacion-archivo" disabled>
+                  <option>Descarga directa</option>
+                  <option>Servidor Hospital</option>
+                  <option>Carpeta usuario</option>
+                  <option>Correo electrónico</option>
+                </select>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- Sección: Auditoría y IDs Asociados -->
+          <fieldset class="seccion">
+            <legend>Auditoría y IDs Asociados</legend>
+            <div class="input-duo">
+              <div class="input-group">
+                <label for="id-hospital">I.d. Hospital</label>
+                <input type="text" id="id-hospital" readonly disabled />
+              </div>
+              <div class="input-group">
+                <label for="id-citas">I.d. Citas</label>
+                <input type="text" id="id-citas" readonly disabled />
+              </div>
+              <div class="input-group">
+                <label for="id-pagos">I.d. Pagos</label>
+                <input type="text" id="id-pagos" readonly disabled />
+              </div>
+            </div>
+            <div class="input-group">
+              <label for="observaciones">Observaciones del Sistema</label>
+              <input type="text" id="observaciones" readonly disabled />
+            </div>
+          </fieldset>
+
+          <!-- Sección: Vista Previa del Reporte -->
+          <fieldset class="seccion">
+            <legend>Vista Previa del Reporte</legend>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Fecha Cita</th>
+                    <th>Hora</th>
+                    <th>Estado</th>
+                    <th>Código Paciente</th>
+                    <th>Nombre y Apellido</th>
+                    <th>Especialidad</th>
+                  </tr>
+                </thead>
+                <tbody id="tabla-datos">
+                  <tr>
+                    <td colspan="6" style="text-align: center">
+                      Sin resultados. Ingrese un I.d. de Reporte.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </fieldset>
+
+          <!-- ADVERTENCIA ELIMINAR -->
+          <div class="msg-warning" id="msg-warning">
+            <span>⚠️</span> ¿Seguro que desea eliminar este reporte? <br />
+            <b>Esta acción no se puede revertir.</b>
+          </div>
+
+          <div class="acciones-crud">
+            <button
+              type="button"
+              class="accion-btn eliminar"
+              onclick="eliminarReporte()"
+            >
+              ELIMINAR
+            </button>
+            <button
+              type="button"
+              class="accion-btn limpiar"
+              onclick="limpiarFormulario()"
+            >
+              LIMPIAR FORMULARIO
+            </button>
+            <button
+              type="button"
+              class="accion-btn regresar"
+              onclick="location.href='acciones-crud-reportes.html'"
+            >
+              REGRESAR
+            </button>
+          </div>
+
+          <div id="msg-eliminado" class="msg-guardado" style="display: none">
+            ¡Reporte eliminado exitosamente!
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        &copy; 2025 Hospital San Paco. Todos los derechos reservados. |
+        Contacto: <a href="mailto:info@sanpaco.com">info@sanpaco.com</a>
+      </p>
+    </footer>
+
+    <script>
+      document
+        .getElementById("buscar-id")
+        .addEventListener("keydown", function (e) {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            activarResultados();
+          }
+        });
+      function activarResultados() {
+        const val = document.getElementById("buscar-id").value.trim();
+        if (val.length < 3) {
+          limpiarFormulario();
+          return;
+        }
+        document.getElementById("id-reporte").value = val;
+        document.getElementById("tipo-reporte").value = "R. Citas Médicas";
+        document.getElementById("descripcion-reporte").value =
+          "Reporte de citas canceladas y agendadas en agosto";
+        document.getElementById("generado-por").value = "admin_jdiaz";
+        document.getElementById("fecha-gen").value = "2025-11-09";
+        document.getElementById("hora-gen").value = "11:52 AM";
+        document.getElementById("id-hospital").value = "HSP-002";
+        document.getElementById("id-citas").value = "CITAS-2025-11";
+        document.getElementById("id-pagos").value = "PGS-0039";
+        document.getElementById("observaciones").value =
+          "Reporte incompleto por fallas en el sistema.";
+        document.getElementById("tabla-datos").innerHTML = `
+    <tr>
+      <td>Agosto 05 2025</td>
+      <td>09:00</td>
+      <td>Cancelada</td>
+      <td>02054</td>
+      <td>Leonardo Luistro Saguil</td>
+      <td>Pediatría</td>
+    </tr>
+    <tr>
+      <td>Agosto 07 2025</td>
+      <td>10:15</td>
+      <td>Cancelada</td>
+      <td>04816</td>
+      <td>María Camila Torregia</td>
+      <td>Cardiología</td>
+    </tr>
+    <tr>
+      <td>Agosto 14 2025</td>
+      <td>11:20</td>
+      <td>Agendada</td>
+      <td>00647</td>
+      <td>Harold Ernesto Gaviria</td>
+      <td>Ortopedia</td>
+    </tr>
+    <tr>
+      <td>Agosto 14 2025</td>
+      <td>15:50</td>
+      <td>Confirmada</td>
+      <td>77401</td>
+      <td>John Freddy Vanegas P</td>
+      <td>Pediatría</td>
+    </tr>
+  `;
+      }
+      function limpiarFormulario() {
+        document.getElementById("buscar-id").value = "";
+        document.getElementById("id-reporte").value = "";
+        document.getElementById("tipo-reporte").value = "";
+        document.getElementById("descripcion-reporte").value = "";
+        document.getElementById("generado-por").value = "";
+        document.getElementById("fecha-gen").value = "";
+        document.getElementById("hora-gen").value = "";
+        document.getElementById("id-hospital").value = "";
+        document.getElementById("id-citas").value = "";
+        document.getElementById("id-pagos").value = "";
+        document.getElementById("observaciones").value = "";
+        document.getElementById(
+          "tabla-datos"
+        ).innerHTML = `<tr><td colspan="6" style="text-align:center;">Sin resultados. Ingrese un I.d. de Reporte.</td></tr>`;
+      }
+      // Confirmación eliminar y mensaje de éxito
+      function eliminarReporte() {
+        if (
+          confirm(
+            "¿Seguro que desea eliminar este reporte?\nEsta acción no se puede deshacer."
+          )
+        ) {
+          let el = document.getElementById("msg-eliminado");
+          el.style.display = "block";
+          setTimeout(() => {
+            el.style.display = "none";
+          }, 2600);
+          limpiarFormulario();
+        }
+      }
+    </script>
+  </body>
+</html>

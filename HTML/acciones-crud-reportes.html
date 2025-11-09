@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>San Paco | CRUD de Reportes</title>
+  <link rel="stylesheet" href="../CSS/acciones-crud-reportes.css" />
+</head>
+<body>
+  <!-- Barra de navegación -->
+  <nav class="navbar">
+    <div class="navbar-logo-nombre-centro">
+      <img src="../Images/logo.jpg" alt="Logo San Paco" class="navbar-logo" />
+      <span class="navbar-title">Hospital San Paco</span>
+    </div>
+  </nav>
+
+  <!-- Encabezado -->
+  <header>
+    <div class="system-info titulos">
+      <strong>Sistema de Información Web</strong>
+      <span class="dashboard-title">San Paco Hospital CRUD System</span>
+      <p>
+        Inteligencia de negocios y gestión de información<br />Bogotá D.C.
+      </p>
+    </div>
+    <div class="modulo-header titulos">
+      <h2>MÓDULO 4. GESTIÓN DE REPORTES Y ESTADÍSTICAS</h2>
+      <p class="breadcrumb">Gestión de Informes, Reportes y Consultas</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="acciones-section">
+      <h3 class="seccion-titulo">Seleccione la acción a realizar:</h3>
+      <div class="acciones-container">
+        <!-- Botón CREAR -->
+        <button
+          class="accion-card crear"
+          onclick="location.href='reportes-crear.html'"
+        >
+          <div class="icono">📝</div>
+          <h3>CREAR</h3>
+          <p>Generar un nuevo reporte sobre datos del hospital</p>
+        </button>
+
+        <!-- Botón CONSULTAR -->
+        <button
+          class="accion-card consultar"
+          onclick="location.href='reportes-consultar.html'"
+        >
+          <div class="icono">🔍</div>
+          <h3>CONSULTAR</h3>
+          <p>Buscar, visualizar o descargar reportes generados</p>
+        </button>
+
+        <!-- Botón EDITAR -->
+        <button
+          class="accion-card editar"
+          onclick="location.href='reportes-editar.html'"
+        >
+          <div class="icono">✏️</div>
+          <h3>EDITAR</h3>
+          <p>Modificar parámetros y detalles de reportes existentes</p>
+        </button>
+
+        <!-- Botón ELIMINAR -->
+        <button
+          class="accion-card eliminar"
+          onclick="location.href='reportes-eliminar.html'"
+        >
+          <div class="icono">🗑️</div>
+          <h3>ELIMINAR</h3>
+          <p>Remover reportes y archivos del sistema</p>
+        </button>
+      </div>
+
+      <div class="boton-regresar-container">
+        <button
+          class="boton-regresar"
+          onclick="location.href='dashboard.html'"
+        >
+          REGRESAR
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>
+      &copy; 2025 Hospital San Paco. Todos los derechos reservados. |
+      Contacto: <a href="mailto:info@sanpaco.com">info@sanpaco.com</a>
+    </p>
+  </footer>
+</body>
+</html>

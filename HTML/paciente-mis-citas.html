@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>San Paco | Mis Citas</title>
+  <link rel="stylesheet" href="../CSS/paciente-mis-citas.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-logo-nombre-centro">
+      <img src="../Images/logo.jpg" alt="Logo San Paco" class="navbar-logo" />
+      <span class="navbar-title">Hospital San Paco</span>
+    </div>
+  </nav>
+  <header>
+    <div class="system-info titulos">
+      <strong>Sistema de Información Web</strong>
+      <span class="dashboard-title">San Paco Hospital CRUD System</span>
+      <p>Gestión Unificada de Citas Médicas – Paciente<br />Bogotá D.C.</p>
+    </div>
+    <div class="modulo-header titulos">
+      <h2>MÓDULO 3. Paciente: Citas Programadas e Historial</h2>
+      <p class="breadcrumb">Mis citas</p>
+    </div>
+  </header>
+  <main>
+    <section class="gestion-citas-section">
+      <form class="gestion-citas-form" autocomplete="off" onsubmit="buscarCitas(); return false;">
+        <!-- Buscador -->
+        <fieldset class="seccion buscador">
+          <legend>Buscar mis citas</legend>
+          <div class="busqueda-flex">
+            <select id="buscar-por" name="buscar-por" onchange="actualizaOpcionesFiltro()">
+              <option value="todas">Todas</option>
+              <option value="fecha">Por fecha</option>
+              <option value="especialidad">Por especialidad</option>
+              <option value="medico">Por médico</option>
+            </select>
+            <select id="filtro" name="filtro" disabled>
+              <option value="">Seleccione una opción</option>
+            </select>
+            <button type="submit" class="accion-btn buscar">BUSCAR</button>
+          </div>
+        </fieldset>
+
+        <!-- Próximas citas -->
+        <fieldset class="seccion">
+          <legend>Mis citas programadas</legend>
+          <div class="responsive-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Fecha</th>
+                  <th>Hora</th>
+                  <th>Especialidad</th>
+                  <th>Médico</th>
+                  <th>Sucursal</th>
+                  <th>Estado</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="tabla-proximas">
+                <!-- Se llena dinámicamente -->
+              </tbody>
+            </table>
+          </div>
+          <div class="msg-info" id="msg-sin-proximas" style="display:none;">
+            No tienes citas programadas próximas.
+          </div>
+        </fieldset>
+
+        <!-- Historial de citas -->
+        <fieldset class="seccion">
+          <legend>Historial de citas</legend>
+          <div class="responsive-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Fecha</th>
+                  <th>Hora</th>
+                  <th>Especialidad</th>
+                  <th>Médico</th>
+                  <th>Sucursal</th>
+                  <th>Estado</th>
+                </tr>
+              </thead>
+              <tbody id="tabla-historial">
+                <!-- Se llena dinámicamente -->
+              </tbody>
+            </table>
+          </div>
+          <div class="msg-info" id="msg-sin-historial" style="display:none;">
+            No hay citas históricas para mostrar.
+          </div>
+        </fieldset>
+
+        <div class="botones-accion">
+          <button type="button" class="accion-btn regresar" onclick="location.href='menu-agendamiento-pacientes.html'">REGRESAR</button>
+        </div>
+      </form>
+    </section>
+  </main>
+  <footer>
+    <p>
+      &copy; 2025 Hospital San Paco. Todos los derechos reservados. |
+      Contacto: <a href="mailto:info@sanpaco.com">info@sanpaco.com</a>
+    </p>
+  </footer>
+  <script>
+    // Simulación de datos actuales/históricos
+    const citas = [
+      // Próximas (hoy o futuras)
+      {fecha:"2025-11-14", hora:"09:30", especialidad:"Medicina General", medico:"María Pérez", sucursal:"Sede Central", estado:"Pendiente", esProxima:true},
+      {fecha:"2025-11-19", hora:"10:30", especialidad:"Pediatría", medico:"Juan Gómez", sucursal:"Consultorio Norte", estado:"Confirmada", esProxima:true},
+      // Historial (antes de hoy)
+      {fecha:"2025-10-30", hora:"08:00", especialidad:"Pediatría", medico:"Juan Gómez", sucursal:"Sede Central", estado:"Cumplida", esProxima:false},
+      {fecha:"2025-10-17", hora:"13:15", especialidad:"Cardiología", medico:"Lisa Romero", sucursal:"Sala 5", estado:"Perdida", esProxima:false}
+    ];
+    // Opciones únicas para cada filtro generado a partir de datos
+    function unique(arr, field) {
+      return [...new Set(arr.map(e => e[field]))];
+    }
+    function actualizaOpcionesFiltro() {
+      const por = document.getElementById('buscar-por').value;
+      const filtro = document.getElementById('filtro');
+      filtro.innerHTML = "";
+      filtro.disabled = (por === "todas");
+      if (por === "todas") {
+        filtro.innerHTML = "<option value=''>--</option>";
+        return;
+      }
+      let options = [];
+      if (por === "fecha") options = unique(citas, "fecha");
+      else if (por === "especialidad") options = unique(citas, "especialidad");
+      else if (por === "medico") options = unique(citas, "medico");
+      options.forEach(x => {
+        let o = document.createElement("option");
+        o.value = x; o.textContent = x;
+        filtro.appendChild(o);
+      });
+    }
+    function pintarTablas(citasMostradas) {
+      const tp = document.getElementById('tabla-proximas');
+      const th = document.getElementById('tabla-historial');
+      tp.innerHTML = th.innerHTML = '';
+      let hayProximas = false, hayHistorial = false;
+      citasMostradas.forEach(cita => {
+        let row = `<tr>
+          <td>${cita.fecha}</td>
+          <td>${cita.hora}</td>
+          <td>${cita.especialidad}</td>
+          <td>${cita.medico}</td>
+          <td>${cita.sucursal}</td>
+          <td><span class="estado ${cita.estado.toLowerCase()}">${cita.estado}</span></td>
+          ` +
+          (cita.esProxima
+            ? `<td>${cita.estado === "Pendiente"
+                  ? `<button type="button" class="mini-btn cancelar" onclick="cancelarCita(this)">Cancelar</button>`
+                  : ""}</td>`
+            : ""
+          ) +
+        `</tr>`;
+        if (cita.esProxima) {
+          tp.innerHTML += row;
+          hayProximas = true;
+        } else {
+          th.innerHTML += row;
+          hayHistorial = true;
+        }
+      });
+      document.getElementById('msg-sin-proximas').style.display = hayProximas ? "none" : "";
+      document.getElementById('msg-sin-historial').style.display = hayHistorial ? "none" : "";
+    }
+    function buscarCitas() {
+      const por = document.getElementById('buscar-por').value;
+      const filtro = document.getElementById('filtro').value;
+      let result;
+      if (por === "todas") {
+        result = citas;
+      } else {
+        result = citas.filter(cita => cita[por] == filtro);
+      }
+      pintarTablas(result);
+      return false;
+    }
+    function cancelarCita(btn) {
+      if (confirm("¿Desea cancelar esta cita? Esta acción es irreversible.")) {
+        const row = btn.closest("tr");
+        row.remove();
+        // Opcional: Lógica de backend aquí
+      }
+    }
+    window.onload = function() {
+      actualizaOpcionesFiltro();
+      pintarTablas(citas);
+    }
+  </script>
+</body>
+</html>

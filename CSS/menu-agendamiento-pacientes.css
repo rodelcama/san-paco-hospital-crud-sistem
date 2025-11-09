@@ -101,7 +101,7 @@ main {
 /* CONTENEDOR DE OPCIONES - 5 en una fila, luego 3-2 */
 .menu-container {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
   width: 100%;
   margin-bottom: 2rem;

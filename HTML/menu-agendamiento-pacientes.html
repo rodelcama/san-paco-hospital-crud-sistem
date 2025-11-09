@@ -1,99 +1,81 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>San Paco | Menú Paciente</title>
-    <link rel="stylesheet" href="../CSS/menu-agendamiento-pacientes.css" />
-  </head>
-  <body>
-    <!-- Barra de navegación -->
-    <nav class="navbar">
-      <div class="navbar-logo-nombre-centro">
-        <img src="../Images/logo.jpg" alt="Logo San Paco" class="navbar-logo" />
-        <span class="navbar-title">Hospital San Paco</span>
-      </div>
-    </nav>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>San Paco | Menú Paciente</title>
+  <link rel="stylesheet" href="../CSS/menu-agendamiento-pacientes.css" />
+</head>
+<body>
+  <!-- Barra de navegación -->
+  <nav class="navbar">
+    <div class="navbar-logo-nombre-centro">
+      <img src="../Images/logo.jpg" alt="Logo San Paco" class="navbar-logo" />
+      <span class="navbar-title">Hospital San Paco</span>
+    </div>
+  </nav>
 
-    <!-- Encabezado -->
-    <header>
-      <div class="system-info titulos">
-        <strong>Sistema de Información Web</strong>
-        <span class="dashboard-title">San Paco Hospital - Portal del Paciente</span>
-        <p>
-          Agendamiento de Citas Médicas<br />Bienvenido(a) al sistema
-        </p>
-      </div>
-      <div class="modulo-header titulos">
-        <h2>MÓDULO 3. AGENDAMIENTO DE CITAS MÉDICAS</h2>
-        <p class="breadcrumb">Menú Principal del Paciente</p>
-      </div>
-    </header>
-
-    <main>
-      <section class="menu-section">
-        <h3 class="seccion-titulo">Seleccione una opción:</h3>
-        <div class="menu-container">
-          
-          <!-- Opción 1: Agendar Nueva Cita -->
-          <button class="menu-card" onclick="location.href='agendar-cita-paciente.html'">
-            <div class="icono">📅</div>
-            <h3>AGENDAR NUEVA CITA</h3>
-            <p>Programe una nueva cita médica con nuestros especialistas</p>
-          </button>
-
-          <!-- Opción 2: Mis Citas Programadas -->
-          <button class="menu-card" onclick="location.href='mis-citas-paciente.html'">
-            <div class="icono">📋</div>
-            <h3>MIS CITAS PROGRAMADAS</h3>
-            <p>Consulte sus citas médicas agendadas y próximas</p>
-          </button>
-
-          <!-- Opción 3: Historial de Citas -->
-          <button class="menu-card" onclick="location.href='historial-citas-paciente.html'">
-            <div class="icono">📚</div>
-            <h3>HISTORIAL DE CITAS</h3>
-            <p>Revise el historial completo de sus citas médicas</p>
-          </button>
-
-          <!-- Opción 4: Cancelar Cita -->
-          <button class="menu-card" onclick="location.href='cancelar-cita-paciente.html'">
-            <div class="icono">❌</div>
-            <h3>CANCELAR CITA</h3>
-            <p>Cancele una cita médica previamente agendada</p>
-          </button>
-
-          <!-- Opción 5: Mi Perfil -->
-          <button class="menu-card" onclick="location.href='perfil-paciente.html'">
-            <div class="icono">👤</div>
-            <h3>MI PERFIL</h3>
-            <p>Vea y actualice su información personal y médica</p>
-          </button>
-
-        </div>
-
-        <!-- Botón cerrar sesión debajo de las opciones -->
-        <div class="cerrar-sesion-container">
-          <button class="btn-cerrar-sesion" onclick="cerrarSesion()">
-            CERRAR SESIÓN
-          </button>
-        </div>
-      </section>
-    </main>
-
-    <footer>
+  <!-- Encabezado -->
+  <header>
+    <div class="system-info titulos">
+      <strong>Sistema de Información Web</strong>
+      <span class="dashboard-title">San Paco Hospital - Portal del Paciente</span>
       <p>
-        &copy; 2025 Hospital San Paco. Todos los derechos reservados. |
-        Contacto: <a href="mailto:info@sanpaco.com">info@sanpaco.com</a>
+        Agendamiento de Citas Médicas<br />Bienvenido(a) al sistema
       </p>
-    </footer>
+    </div>
+    <div class="modulo-header titulos">
+      <h2>MÓDULO 3. AGENDAMIENTO DE CITAS MÉDICAS</h2>
+      <p class="breadcrumb">Menú Principal del Paciente</p>
+    </div>
+  </header>
 
-    <script>
-      function cerrarSesion() {
-        if (confirm("¿Está seguro de que desea cerrar sesión?")) {
-          window.location.href = '../index.html';
-        }
+  <main>
+    <section class="menu-section">
+      <h3 class="seccion-titulo">Seleccione una opción:</h3>
+      <div class="menu-container">
+        <!-- Opción 1: Agendar Nueva Cita -->
+        <button class="menu-card" onclick="location.href='paciente-agendar-cita.html'">
+          <div class="icono">📅</div>
+          <h3>AGENDAR NUEVA CITA</h3>
+          <p>Programe una nueva cita médica con nuestros especialistas</p>
+        </button>
+        <!-- Opción 2: Mis Citas -->
+        <button class="menu-card" onclick="location.href='paciente-mis-citas.html'">
+          <div class="icono">📋</div>
+          <h3>MIS CITAS</h3>
+          <p>Consulta y gestiona tus citas futuras e historial completo</p>
+        </button>
+        <!-- Opción 3: Mi Perfil -->
+        <button class="menu-card" onclick="location.href='paciente-perfil.html'">
+          <div class="icono">👤</div>
+          <h3>MI PERFIL</h3>
+          <p>Vea y actualice su información personal y médica</p>
+        </button>
+      </div>
+
+      <!-- Botón cerrar sesión debajo de las opciones -->
+      <div class="cerrar-sesion-container">
+        <button class="btn-cerrar-sesion" onclick="cerrarSesion()">
+          CERRAR SESIÓN
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>
+      &copy; 2025 Hospital San Paco. Todos los derechos reservados. |
+      Contacto: <a href="mailto:info@sanpaco.com">info@sanpaco.com</a>
+    </p>
+  </footer>
+
+  <script>
+    function cerrarSesion() {
+      if (confirm("¿Está seguro de que desea cerrar sesión?")) {
+        window.location.href = '../index.html';
       }
-    </script>
-  </body>
+    }
+  </script>
+</body>
 </html>

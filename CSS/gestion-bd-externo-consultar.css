@@ -15,8 +15,6 @@ body {
   margin: 0;
   padding: 0;
 }
-
-/* NAVBAR SOLO LOGO Y NOMBRE, CENTRADO */
 .navbar {
   position: sticky;
   top: 0;
@@ -44,8 +42,6 @@ body {
   font-weight: bold;
   letter-spacing: 1px;
 }
-
-/* HEADER Y TITULOS */
 .titulos, .system-info, .modulo-header {
   background-color: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(10px);
@@ -68,17 +64,8 @@ body {
   font-weight: 600;
   margin-top: 0.5rem;
 }
+main { flex: 1; display: flex; flex-direction: column; align-items: center; margin-top: 1.3rem; }
 
-/* MAIN */
-main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 1.3rem;
-}
-
-/* SECCIÓN PRINCIPAL DEL FORMULARIO */
 .gestion-bd-section {
   box-sizing: border-box;
   width: 100%;
@@ -89,15 +76,13 @@ main {
   padding: 1.5rem 2.3rem 2.5rem 2.3rem;
   margin: 0 auto 70px auto;
 }
-
-/* FORMULARIO */
 .gestion-bd-form {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
 
-/* SECCIONES (fieldsets) */
+/* SECCIONES */
 .seccion {
   background: #f6feff;
   border: 1px solid #b3e5fc;
@@ -107,34 +92,29 @@ main {
   flex-direction: column;
   gap: 0.9rem;
 }
-
 .buscador {
   background: #f1f8e9;
-  border-color: #aed581;
+  border: 1.5px solid #43a047;
+  border-radius: 12px;
   margin-bottom: 1.5rem;
 }
-.seccion legend {
+.buscador legend {
+  font-weight: 800;
+}
+.seccion legend, .admin-section legend {
   color: #0d47a1;
   font-weight: 700;
   font-size: 1.15rem;
   padding: 0 0.5rem;
 }
-
-/* LABELS */
 label {
   color: #0377b2;
   font-weight: 600;
   margin-bottom: 0.3rem;
   font-size: 1.02rem;
 }
-
-/* Inputs, textarea y select */
-input[type="text"], 
-input[type="email"], 
-input[type="tel"], 
-input[type="date"],
-input[type="password"],
-select, textarea {
+input[type="text"], input[type="email"], input[type="tel"], 
+input[type="date"], input[type="password"], select, textarea {
   width: 100%;
   padding: 0.6rem;
   border: 1px solid #cccccc;
@@ -144,20 +124,11 @@ select, textarea {
   margin-bottom: 0.25rem;
   resize: vertical;
 }
-
 input:disabled, textarea:disabled {
   background-color: #e3eaec;
   color: #383838;
   cursor: not-allowed;
 }
-
-/* Sección médica con color diferente */
-.seccion-medica {
-  background: #fff3e0;
-  border-color: #ffb74d;
-}
-
-/* Permisos (checkbox) */
 .permisos {
   background: #e3f2fd;
   border-radius: 8px;
@@ -170,29 +141,15 @@ input:disabled, textarea:disabled {
   gap: 0.5rem;
   border: 1px solid #b3e5fc;
 }
+.permisos legend { color: #0d47a1; font-weight: 600; font-size: 1.05rem; margin-bottom: 0.5rem; }
+.permisos label { display: flex; align-items: center; gap: 0.5rem; font-weight: 500; }
 
-.permisos legend {
-  color: #0d47a1;
-  font-weight: 600;
-  font-size: 1.05rem;
-  margin-bottom: 0.5rem;
-}
-
-.permisos label {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-weight: 500;
-}
-
-/* Botones de acción */
 .botones-accion {
   display: flex;
   gap: 1rem;
   margin-top: 1rem;
   flex-wrap: wrap;
 }
-
 .accion-btn {
   flex: 1;
   min-width: 180px;
@@ -208,16 +165,12 @@ input:disabled, textarea:disabled {
   color: #fff;
   letter-spacing: 0.3px;
 }
-
 .accion-btn.buscar { background: #1565c0; }
 .accion-btn.regresar { background: #0d47a1; }
-
 .accion-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
-
-/* FOOTER */
 footer {
   background: #e5e5e5;
   width: 100%;
@@ -232,44 +185,28 @@ footer {
   box-shadow: 0 -2px 6px rgba(0,0,0,0.04);
 }
 
-/* RESPONSIVE */
 @media (max-width: 900px) {
   .gestion-bd-section {
     max-width: 99vw;
     width: 94vw;
     padding: 1rem 1.5rem 1.5rem 1.5rem;
   }
-  
-  .seccion {
-    padding: 1rem;
-  }
+  .seccion { padding: 1rem; }
 }
-
 @media (max-width: 600px) {
-  .botones-accion {
-    flex-direction: column;
-  }
-  
-  .accion-btn {
-    width: 100%;
-    min-width: unset;
-  }
-  
-  .dashboard-title, .modulo-header h2 {
-    font-size: 1.2rem;
-  }
+  .botones-accion { flex-direction: column; }
+  .accion-btn { width: 100%; min-width: unset; }
+  .dashboard-title, .modulo-header h2 { font-size: 1.2rem; }
+  .breadcrumb { font-size: 1rem; }
+}
+@media (max-width: 450px) {
+  .navbar-logo { width: 28px; height: 28px; }
+  .navbar-title { font-size: 1rem; }
+  .gestion-bd-section { padding: 0.8rem 1rem; }
 }
 
-@media (max-width: 450px) {
-  .navbar-logo {
-    width: 28px;
-    height: 28px;
-  }
-  .navbar-title {
-    font-size: 1rem;
-  }
-  
-  .gestion-bd-section {
-    padding: 0.8rem 1rem;
-  }
+/* CORRECCIÓN DE COLOR VERDE FUERTE EN EL LEGEND DEL BUSCADOR */
+.seccion.buscador legend {
+  color: #2e7d32 !important;
+  font-weight: 800 !important;
 }

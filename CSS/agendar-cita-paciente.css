@@ -4,7 +4,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-image: url("/Images/fondo-principal.jpg");
+  background-image: url("../Images/fondo-principal.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -45,7 +45,6 @@ body {
   letter-spacing: 1px;
 }
 
-/* HEADER Y TITULOS */
 .titulos, .system-info, .modulo-header {
   background-color: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(10px);
@@ -68,8 +67,19 @@ body {
   font-weight: 600;
   margin-top: 0.5rem;
 }
+.saludo-paciente {
+  width: 100%;
+  background: #e8f5e9;
+  color: #388e3c;
+  font-size: 1.12rem;
+  font-weight: 600;
+  text-align: center;
+  border-radius: 9px;
+  padding: 1em 0;
+  margin-bottom: 1.2em;
+  letter-spacing: 0.5px;
+}
 
-/* MAIN */
 main {
   flex: 1;
   display: flex;
@@ -78,34 +88,25 @@ main {
   margin-top: 1.3rem;
 }
 
-/* SECCIÓN PRINCIPAL DEL FORMULARIO */
-.gestion-bd-section, .gestion-usuarios-section {
+/* FORMULARIO PRINCIPAL */
+.gestion-section {
   box-sizing: border-box;
   width: 100%;
-  max-width: 600px;
+  max-width: 900px;
   background: #ffffffcc;
   border-radius: 16px;
   box-shadow: 0 4px 8px rgba(79,195,247,0.12);
-  padding: 1.5rem 2.3rem 2.5rem 2.3rem;
+  padding: 2rem 2.5rem 2.5rem 2.5rem;
   margin: 0 auto 70px auto;
 }
 
-/* FORMULARIO */
-.gestion-bd-form, .gestion-usuarios-form {
+.gestion-form {
   display: flex;
   flex-direction: column;
-  gap: 0.9rem;
+  gap: 1.5rem;
 }
 
-/* Buscador */
-.buscador {
-  background: #f1f8e9;
-  border-color: #aed581;
-  border-radius: 12px;
-}
-
-/* Secciones (fieldset), admin-section igual */
-.seccion, .admin-section {
+.seccion {
   background: #f6feff;
   border: 1px solid #b3e5fc;
   border-radius: 12px;
@@ -113,83 +114,84 @@ main {
   display: flex;
   flex-direction: column;
   gap: 0.9rem;
-  margin-bottom: 0;
 }
 
-.seccion legend, .admin-section legend, .buscador legend {
+.seccion legend {
   color: #0d47a1;
   font-weight: 700;
   font-size: 1.15rem;
   padding: 0 0.5rem;
 }
 
-label, legend {
+.datos-generales {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.datos-generales > div {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
   color: #0377b2;
   font-weight: 600;
   margin-bottom: 0.3rem;
   font-size: 1.02rem;
 }
 
-/* Inputs, textareas y select */
-input[type="text"], input[type="password"], input[type="date"], input[type="tel"], input[type="email"], select, textarea {
+/* Inputs, textarea y select */
+input[type="text"],
+input[type="date"],
+select,
+textarea {
   width: 100%;
-  padding: 0.5rem;
+  padding: 0.6rem;
   border: 1px solid #cccccc;
   border-radius: 8px;
   font-size: 1rem;
-  background-color: #f6feff;
+  background-color: #fff;
   margin-bottom: 0.25rem;
+  transition: border 0.2s;
 }
+
 input:disabled, textarea:disabled {
   background-color: #e3eaec;
   color: #383838;
   cursor: not-allowed;
 }
 
-/* Permisos (checkbox) - solo lectura */
-.permisos {
-  background: #e3f2fd;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(79,195,247,0.06);
-  padding: 0.9rem 1.2rem;
-  margin-bottom: 0.7rem;
-  font-size: 0.98rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  border: 1px solid #b3e5fc;
-}
-
-/* Botones de acción */
+/* BOTONES DE ACCIÓN */
 .botones-accion {
   display: flex;
   gap: 1rem;
   margin-top: 1rem;
+  flex-wrap: wrap;
 }
+
 .accion-btn {
   flex: 1;
+  min-width: 180px;
   padding: 0.7rem 1rem;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: bold;
   border: none;
   border-radius: 8px;
   box-shadow: 2px 2px 0 0 #4443 inset;
-  transition: background 0.3s, color 0.3s, box-shadow 0.2s;
+  transition: all 0.3s;
   cursor: pointer;
   text-align: center;
   color: #fff;
   letter-spacing: 0.3px;
 }
-.accion-btn.guardar { background: #4fc3f7; color: #0d47a1; font-weight: 700; }
-.accion-btn.regresar { background: #0d47a1; color: #fff; }
+.accion-btn.confirmar { background: #4caf50; }
+.accion-btn.regresar { background: #0d47a1; }
 .accion-btn:hover {
-  background: #00b4d8 !important;
-  color: #fff !important;
-  filter: none;
-  box-shadow: 0 2px 8px rgba(79,195,247,0.14);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
-/* FOOTER */
 footer {
   background: #e5e5e5;
   width: 100%;
@@ -198,46 +200,27 @@ footer {
   text-align: center;
   padding: 0.1rem 0;
   font-size: 1rem;
-  position: relative;
-  left: 0;
-  bottom: 0;
   box-shadow: 0 -2px 6px rgba(0,0,0,0.04);
 }
 
-/* RESPONSIVE */
-@media (max-width: 700px) {
-  .gestion-bd-section, .gestion-usuarios-section {
+/* Responsive */
+@media (max-width: 900px) {
+  .gestion-section {
     max-width: 99vw;
     width: 94vw;
-    padding: 0.9rem 1.3rem 1.1rem 1.3rem;
-    margin: 0 auto 70px auto;
+    padding: 1.5rem 1.3rem 2rem 1.3rem;
   }
-  .dashboard-title, .modulo-header h2 {
-    font-size: 1.13rem;
-  }
-  .breadcrumb {
-    font-size: 0.95rem;
-  }
-  .accion-btn {
-    font-size: 1.01rem;
-    padding: 0.6rem 0.8rem;
-  }
+  .seccion { padding: 1rem; }
+  .datos-generales { grid-template-columns: 1fr; }
 }
-
+@media (max-width: 600px) {
+  .botones-accion { flex-direction: column; }
+  .accion-btn { width: 100%; min-width: unset; }
+  .dashboard-title, .modulo-header h2 { font-size: 1.2rem; }
+  .seccion { padding: 0.7rem; }
+}
 @media (max-width: 450px) {
-  .navbar-logo {
-    width: 28px;
-    height: 28px;
-  }
-  .navbar-title {
-    font-size: 1rem;
-    margin-bottom: 0.4rem;
-  }
-  .modulo-header h2 {
-    font-size: 1.04rem;
-  }
-  .system-info p {
-    font-size: 0.89rem;
-    padding: 0.5rem 0.35rem;
-  }
+  .navbar-logo { width: 28px; height: 28px; }
+  .navbar-title { font-size: 1rem; }
+  .gestion-section { padding: 0.7rem 0.4rem; }
 }

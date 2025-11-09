@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>San Paco | Agendar Nueva Cita</title>
+  <link rel="stylesheet" href="../CSS/agendar-cita-paciente.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-logo-nombre-centro">
+      <img src="../Images/logo.jpg" alt="Logo San Paco" class="navbar-logo" />
+      <span class="navbar-title">Hospital San Paco</span>
+    </div>
+  </nav>
+
+  <header>
+    <div class="system-info titulos">
+      <strong>Sistema de Información Web – Portal del Paciente</strong>
+      <span class="dashboard-title">San Paco Hospital</span>
+      <p>Agende su próxima cita médica</p>
+    </div>
+    <div class="modulo-header titulos">
+      <h2>MÓDULO 3. Agendamiento de Citas Médicas</h2>
+      <p class="breadcrumb">Nueva Cita</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="gestion-section">
+      <!-- Saludo del paciente -->
+      <div class="saludo-paciente">
+        ¡Hola, <span id="nombre-paciente">Carolina Andrea Gómez Rivas</span>!
+      </div>
+      <form class="gestion-form" autocomplete="off" onsubmit="agendarCita(event)">
+        <!-- Identificación y estado del paciente -->
+        <fieldset class="seccion">
+          <legend>Identificación y Estado</legend>
+          <div class="datos-generales">
+            <div>
+              <label for="codigo-cita">Código de Cita:</label>
+              <input type="text" id="codigo-cita" value="CIT-03214" disabled />
+            </div>
+            <div>
+              <label for="estado-paciente">Estado del paciente:</label>
+              <input type="text" id="estado-paciente" value="Activo" disabled />
+            </div>
+            <div>
+              <label for="tipo-paciente">Tipo de paciente:</label>
+              <input type="text" id="tipo-paciente" value="Ambulatorio" disabled />
+            </div>
+            <div>
+              <label for="fecha-registro">Fecha de registro:</label>
+              <input type="date" id="fecha-registro" value="2024-11-03" disabled />
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Datos de la cita -->
+        <fieldset class="seccion">
+          <legend>Datos de la Cita Médica</legend>
+          <label for="tipo-cita">Tipo de cita:</label>
+          <select id="tipo-cita" name="tipo-cita" required>
+            <option value="">Seleccione tipo...</option>
+            <option value="primera-vez">Primera Vez</option>
+            <option value="control">Control</option>
+            <option value="consulta">Consulta</option>
+            <option value="especialista">Especialista</option>
+            <option value="urgencia">Urgencia</option>
+          </select>
+
+          <label for="especialidad">Especialidad:</label>
+          <select id="especialidad" name="especialidad" onchange="cargarMedicos()" required>
+            <option value="">Seleccione especialidad...</option>
+            <option value="cardiología">Cardiología</option>
+            <option value="pediatría">Pediatría</option>
+            <option value="neurología">Neurología</option>
+            <option value="dermatología">Dermatología</option>
+            <option value="traumatología">Traumatología</option>
+            <option value="oftalmología">Oftalmología</option>
+            <option value="medicina-interna">Medicina Interna</option>
+          </select>
+
+          <label for="medico">Médico:</label>
+          <select id="medico" name="medico" required>
+            <option value="">Seleccione especialidad primero...</option>
+          </select>
+
+          <label for="fecha-cita">Fecha de la cita:</label>
+          <input type="date" id="fecha-cita" name="fecha-cita" required>
+
+          <label for="hora-cita">Hora de la cita:</label>
+          <select id="hora-cita" name="hora-cita" required>
+            <option value="">Seleccione fecha y médico primero...</option>
+          </select>
+
+          <label for="motivo">Motivo (opcional):</label>
+          <textarea id="motivo" name="motivo" rows="2" placeholder="Describa el motivo de su cita"></textarea>
+        </fieldset>
+
+        <div class="botones-accion">
+          <button type="submit" class="accion-btn confirmar">CONFIRMAR CITA</button>
+          <button type="button" class="accion-btn regresar" onclick="window.location.href='menu-agendamiento-pacientes.html'">REGRESAR</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>
+      &copy; 2025 Hospital San Paco. Todos los derechos reservados. |
+      Contacto: <a href="mailto:info@sanpaco.com">info@sanpaco.com</a>
+    </p>
+  </footer>
+
+  <script>
+    // Simulación de médicos por especialidad
+    const medicosPorEspecialidad = {
+      'cardiología': ['Dr. Carlos Mendoza', 'Dra. Patricia Ruiz'],
+      'pediatría': ['Dra. Ana López', 'Dr. Luis Gómez'],
+      'neurología': ['Dr. Juan Pérez'],
+      'dermatología': ['Dra. María García'],
+      'traumatología': ['Dr. Roberto Silva'],
+      'oftalmología': ['Dra. Carmen Torres'],
+      'medicina-interna': ['Dr. Pablo Aguirre', 'Dra. Marisol Sánchez']
+    };
+    function cargarMedicos() {
+      const especialidad = document.getElementById('especialidad').value;
+      const medicoSelect = document.getElementById('medico');
+      medicoSelect.innerHTML = '<option value="">Seleccione especialidad primero...</option>';
+      if (especialidad && medicosPorEspecialidad[especialidad]) {
+        medicosPorEspecialidad[especialidad].forEach(nombre => {
+          const option = document.createElement('option');
+          option.value = nombre;
+          option.textContent = nombre;
+          medicoSelect.appendChild(option);
+        });
+      }
+      document.getElementById('hora-cita').innerHTML = '<option value="">Seleccione fecha y médico primero...</option>';
+    }
+    document.getElementById('medico').addEventListener('change', cargarHorarios);
+    document.getElementById('fecha-cita').addEventListener('change', cargarHorarios);
+    function cargarHorarios() {
+      const medico = document.getElementById('medico').value;
+      const fecha = document.getElementById('fecha-cita').value;
+      const horaSelect = document.getElementById('hora-cita');
+      if (medico && fecha) {
+        const horarios = [
+          '08:00', '08:30', '09:00', '09:30', '10:00', '10:30',
+          '11:00', '11:30', '14:00', '14:30', '15:00', '15:30',
+          '16:00', '16:30', '17:00', '17:30'
+        ];
+        horaSelect.innerHTML = '<option value="">Seleccione un horario...</option>';
+        horarios.forEach(hora => {
+          const option = document.createElement('option');
+          option.value = hora;
+          option.textContent = hora;
+          horaSelect.appendChild(option);
+        });
+      }
+    }
+    function agendarCita(event) {
+      event.preventDefault();
+      alert("¡Cita agendada exitosamente!\n\nLe enviaremos un recordatorio por correo o SMS.");
+      document.querySelector('.gestion-form').reset();
+      document.getElementById('medico').innerHTML = '<option value="">Seleccione especialidad primero...</option>';
+      document.getElementById('hora-cita').innerHTML = '<option value="">Seleccione fecha y médico primero...</option>';
+    }
+  </script>
+</body>
+</html>

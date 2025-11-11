@@ -1,10 +1,12 @@
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-image: url("/Images/fondo-principal.jpg");
+  background-image: url("../Images/fondo-principal.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -43,17 +45,20 @@ body {
   letter-spacing: 1px;
 }
 
-.titulos, .system-info, .modulo-header {
+.titulos,
+.system-info,
+.modulo-header {
   background-color: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(10px);
   border-radius: 16px;
   text-align: center;
   color: #0d47a1;
   margin-bottom: 0.7rem;
-  box-shadow: 0 2px 6px rgba(79,195,247,0.05);
+  box-shadow: 0 2px 6px rgba(79, 195, 247, 0.05);
   padding: 1.1rem 0.7rem 0.8rem 0.7rem;
 }
-.dashboard-title, .modulo-header h2 {
+.dashboard-title,
+.modulo-header h2 {
   font-size: 1.45rem;
   font-weight: 700;
   letter-spacing: 1.5px;
@@ -79,7 +84,7 @@ main {
   max-width: 900px;
   background: #ffffffee;
   border-radius: 18px;
-  box-shadow: 0 3px 22px rgba(79,195,247,0.12);
+  box-shadow: 0 3px 22px rgba(79, 195, 247, 0.12);
   padding: 2rem 2.2rem 2.2rem 2.2rem;
   margin-bottom: 2.7rem;
 }
@@ -98,7 +103,9 @@ main {
   padding: 1.14rem 1.3rem 1.05rem 1.3rem;
 }
 .seccion legend {
-  color: #1565c0; font-weight: 700; font-size: 1.08rem;
+  color: #1565c0;
+  font-weight: 700;
+  font-size: 1.08rem;
   margin-bottom: 0.7rem;
 }
 
@@ -119,14 +126,19 @@ main {
   color: #1976d2;
   margin-bottom: 0.18em;
 }
-input[type="text"], select, textarea {
+input[type="text"],
+select,
+textarea {
   padding: 0.61rem 0.55rem;
   border-radius: 7px;
   border: 1.3px solid #90caf9;
   background: #e3f2fd;
   font-size: 1.04rem;
 }
-textarea { resize: vertical; min-height: 48px; }
+textarea {
+  resize: vertical;
+  min-height: 48px;
+}
 
 input[readonly] {
   background: #f3eafd;
@@ -138,7 +150,8 @@ input[readonly] {
   box-shadow: 0 0 4.5px #beaed4 inset;
 }
 
-.input-group input[readonly][id^="id-"]:not([type="checkbox"]):not([type="radio"]) {
+.input-group
+  input[readonly][id^="id-"]:not([type="checkbox"]):not([type="radio"]) {
   background: #f8effe;
   color: #6c44c1;
   font-weight: 600;
@@ -167,14 +180,20 @@ input[readonly] {
   background: #fff;
 }
 .table-container th {
-  background: #e3f2fd; color: #1565c0; font-weight: 600; padding: 0.5rem 0.35rem;
+  background: #e3f2fd;
+  color: #1565c0;
+  font-weight: 600;
+  padding: 0.5rem 0.35rem;
   border-bottom: 2px solid #b3e5fc;
 }
 .table-container td {
-  padding: 0.38rem 0.32rem; border-bottom: 1px solid #b3e5fc;
+  padding: 0.38rem 0.32rem;
+  border-bottom: 1px solid #b3e5fc;
   color: #333;
 }
-.table-container tr:last-child td { border-bottom: none; }
+.table-container tr:last-child td {
+  border-bottom: none;
+}
 
 .acciones-crud {
   display: flex;
@@ -191,13 +210,22 @@ input[readonly] {
   border-radius: 8px;
   padding: 0.7rem 1.3rem;
   transition: background 0.3s, box-shadow 0.2s;
-  box-shadow: 0 3px 12px rgba(79,220,247,0.09);
+  box-shadow: 0 3px 12px rgba(79, 220, 247, 0.09);
   letter-spacing: 0.7px;
   cursor: pointer;
 }
-.accion-btn.crear { background: #4caf50; color: #fff;}
-.accion-btn.regresar { background: #1565c0; color: #fff;}
-.accion-btn:hover { filter: brightness(1.09); transform: translateY(-2px); }
+.accion-btn.crear {
+  background: #4caf50;
+  color: #fff;
+}
+.accion-btn.regresar {
+  background: #1565c0;
+  color: #fff;
+}
+.accion-btn:hover {
+  filter: brightness(1.09);
+  transform: translateY(-2px);
+}
 
 .msg-guardado {
   background: #e8f5e9;
@@ -209,9 +237,8 @@ input[readonly] {
   text-align: center;
   margin-top: 1.05rem;
   padding: 0.6em 1.2em;
-  box-shadow: 0 2px 7px rgba(67,160,71,0.08);
+  box-shadow: 0 2px 7px rgba(67, 160, 71, 0.08);
 }
-
 
 footer {
   background: #e5e5e5;
@@ -221,7 +248,7 @@ footer {
   text-align: center;
   padding: 0.1rem 0;
   font-size: 1rem;
-  box-shadow: 0 -2px 6px rgba(0,0,0,0.04);
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.04);
   margin-top: auto;
 }
 
@@ -232,7 +259,16 @@ footer {
   }
 }
 @media (max-width: 580px) {
-  .input-duo { flex-direction: column; gap: 0.6rem;}
-  .accion-btn { min-width: 90px; font-size: 0.97rem; padding: 0.62rem 0.8rem;}
-  .seccion { padding: 0.7rem 0.3rem 0.7rem 0.3rem;}
+  .input-duo {
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .accion-btn {
+    min-width: 90px;
+    font-size: 0.97rem;
+    padding: 0.62rem 0.8rem;
+  }
+  .seccion {
+    padding: 0.7rem 0.3rem 0.7rem 0.3rem;
+  }
 }

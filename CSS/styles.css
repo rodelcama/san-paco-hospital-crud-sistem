@@ -2,7 +2,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-image: url("/Images/fondo-principal.jpg");
+  background-image: url("../Images/fondo-principal.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -155,7 +155,7 @@ footer {
   position: relative;
   left: 0;
   bottom: 0;
-  box-shadow: 0 -2px 6px rgba(0,0,0,0.04);
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.04);
 }
 
 /* ---------- RESPONSIVE MEDIA QUERIES ---------- */
@@ -257,9 +257,16 @@ footer {
 }
 
 @keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  75% { transform: translateX(5px); }
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
 }
 
 /* Enlace de registro */
@@ -287,4 +294,3 @@ footer {
   color: #00b4d8;
   text-decoration: underline;
 }
-

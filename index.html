@@ -13,10 +13,10 @@
         <span class="navbar-title">Hospital San Paco</span>
       </div>
       <ul class="navbar-menu">
-        <li><a href="/HTML/acerca.html">Acerca de Nosotros</a></li>
-        <li><a href="/HTML/mision.html">Misión</a></li>
-        <li><a href="/HTML/vision.html">Visión</a></li>
-        <li><a href="/HTML/contacto.html">Contáctenos</a></li>
+        <li><a href="HTML/acerca.html">Acerca de Nosotros</a></li>
+        <li><a href="HTML/mision.html">Misión</a></li>
+        <li><a href="HTML/vision.html">Visión</a></li>
+        <li><a href="HTML/contacto.html">Contáctenos</a></li>
       </ul>
     </nav>
     <header>
@@ -50,18 +50,21 @@
               required
             />
           </div>
-          
+
           <!-- Mensaje de error (oculto por defecto) -->
-          <div id="errorMessage" class="error-message" style="display: none;">
+          <div id="errorMessage" class="error-message" style="display: none">
             Usuario o contraseña incorrectos. Intente nuevamente.
           </div>
-          
+
           <button type="submit">Ingresar</button>
         </form>
-        
+
         <!-- Enlace de registro -->
         <div class="registro-link">
-          <p>¿Aún no tiene cuenta? <a href="HTML/registro-paciente.html">Regístrese aquí</a></p>
+          <p>
+            ¿Aún no tiene cuenta?
+            <a href="HTML/registro-paciente.html">Regístrese aquí</a>
+          </p>
         </div>
       </section>
     </main>
@@ -75,30 +78,30 @@
     <script>
       function validarLogin(event) {
         event.preventDefault(); // Prevenir envío del formulario
-        
+
         // Obtener valores de los campos
-        const usuario = document.getElementById('login').value.trim();
-        const password = document.getElementById('password').value;
-        const errorMessage = document.getElementById('errorMessage');
-        
+        const usuario = document.getElementById("login").value.trim();
+        const password = document.getElementById("password").value;
+        const errorMessage = document.getElementById("errorMessage");
+
         // Validación de usuarios
-        if (usuario === 'interno' && password === '1234') {
+        if (usuario === "interno" && password === "1234") {
           // Usuario interno: redirigir a dashboard
-          window.location.href = 'HTML/dashboard.html';
-        } else if (usuario === 'externo' && password === '1234') {
+          window.location.href = "HTML/dashboard.html";
+        } else if (usuario === "externo" && password === "1234") {
           // Usuario externo: redirigir a menú de agendamiento de pacientes
-          window.location.href = 'HTML/menu-agendamiento-pacientes.html';
+          window.location.href = "HTML/menu-agendamiento-pacientes.html";
         } else {
           // Credenciales incorrectas: mostrar mensaje de error
-          errorMessage.style.display = 'block';
-          
+          errorMessage.style.display = "block";
+
           // Limpiar campos
-          document.getElementById('password').value = '';
-          document.getElementById('login').focus();
-          
+          document.getElementById("password").value = "";
+          document.getElementById("login").focus();
+
           // Ocultar mensaje después de 3 segundos
-          setTimeout(function() {
-            errorMessage.style.display = 'none';
+          setTimeout(function () {
+            errorMessage.style.display = "none";
           }, 3000);
         }
       }

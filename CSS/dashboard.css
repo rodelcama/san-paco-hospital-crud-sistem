@@ -1,10 +1,12 @@
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-image: url("/Images/fondo-principal.jpg");
+  background-image: url("../Images/fondo-principal.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -46,17 +48,20 @@ body {
 }
 
 /* HEADER Y TITULOS */
-.titulos, .system-info, .modulo-header {
+.titulos,
+.system-info,
+.modulo-header {
   background-color: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(10px);
   border-radius: 16px;
   text-align: center;
   color: #0d47a1;
   margin-bottom: 0.7rem;
-  box-shadow: 0 2px 6px rgba(79,195,247,0.05);
+  box-shadow: 0 2px 6px rgba(79, 195, 247, 0.05);
   padding: 1.1rem 0.7rem 0.8rem 0.7rem;
 }
-.dashboard-title, .modulo-header h2 {
+.dashboard-title,
+.modulo-header h2 {
   font-size: 1.45rem;
   font-weight: 700;
   letter-spacing: 1.5px;
@@ -175,7 +180,7 @@ footer {
   text-align: center;
   padding: 0.1rem 0;
   font-size: 1rem;
-  box-shadow: 0 -2px 6px rgba(0,0,0,0.04);
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.04);
   margin-top: auto;
 }
 
@@ -211,7 +216,8 @@ footer {
     justify-self: center;
     max-width: 350px;
   }
-  .dashboard-title, .modulo-header h2 {
+  .dashboard-title,
+  .modulo-header h2 {
     font-size: 1.15rem;
   }
   .modulo-card h3 {

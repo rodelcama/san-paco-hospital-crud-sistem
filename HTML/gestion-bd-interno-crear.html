@@ -1,134 +1,246 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>San Paco | Crear Usuario Interno B.D.</title>
-    <link rel="stylesheet" href="../CSS/gestion-bd-interno-crear.css" />
-  </head>
-  <body>
-    <!-- Barra de navegación -->
-    <nav class="navbar">
-      <div class="navbar-logo-nombre-centro">
-        <img src="../Images/logo.jpg" alt="Logo San Paco" class="navbar-logo" />
-        <span class="navbar-title">Hospital San Paco</span>
-      </div>
-    </nav>
-
-    <!-- Encabezado del Sistema -->
-    <header>
-      <div class="system-info titulos">
-        <strong>Sistema de Información Web</strong>
-        <span class="dashboard-title">San Paco Hospital CRUD System</span>
-        <p>
-          Agendamiento de Citas Médicas para los Pacientes del Hospital San Paco<br />Bogotá D.C.
-        </p>
-      </div>
-      <div class="modulo-header titulos">
-        <h2>MÓDULO 2. GESTIÓN DE BASES DE DATOS</h2>
-        <p class="breadcrumb">Usuario Interno - Crear</p>
-      </div>
-    </header>
-    
-    <main>
-      <!-- Formulario central de creación de usuarios internos -->
-      <section class="gestion-bd-section">
-        <form class="gestion-bd-form" autocomplete="off">
-          
-                    <!-- SECCIÓN 1: INFORMACIÓN BÁSICA -->
-          <fieldset class="seccion">
-            <legend>Información Básica</legend>
-
-            <label for="codigo-interno">Código Usuario Interno:</label>
-            <input type="text" id="codigo-interno" name="codigo-interno" value="EMP-00145" disabled>
-
-            <label for="es-medico">¿Es personal médico?</label>
-            <select id="es-medico" name="es-medico" onchange="toggleSeccionMedica()">
-              <option value="no">No</option>
-              <option value="si">Sí</option>
-            </select>
-
-            <label for="nombres">Nombres del Usuario:</label>
-            <input type="text" id="nombres" name="nombres" placeholder="Ej: Juan Carlos" required>
-
-            <label for="apellidos">Apellidos del Usuario:</label>
-            <input type="text" id="apellidos" name="apellidos" placeholder="Ej: Pérez López" required>
-
-            <label for="tipo-documento">Tipo Documento:</label>
-            <select id="tipo-documento" name="tipo-documento" required>
-              <option value="">Seleccione...</option>
-              <option value="CC">Cédula de Ciudadanía (CC)</option>
-              <option value="CE">Cédula de Extranjería (CE)</option>
-              <option value="Pasaporte">Pasaporte</option>
-              <option value="TI">Tarjeta de Identidad (TI)</option>
-            </select>
-
-                        <label for="numero-documento">Número Documento:</label>
-            <input type="text" id="numero-documento" name="numero-documento" placeholder="Ingrese número de documento" onblur="actualizarUsuarioLogin()" required>
-
-          </fieldset>
-
-          <!-- SECCIÓN 5: ACCESO AL SISTEMA -->
-          <fieldset class="seccion">
-            <legend>Acceso al Sistema</legend>
-
-            <label for="usuario-login">Usuario / Login:</label>
-            <input type="text" id="usuario-login" name="usuario-login" value="" placeholder="Se autocompleta con el número de documento" disabled>
-
-            <label for="password">Contraseña (autogenerada):</label>
-            <input type="text" id="password" name="password" value="HospSP2025#145" disabled>
-
-            <div class="permisos">
-              <legend>Permisos Asignados:</legend>
-              <label><input type="checkbox" name="permiso" value="gestion-usuarios"/> Gestión de Usuarios</label>
-              <label><input type="checkbox" name="permiso" value="gestion-bd"/> Gestión de Bases de Datos</label>
-              <label><input type="checkbox" name="permiso" value="agendamiento"/> Agendamiento de Citas</label>
-              <label><input type="checkbox" name="permiso" value="reportes"/> Reportes y Consultas</label>
-            </div>
-          </fieldset>
-
-          <!-- Botones de acción -->
-          <div class="botones-accion">
-            <button type="submit" class="accion-btn guardar">GUARDAR</button>
-            <button type="reset" class="accion-btn limpiar">LIMPIAR FORMULARIO</button>
-            <button type="button" class="accion-btn regresar" onclick="location.href='acciones-crud-bd-internos.html'">REGRESAR</button>
-          </div>
-        </form>
-      </section>
-    </main>
-
-    <footer>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>San Paco | Crear Usuario Interno B.D.</title>
+  <link rel="stylesheet" href="../CSS/gestion-bd-interno-crear.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-logo-nombre-centro">
+      <img src="../Images/logo.jpg" alt="Logo San Paco" class="navbar-logo" />
+      <span class="navbar-title">Hospital San Paco</span>
+    </div>
+  </nav>
+  <header>
+    <div class="system-info titulos">
+      <strong>Sistema de Información Web</strong>
+      <span class="dashboard-title">San Paco Hospital CRUD System</span>
       <p>
-        &copy; 2025 Hospital San Paco. Todos los derechos reservados. |
-        Contacto: <a href="mailto:info@sanpaco.com">info@sanpaco.com</a>
+        Agendamiento de Citas Médicas para los Pacientes del Hospital San Paco<br />Bogotá D.C.
       </p>
-    </footer>
+    </div>
+    <div class="modulo-header titulos">
+      <h2>MÓDULO 2. GESTIÓN DE BASES DE DATOS</h2>
+      <p class="breadcrumb">Usuario Interno - Crear</p>
+    </div>
+  </header>
+  
+  <main>
+    <section class="gestion-bd-section">
+      <form class="gestion-bd-form" autocomplete="off">
 
-        <script>
-      // Función para mostrar/ocultar sección médica
-      function toggleSeccionMedica() {
-        const esMedico = document.getElementById('es-medico').value;
-        const seccionMedica = document.getElementById('seccion-medica');
-        
-        if (esMedico === 'si') {
-          seccionMedica.style.display = 'block';
-        } else {
-          seccionMedica.style.display = 'none';
-        }
+        <!-- ¿ES PERSONAL MÉDICO? -->
+        <fieldset class="seccion">
+          <legend>¿Es personal médico?</legend>
+          <select id="es-medico" name="es-medico" onchange="toggleSeccionMedica()">
+            <option value="no" selected>No</option>
+            <option value="si">Sí</option>
+          </select>
+        </fieldset>
+
+        <!-- INFORMACIÓN MÉDICA -->
+        <fieldset class="seccion seccion-medica" id="seccion-medica" style="display:none;">
+          <legend>Información Médica</legend>
+          <label for="id-medico">ID Médico:</label>
+          <input type="text" id="id-medico" name="id-medico" placeholder="ID Médico" readonly>
+          
+          <label for="especialidad">Especialidad:</label>
+          <select id="especialidad" name="especialidad" required>
+            <option value="">Seleccione...</option>
+            <option>Pediatría</option>
+            <option>Cardiología</option>
+            <option>Cirugía General</option>
+            <option>Traumatología</option>
+            <option>Oncología</option>
+            <option>Ginecología</option>
+            <option>Dermatología</option>
+            <option>Neurología</option>
+            <option>Urología</option>
+            <option>Gastroenterología</option>
+            <option>Otorrinolaringología</option>
+            <option>Oftalmología</option>
+            <option>Reumatología</option>
+            <option>Endocrinología</option>
+            <option>Psiquiatría</option>
+            <option>Neumología</option>
+            <option>Otros</option>
+          </select>
+
+          <label for="registro-medico">Registro Médico:</label>
+          <input type="text" id="registro-medico" name="registro-medico" placeholder="Registro Médico">
+        </fieldset>
+
+        <!-- INFORMACIÓN BÁSICA -->
+        <fieldset class="seccion">
+          <legend>Información Básica</legend>
+          <label for="codigo-interno">Código Usuario Interno:</label>
+          <input type="text" id="codigo-interno" name="codigo-interno" placeholder="Código del usuario" readonly>
+
+          <label for="nombres">Nombres del Usuario:</label>
+          <input type="text" id="nombres" name="nombres" placeholder="Ej: Juan Carlos" required>
+
+          <label for="apellidos">Apellidos del Usuario:</label>
+          <input type="text" id="apellidos" name="apellidos" placeholder="Ej: Pérez López" required>
+
+          <label for="tipo-documento">Tipo Documento:</label>
+          <select id="tipo-documento" name="tipo-documento" required>
+            <option value="">Seleccione...</option>
+            <option value="CC">Cédula de Ciudadanía (CC)</option>
+            <option value="CE">Cédula de Extranjería (CE)</option>
+            <option value="Pasaporte">Pasaporte</option>
+            <option value="TI">Tarjeta de Identidad (TI)</option>
+          </select>
+
+          <label for="numero-documento">Número Documento:</label>
+          <input type="text" id="numero-documento" name="numero-documento" placeholder="Ingrese número de documento" onblur="actualizarUsuarioLogin()" required>
+        </fieldset>
+
+        <!-- INFORMACIÓN DE CONTACTO -->
+        <fieldset class="seccion">
+          <legend>Información de Contacto</legend>
+          <label for="fecha-nacimiento">Fecha de nacimiento:</label>
+          <input type="date" id="fecha-nacimiento" name="fecha-nacimiento">
+
+          <label for="telefono">Teléfono:</label>
+          <input type="text" id="telefono" name="telefono" placeholder="Teléfono">
+
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" placeholder="Email">
+
+          <label for="direccion">Dirección:</label>
+          <input type="text" id="direccion" name="direccion" placeholder="Dirección">
+
+          <label for="pais-origen">País de origen:</label>
+          <select id="pais-origen" name="pais-origen">
+            <option value="">Seleccione...</option>
+            <option>Colombia</option>
+            <option>Argentina</option>
+            <option>Perú</option>
+            <option>Brasil</option>
+            <option>Chile</option>
+            <option>Venezuela</option>
+            <option>Ecuador</option>
+            <option>Uruguay</option>
+            <option>Paraguay</option>
+            <option>México</option>
+            <option>Estados Unidos</option>
+            <option>España</option>
+            <option>Otro</option>
+          </select>
+
+          <label for="ciudad-natal">Ciudad Natal:</label>
+          <input type="text" id="ciudad-natal" name="ciudad-natal" placeholder="Ciudad">
+        </fieldset>
+
+        <!-- INFORMACIÓN LABORAL -->
+        <fieldset class="seccion">
+          <legend>Información Laboral</legend>
+          <label for="estado-laboral">Estado Laboral:</label>
+          <select id="estado-laboral" name="estado-laboral">
+            <option value="">Seleccione...</option>
+            <option>Contratado</option>
+            <option>En formación</option>
+            <option>Practicante</option>
+            <option>Tiempo parcial</option>
+            <option>Retirado</option>
+            <option>Vacaciones</option>
+            <option>Licencia</option>
+            <option>Otro</option>
+          </select>
+
+          <label for="area-operacion">Área de Operación:</label>
+          <select id="area-operacion" name="area-operacion">
+            <option value="">Seleccione...</option>
+            <option>Medicina</option>
+            <option>Administración</option>
+            <option>Sistemas</option>
+            <option>Enfermería</option>
+            <option>Recursos Humanos</option>
+            <option>Ayudantía</option>
+            <option>Laboratorio</option>
+            <option>Farmacia</option>
+            <option>Otros</option>
+          </select>
+        </fieldset>
+
+        <!-- ACCESO AL SISTEMA -->
+        <fieldset class="seccion">
+          <legend>Acceso al Sistema</legend>
+          <label for="usuario-login">Usuario / Login:</label>
+          <input type="text" id="usuario-login" name="usuario-login" placeholder="Se autocompleta con el número de documento" readonly>
+
+          <label for="password">Contraseña (autogenerada):</label>
+          <input type="text" id="password" name="password" value="HospSP2025#145" readonly>
+
+          <div class="permisos">
+            <legend>Permisos Asignados:</legend>
+            <label><input type="checkbox" name="permiso1" /> Gestión de Usuarios</label>
+            <label><input type="checkbox" name="permiso2" /> Gestión de Bases de Datos</label>
+            <label><input type="checkbox" name="permiso3" /> Agendamiento de Citas</label>
+            <label><input type="checkbox" name="permiso4" /> Reportes y Consultas</label>
+          </div>
+        </fieldset>
+
+        <!-- BOTONES -->
+        <div class="botones-accion">
+          <button type="submit" class="accion-btn guardar">GUARDAR</button>
+          <button type="reset" class="accion-btn limpiar">LIMPIAR FORMULARIO</button>
+          <button type="button" class="accion-btn regresar" onclick="location.href='acciones-crud-bd-internos.html'">REGRESAR</button>
+        </div>
+      </form>
+    </section>
+  </main>
+  <footer>
+    <p>
+      &copy; 2025 Hospital San Paco. Todos los derechos reservados. |
+      Contacto: <a href="mailto:info@sanpaco.com">info@sanpaco.com</a>
+    </p>
+  </footer>
+  <script>
+    // Generar EMP-xxx aleatorio en código usuario interno al cargar y resetear
+    function generarCodigoInterno() {
+      const codigo = "EMP-" + Math.floor(100 + Math.random() * 900);
+      document.getElementById('codigo-interno').value = codigo;
+    }
+
+    // Autogenerar ID Médico y sincronizar con código usuario interno si es médico
+    function toggleSeccionMedica() {
+      const esMedico = document.getElementById('es-medico').value;
+      const seccionMedica = document.getElementById('seccion-medica');
+      const idMedico = document.getElementById('id-medico');
+      const codigoInterno = document.getElementById('codigo-interno');
+      if (esMedico === 'si') {
+        seccionMedica.style.display = 'block';
+        // Genera MED-xxx aleatorio
+        const idGen = "MED-" + Math.floor(100 + Math.random() * 900);
+        idMedico.value = idGen;
+        codigoInterno.value = idGen;
+      } else {
+        seccionMedica.style.display = 'none';
+        idMedico.value = "";
+        generarCodigoInterno();
       }
+    }
 
-      // Función para actualizar usuario/login con el número de documento
-      function actualizarUsuarioLogin() {
-        const numeroDocumento = document.getElementById('numero-documento').value;
-        const usuarioLogin = document.getElementById('usuario-login');
-        
-        if (numeroDocumento.trim() !== '') {
-          usuarioLogin.value = numeroDocumento;
-        } else {
-          usuarioLogin.value = '';
-        }
-      }
-    </script>
+    // Autocompletar usuario/login según el número de documento
+    function actualizarUsuarioLogin() {
+      const numeroDocumento = document.getElementById('numero-documento').value;
+      const usuarioLogin = document.getElementById('usuario-login');
+      usuarioLogin.value = numeroDocumento.trim() !== '' ? numeroDocumento : '';
+    }
 
-  </body>
+    // Inicializar campos al cargar y resetear
+    window.onload = generarCodigoInterno;
+    document.querySelector('.gestion-bd-form').addEventListener('reset', function() {
+      setTimeout(() => {
+        document.getElementById('es-medico').value = "no";
+        document.getElementById('seccion-medica').style.display = 'none';
+        generarCodigoInterno();
+        document.getElementById('id-medico').value = "";
+      }, 25);
+    });
+  </script>
+</body>
 </html>

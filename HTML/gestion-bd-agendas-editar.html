@@ -1,203 +1,163 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>San Paco | Editar Agenda Médica B.D.</title>
-    <link rel="stylesheet" href="../CSS/gestion-bd-agendas-editar.css" />
-  </head>
-  <body>
-    <!-- Barra de navegación -->
-    <nav class="navbar">
-      <div class="navbar-logo-nombre-centro">
-        <img src="../Images/logo.jpg" alt="Logo San Paco" class="navbar-logo" />
-        <span class="navbar-title">Hospital San Paco</span>
-      </div>
-    </nav>
 
-    <!-- Encabezado -->
-    <header>
-      <div class="system-info titulos">
-        <strong>Sistema de Información Web</strong>
-        <span class="dashboard-title">San Paco Hospital CRUD System</span>
-        <p>
-          Agendamiento de Citas Médicas para los Pacientes del Hospital San Paco<br />Bogotá D.C.
-        </p>
-      </div>
-      <div class="modulo-header titulos">
-        <h2>MÓDULO 2. GESTIÓN DE BASES DE DATOS</h2>
-        <p class="breadcrumb">Agendas Médicas - Editar</p>
-      </div>
-    </header>
-    
-    <main>
-      <section class="gestion-section">
-        <form class="gestion-form" autocomplete="off" onsubmit="guardarCambios(event)">
-          <!-- Buscador -->
-          <fieldset class="seccion buscador">
-            <legend>Buscar agenda médica a editar</legend>
-            <label for="buscar-opcion">Buscar por:</label>
-            <select id="buscar-opcion" name="buscar-opcion">
-              <option value="codigo-agenda">Código de agenda</option>
-              <option value="codigo-medico">Código de médico</option>
-              <option value="id-medico">ID de médico</option>
-            </select>
-            <input type="text" id="input-busqueda" name="input-busqueda" placeholder="Ingrese dato de búsqueda" required>
-            <button type="button" class="accion-btn buscar" onclick="buscarAgenda()">BUSCAR</button>
-          </fieldset>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>San Paco | Editar Agenda Médica B.D.</title>
+  <link rel="stylesheet" href="../CSS/gestion-bd-agendas-editar.css" />
+</head>
 
-          <!-- Código de Agenda (disabled - no editable) -->
-          <fieldset class="seccion">
-            <legend>Identificación de la Agenda</legend>
-            <label for="codigo-agenda">Código de Agenda:</label>
-            <input type="text" id="codigo-agenda" name="codigo-agenda" value="" disabled placeholder="Código de la agenda">
-          </fieldset>
+<body>
+  <nav class="navbar">
+    <div class="navbar-logo-nombre-centro">
+      <img src="../Images/logo.jpg" alt="Logo San Paco" class="navbar-logo" />
+      <span class="navbar-title">Hospital San Paco</span>
+    </div>
+  </nav>
 
-          <!-- Datos del Médico con opción de cambio -->
-          <fieldset class="seccion">
-            <legend>Asignación del Médico</legend>
-            
-            <label for="medico-actual">Médico Actual:</label>
-            <input type="text" id="medico-actual" name="medico-actual" value="Dr. Carlos Mendoza - EMP-00145" disabled placeholder="Médico asignado">
+  <header>
+    <div class="system-info titulos">
+      <strong>Sistema de Información Web</strong>
+      <span class="dashboard-title">San Paco Hospital CRUD System</span>
+      <p>Agendamiento de Citas Médicas para los Pacientes del Hospital San Paco<br />Bogotá D.C.</p>
+    </div>
+    <div class="modulo-header titulos">
+      <h2>MÓDULO 2. GESTIÓN DE BASES DE DATOS</h2>
+      <p class="breadcrumb">Agendas Médicas - Editar</p>
+    </div>
+  </header>
 
-            <label for="especialidad-actual">Especialidad Actual:</label>
-            <input type="text" id="especialidad-actual" name="especialidad-actual" value="Cardiología" disabled placeholder="Especialidad del médico">
+  <main>
+    <section class="gestion-section">
+      <form class="gestion-form" autocomplete="off" onsubmit="guardarCambios(event)">
+        <fieldset class="seccion buscador">
+          <legend>Buscar agenda médica a editar</legend>
+          <label for="buscar-opcion">Buscar por:</label>
+          <select id="buscar-opcion" name="buscar-opcion">
+            <option value="codigo-agenda">Código de agenda</option>
+            <option value="codigo-medico">Código de médico</option>
+            <option value="id-medico">ID de médico</option>
+          </select>
+          <input type="text" id="input-busqueda" name="input-busqueda" placeholder="Ingrese dato de búsqueda" required>
+          <button type="button" class="accion-btn buscar" onclick="buscarAgenda()">BUSCAR</button>
+        </fieldset>
 
-            <div class="checkbox-cambio">
-              <label>
-                <input type="checkbox" id="cambiar-medico" name="cambiar-medico" onchange="toggleCambioMedico()">
-                Deseo cambiar de médico
-              </label>
+        <fieldset class="seccion">
+          <legend>Identificación de la Agenda</legend>
+          <label for="codigo-agenda">Código de Agenda:</label>
+          <input type="text" id="codigo-agenda" name="codigo-agenda" value="" disabled
+            placeholder="Código de la agenda">
+        </fieldset>
+
+        <fieldset class="seccion">
+          <legend>Asignación del Médico</legend>
+          <label for="medico-actual">Médico Asignado:</label>
+          <input type="text" id="medico-actual" name="medico-actual" value="Dr. Carlos Mendoza - EMP-00145" disabled
+            placeholder="Médico asignado">
+
+          <label for="especialidad-actual">Especialidad:</label>
+          <input type="text" id="especialidad-actual" name="especialidad-actual" value="Cardiología" disabled
+            placeholder="Especialidad del médico">
+        </fieldset>
+
+        <fieldset class="seccion">
+          <legend>Período de Vigencia</legend>
+          <div class="fila-flexible">
+            <div class="columna-flexible">
+              <label for="fecha-inicio">Fecha Inicio Agenda:</label>
+              <input type="date" id="fecha-inicio" name="fecha-inicio" value="2025-11-01" required>
             </div>
-
-            <!-- Sección oculta que aparece al marcar checkbox -->
-            <div id="seccion-nuevo-medico" class="seccion-oculta">
-              <div class="separador-cambio">
-                <span>Nuevo médico a asignar</span>
-              </div>
-              
-              <label for="nuevo-medico">Nuevo Médico:</label>
-              <select id="nuevo-medico" name="nuevo-medico" onchange="autocompletarNuevaEspecialidad()">
-                <option value="">Seleccione un médico...</option>
-                <option value="EMP-00145" data-especialidad="Cardiología">Dr. Carlos Mendoza - EMP-00145</option>
-                <option value="EMP-00156" data-especialidad="Pediatría">Dra. Ana López - EMP-00156</option>
-                <option value="EMP-00178" data-especialidad="Neurología">Dr. Juan Pérez - EMP-00178</option>
-                <option value="EMP-00192" data-especialidad="Dermatología">Dra. María García - EMP-00192</option>
-              </select>
-
-              <label for="nueva-especialidad">Nueva Especialidad:</label>
-              <input type="text" id="nueva-especialidad" name="nueva-especialidad" value="" disabled placeholder="Se autocompleta al seleccionar médico">
+            <div class="columna-flexible">
+              <label for="fecha-fin">Fecha Finalización Agenda:</label>
+              <input type="date" id="fecha-fin" name="fecha-fin" value="2025-11-30" required>
             </div>
-          </fieldset>
-
-          <!-- Período de Vigencia (siempre editables) -->
-          <fieldset class="seccion">
-            <legend>Período de Vigencia</legend>
-            <label for="fecha-inicio">Fecha Inicio Agenda:</label>
-            <input type="date" id="fecha-inicio" name="fecha-inicio" required>
-
-            <label for="fecha-fin">Fecha Finalización Agenda:</label>
-            <input type="date" id="fecha-fin" name="fecha-fin" required>
-          </fieldset>
-
-          <!-- Clasificación (siempre editables) -->
-          <fieldset class="seccion">
-            <legend>Clasificación y Observaciones</legend>
-            <label for="motivo">Motivo:</label>
-            <select id="motivo" name="motivo" required>
-              <option value="">Seleccione el motivo...</option>
-              <option value="creacion-periodica">Creación de Agenda Periódica</option>
-              <option value="reemplazo-temporal">Reemplazo Temporal</option>
-              <option value="ampliacion-cupo">Ampliación de Cupo</option>
-              <option value="agenda-especial">Agenda Especial</option>
-              <option value="ajuste-disponibilidad">Ajuste por Disponibilidad</option>
-            </select>
-
-            <label for="observaciones">Observaciones:</label>
-            <textarea id="observaciones" name="observaciones" rows="3" placeholder="Notas adicionales sobre la agenda (máx. 500 caracteres)" maxlength="500"></textarea>
-            <small class="contador-caracteres">0 / 500 caracteres</small>
-          </fieldset>
-
-          <!-- Botones de acción -->
-          <div class="botones-accion">
-            <button type="submit" class="accion-btn guardar">GUARDAR CAMBIOS</button>
-            <button type="button" class="accion-btn regresar" onclick="location.href='acciones-crud-agendas-medicas.html'">REGRESAR</button>
           </div>
-        </form>
-      </section>
-    </main>
+        </fieldset>
 
-    <footer>
-      <p>
-        &copy; 2025 Hospital San Paco. Todos los derechos reservados. |
-        Contacto: <a href="mailto:info@sanpaco.com">info@sanpaco.com</a>
-      </p>
-    </footer>
+        <fieldset class="seccion">
+          <legend>Configuración de Horario y Turnos</legend>
 
-    <script>
-      function buscarAgenda() {
-        alert("Funcionalidad de búsqueda pendiente de integración.");
-        // Aquí iría la lógica para buscar y cargar los datos en los campos
+          <div class="fila-flexible">
+            <div class="columna-flexible">
+              <label for="hora-inicio-turno">Hora Inicio Turno:</label>
+              <input type="time" id="hora-inicio-turno" name="hora-inicio-turno" value="08:00" required>
+            </div>
+            <div class="columna-flexible">
+              <label for="hora-fin-turno">Hora Fin Turno:</label>
+              <input type="time" id="hora-fin-turno" name="hora-fin-turno" value="17:00" required>
+            </div>
+          </div>
+
+          <label>Días de Atención:</label>
+          <div class="contenedor-dias">
+            <label class="dia-label"><input type="checkbox" name="dia" value="L" checked> Lun</label>
+            <label class="dia-label"><input type="checkbox" name="dia" value="M" checked> Mar</label>
+            <label class="dia-label"><input type="checkbox" name="dia" value="X" checked> Mié</label>
+            <label class="dia-label"><input type="checkbox" name="dia" value="J" checked> Jue</label>
+            <label class="dia-label"><input type="checkbox" name="dia" value="V" checked> Vie</label>
+            <label class="dia-label"><input type="checkbox" name="dia" value="S"> Sáb</label>
+            <label class="dia-label"><input type="checkbox" name="dia" value="D"> Dom</label>
+          </div>
+
+          <label for="duracion">Duración por Cita (Minutos):</label>
+          <input type="number" id="duracion" name="duracion" min="10" max="60" step="5" value="20" placeholder="Ej: 20">
+        </fieldset>
+
+        <fieldset class="seccion">
+          <legend>Clasificación y Observaciones</legend>
+          <label for="motivo">Motivo:</label>
+          <select id="motivo" name="motivo" required>
+            <option value="">Seleccione el motivo...</option>
+            <option value="creacion-periodica" selected>Creación de Agenda Periódica</option>
+            <option value="reemplazo-temporal">Reemplazo Temporal</option>
+            <option value="ampliacion-cupo">Ampliación de Cupo</option>
+            <option value="agenda-especial">Agenda Especial</option>
+            <option value="ajuste-disponibilidad">Ajuste por Disponibilidad</option>
+          </select>
+
+          <label for="observaciones">Observaciones:</label>
+          <textarea id="observaciones" name="observaciones" rows="3"
+            placeholder="Notas adicionales sobre la agenda (máx. 500 caracteres)"
+            maxlength="500">Agenda estándar para el mes de noviembre.</textarea>
+          <small class="contador-caracteres">38 / 500 caracteres</small>
+        </fieldset>
+
+        <div class="botones-accion">
+          <button type="submit" class="accion-btn guardar">GUARDAR CAMBIOS</button>
+          <button type="button" class="accion-btn regresar"
+            onclick="location.href='acciones-crud-agendas-medicas.html'">REGRESAR</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Hospital San Paco. Todos los derechos reservados. | Contacto: <a
+        href="mailto:info@sanpaco.com">info@sanpaco.com</a></p>
+  </footer>
+
+  <script>
+    function buscarAgenda() {
+      alert("Simulación: Datos de agenda AGD-00125 cargados para edición.");
+      document.getElementById('codigo-agenda').value = "AGD-00125";
+    }
+
+    function guardarCambios(event) {
+      event.preventDefault();
+      if (confirm("¿Está seguro de que desea guardar los cambios realizados en esta agenda médica?")) {
+        alert("Cambios guardados exitosamente.");
       }
+    }
 
-      // Mostrar/ocultar sección de nuevo médico
-      function toggleCambioMedico() {
-        const checkbox = document.getElementById('cambiar-medico');
-        const seccionNuevoMedico = document.getElementById('seccion-nuevo-medico');
-        
-        if (checkbox.checked) {
-          seccionNuevoMedico.style.display = 'block';
-        } else {
-          seccionNuevoMedico.style.display = 'none';
-          // Limpiar selección si se desmarca
-          document.getElementById('nuevo-medico').value = '';
-          document.getElementById('nueva-especialidad').value = '';
-        }
-      }
+    const observaciones = document.getElementById('observaciones');
+    const contador = document.querySelector('.contador-caracteres');
 
-      // Autocompletar nueva especialidad
-      function autocompletarNuevaEspecialidad() {
-        const nuevoMedicoSelect = document.getElementById('nuevo-medico');
-        const nuevaEspecialidadInput = document.getElementById('nueva-especialidad');
-        const selectedOption = nuevoMedicoSelect.options[nuevoMedicoSelect.selectedIndex];
-        
-        if (selectedOption.value) {
-          const especialidad = selectedOption.getAttribute('data-especialidad');
-          nuevaEspecialidadInput.value = especialidad;
-        } else {
-          nuevaEspecialidadInput.value = '';
-        }
-      }
+    observaciones.addEventListener('input', function () {
+      const length = this.value.length;
+      contador.textContent = `${length} / 500 caracteres`;
+    });
+  </script>
+</body>
 
-      function guardarCambios(event) {
-        event.preventDefault();
-        
-        const cambiarMedico = document.getElementById('cambiar-medico').checked;
-        let mensaje = "¿Está seguro de que desea guardar los cambios realizados en esta agenda médica?";
-        
-        if (cambiarMedico) {
-          const nuevoMedico = document.getElementById('nuevo-medico').value;
-          if (!nuevoMedico) {
-            alert("Por favor seleccione un nuevo médico o desmarque la opción de cambio.");
-            return;
-          }
-          mensaje = "⚠️ ATENCIÓN: Está cambiando el médico asignado a esta agenda.\n\n¿Está seguro de que desea guardar los cambios?";
-        }
-        
-        if (confirm(mensaje)) {
-          alert("Cambios guardados exitosamente.");
-          // Aquí iría la lógica para guardar los cambios en la BD
-        }
-      }
-
-      // Contador de caracteres para observaciones
-      const observaciones = document.getElementById('observaciones');
-      const contador = document.querySelector('.contador-caracteres');
-      
-      observaciones.addEventListener('input', function() {
-        const length = this.value.length;
-        contador.textContent = `${length} / 500 caracteres`;
-      });
-    </script>
-  </body>
 </html>

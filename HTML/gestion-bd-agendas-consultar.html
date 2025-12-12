@@ -1,109 +1,151 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>San Paco | Consultar Agenda Médica B.D.</title>
-    <link rel="stylesheet" href="../CSS/gestion-bd-agendas-consultar.css" />
-  </head>
-  <body>
-    <!-- Barra de navegación -->
-    <nav class="navbar">
-      <div class="navbar-logo-nombre-centro">
-        <img src="../Images/logo.jpg" alt="Logo San Paco" class="navbar-logo" />
-        <span class="navbar-title">Hospital San Paco</span>
-      </div>
-    </nav>
 
-    <!-- Encabezado -->
-    <header>
-      <div class="system-info titulos">
-        <strong>Sistema de Información Web</strong>
-        <span class="dashboard-title">San Paco Hospital CRUD System</span>
-        <p>
-          Agendamiento de Citas Médicas para los Pacientes del Hospital San Paco<br />Bogotá D.C.
-        </p>
-      </div>
-      <div class="modulo-header titulos">
-        <h2>MÓDULO 2. GESTIÓN DE BASES DE DATOS</h2>
-        <p class="breadcrumb">Agendas Médicas - Consultar</p>
-      </div>
-    </header>
-    
-    <main>
-      <section class="gestion-section">
-        <form class="gestion-form" autocomplete="off" onsubmit="buscarAgenda(event)">
-          <!-- Buscador -->
-          <fieldset class="seccion buscador">
-            <legend>Buscar agenda médica</legend>
-            <label for="buscar-opcion">Buscar por:</label>
-            <select id="buscar-opcion" name="buscar-opcion">
-              <option value="codigo-agenda">Código de agenda</option>
-              <option value="codigo-medico">Código de médico</option>
-              <option value="id-medico">ID de médico</option>
-            </select>
-            <input type="text" id="input-busqueda" name="input-busqueda" placeholder="Ingrese dato de búsqueda" required>
-            <button type="submit" class="accion-btn buscar">BUSCAR</button>
-          </fieldset>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>San Paco | Consultar Agenda Médica B.D.</title>
+  <link rel="stylesheet" href="../CSS/gestion-bd-agendas-consultar.css" />
+</head>
 
-          <!-- Código de Agenda (disabled) -->
-          <fieldset class="seccion">
-            <legend>Identificación de la Agenda</legend>
-            <label for="codigo-agenda">Código de Agenda:</label>
-            <input type="text" id="codigo-agenda" name="codigo-agenda" value="" disabled placeholder="Código de la agenda">
-          </fieldset>
+<body>
+  <nav class="navbar">
+    <div class="navbar-logo-nombre-centro">
+      <img src="../Images/logo.jpg" alt="Logo San Paco" class="navbar-logo" />
+      <span class="navbar-title">Hospital San Paco</span>
+    </div>
+  </nav>
 
-          <!-- Datos del Médico (disabled) -->
-          <fieldset class="seccion">
-            <legend>Asignación del Médico</legend>
-            <label for="medico">Médico:</label>
-            <input type="text" id="medico" name="medico" value="" disabled placeholder="Nombre del médico">
+  <header>
+    <div class="system-info titulos">
+      <strong>Sistema de Información Web</strong>
+      <span class="dashboard-title">San Paco Hospital CRUD System</span>
+      <p>Agendamiento de Citas Médicas para los Pacientes del Hospital San Paco<br />Bogotá D.C.</p>
+    </div>
+    <div class="modulo-header titulos">
+      <h2>MÓDULO 2. GESTIÓN DE BASES DE DATOS</h2>
+      <p class="breadcrumb">Agendas Médicas - Consultar</p>
+    </div>
+  </header>
 
-            <label for="especialidad">Especialidad:</label>
-            <input type="text" id="especialidad" name="especialidad" value="" disabled placeholder="Especialidad del médico">
-          </fieldset>
+  <main>
+    <section class="gestion-section">
+      <form class="gestion-form" autocomplete="off" onsubmit="buscarAgenda(event)">
+        <fieldset class="seccion buscador">
+          <legend>Buscar agenda médica</legend>
+          <label for="buscar-opcion">Buscar por:</label>
+          <select id="buscar-opcion" name="buscar-opcion">
+            <option value="codigo-agenda">Código de agenda</option>
+            <option value="codigo-medico">Código de médico</option>
+            <option value="id-medico">ID de médico</option>
+          </select>
+          <input type="text" id="input-busqueda" name="input-busqueda" placeholder="Ingrese dato de búsqueda" required>
+          <button type="submit" class="accion-btn buscar">BUSCAR</button>
+        </fieldset>
 
-          <!-- Período de Vigencia (disabled) -->
-          <fieldset class="seccion">
-            <legend>Período de Vigencia</legend>
-            <label for="fecha-inicio">Fecha Inicio Agenda:</label>
-            <input type="text" id="fecha-inicio" name="fecha-inicio" value="" disabled placeholder="Fecha de inicio">
+        <fieldset class="seccion">
+          <legend>Identificación de la Agenda</legend>
+          <label for="codigo-agenda">Código de Agenda:</label>
+          <input type="text" id="codigo-agenda" name="codigo-agenda" value="" disabled
+            placeholder="Código de la agenda">
+        </fieldset>
 
-            <label for="fecha-fin">Fecha Finalización Agenda:</label>
-            <input type="text" id="fecha-fin" name="fecha-fin" value="" disabled placeholder="Fecha de finalización">
-          </fieldset>
+        <fieldset class="seccion">
+          <legend>Asignación del Médico</legend>
+          <label for="medico">Médico:</label>
+          <input type="text" id="medico" name="medico" value="" disabled placeholder="Nombre del médico">
 
-          <!-- Clasificación (disabled) -->
-          <fieldset class="seccion">
-            <legend>Clasificación y Observaciones</legend>
-            <label for="motivo">Motivo:</label>
-            <input type="text" id="motivo" name="motivo" value="" disabled placeholder="Motivo de la agenda">
+          <label for="especialidad">Especialidad:</label>
+          <input type="text" id="especialidad" name="especialidad" value="" disabled
+            placeholder="Especialidad del médico">
+        </fieldset>
 
-            <label for="observaciones">Observaciones:</label>
-            <textarea id="observaciones" name="observaciones" rows="3" disabled placeholder="Observaciones de la agenda"></textarea>
-          </fieldset>
-
-          <!-- Botón regresar -->
-          <div class="botones-accion">
-            <button type="button" class="accion-btn regresar" onclick="location.href='acciones-crud-agendas-medicas.html'">REGRESAR</button>
+        <fieldset class="seccion">
+          <legend>Período de Vigencia</legend>
+          <div class="fila-flexible">
+            <div class="columna-flexible">
+              <label for="fecha-inicio">Fecha Inicio Agenda:</label>
+              <input type="text" id="fecha-inicio" name="fecha-inicio" value="" disabled placeholder="Fecha de inicio">
+            </div>
+            <div class="columna-flexible">
+              <label for="fecha-fin">Fecha Finalización Agenda:</label>
+              <input type="text" id="fecha-fin" name="fecha-fin" value="" disabled placeholder="Fecha de finalización">
+            </div>
           </div>
-        </form>
-      </section>
-    </main>
+        </fieldset>
 
-    <footer>
-      <p>
-        &copy; 2025 Hospital San Paco. Todos los derechos reservados. |
-        Contacto: <a href="mailto:info@sanpaco.com">info@sanpaco.com</a>
-      </p>
-    </footer>
+        <fieldset class="seccion">
+          <legend>Configuración de Horario y Turnos</legend>
 
-    <script>
-      function buscarAgenda(event) {
-        event.preventDefault();
-        alert("Funcionalidad de búsqueda pendiente de integración.");
-        // Aquí iría la lógica para buscar y cargar los datos
-      }
-    </script>
-  </body>
+          <div class="fila-flexible">
+            <div class="columna-flexible">
+              <label for="hora-inicio-turno">Hora Inicio Turno:</label>
+              <input type="time" id="hora-inicio-turno" name="hora-inicio-turno" disabled>
+            </div>
+            <div class="columna-flexible">
+              <label for="hora-fin-turno">Hora Fin Turno:</label>
+              <input type="time" id="hora-fin-turno" name="hora-fin-turno" disabled>
+            </div>
+          </div>
+
+          <label>Días de Atención:</label>
+          <div class="contenedor-dias">
+            <label class="dia-label"><input type="checkbox" name="dia" value="L" disabled> Lun</label>
+            <label class="dia-label"><input type="checkbox" name="dia" value="M" disabled> Mar</label>
+            <label class="dia-label"><input type="checkbox" name="dia" value="X" disabled> Mié</label>
+            <label class="dia-label"><input type="checkbox" name="dia" value="J" disabled> Jue</label>
+            <label class="dia-label"><input type="checkbox" name="dia" value="V" disabled> Vie</label>
+            <label class="dia-label"><input type="checkbox" name="dia" value="S" disabled> Sáb</label>
+            <label class="dia-label"><input type="checkbox" name="dia" value="D" disabled> Dom</label>
+          </div>
+
+          <label for="duracion">Duración por Cita (Minutos):</label>
+          <input type="text" id="duracion" name="duracion" disabled placeholder="Duración en minutos">
+        </fieldset>
+
+        <fieldset class="seccion">
+          <legend>Clasificación y Observaciones</legend>
+          <label for="motivo">Motivo:</label>
+          <input type="text" id="motivo" name="motivo" value="" disabled placeholder="Motivo de la agenda">
+
+          <label for="observaciones">Observaciones:</label>
+          <textarea id="observaciones" name="observaciones" rows="3" disabled
+            placeholder="Observaciones de la agenda"></textarea>
+        </fieldset>
+
+        <div class="botones-accion">
+          <button type="button" class="accion-btn regresar"
+            onclick="location.href='acciones-crud-agendas-medicas.html'">REGRESAR</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Hospital San Paco. Todos los derechos reservados. | Contacto: <a
+        href="mailto:info@sanpaco.com">info@sanpaco.com</a></p>
+  </footer>
+
+  <script>
+    function buscarAgenda(event) {
+      event.preventDefault();
+      alert("Simulación: Datos de agenda cargados.");
+
+      document.getElementById('codigo-agenda').value = "AGD-00125";
+      document.getElementById('medico').value = "Dr. Carlos Mendoza";
+      document.getElementById('especialidad').value = "Cardiología";
+      document.getElementById('fecha-inicio').value = "01/11/2025";
+      document.getElementById('fecha-fin').value = "30/11/2025";
+      document.getElementById('hora-inicio-turno').value = "08:00";
+      document.getElementById('hora-fin-turno').value = "17:00";
+      document.getElementById('duracion').value = "20";
+      document.getElementById('motivo').value = "Creación Periódica";
+      document.getElementById('observaciones').value = "Sin observaciones.";
+
+      const dias = document.querySelectorAll('input[name="dia"]');
+      dias.forEach(d => { if (d.value !== 'S' && d.value !== 'D') d.checked = true; });
+    }
+  </script>
+</body>
+
 </html>

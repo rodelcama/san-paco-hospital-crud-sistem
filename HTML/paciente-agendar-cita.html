@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>San Paco | Agendar Nueva Cita</title>
   <link rel="stylesheet" href="../CSS/paciente-agendar-cita.css" />
 </head>
+
 <body>
   <nav class="navbar">
     <div class="navbar-logo-nombre-centro">
@@ -28,12 +30,11 @@
 
   <main>
     <section class="gestion-section">
-      <!-- Saludo del paciente -->
       <div class="saludo-paciente">
         ¡Hola, <span id="nombre-paciente">Carolina Andrea Gómez Rivas</span>!
       </div>
+
       <form class="gestion-form" autocomplete="off" onsubmit="agendarCita(event)">
-        <!-- Identificación y estado del paciente -->
         <fieldset class="seccion">
           <legend>Identificación y Estado</legend>
           <div class="datos-generales">
@@ -56,9 +57,9 @@
           </div>
         </fieldset>
 
-        <!-- Datos de la cita -->
         <fieldset class="seccion">
           <legend>Datos de la Cita Médica</legend>
+
           <label for="tipo-cita">Tipo de cita:</label>
           <select id="tipo-cita" name="tipo-cita" required>
             <option value="">Seleccione tipo...</option>
@@ -100,7 +101,8 @@
 
         <div class="botones-accion">
           <button type="submit" class="accion-btn confirmar">CONFIRMAR CITA</button>
-          <button type="button" class="accion-btn regresar" onclick="window.location.href='menu-agendamiento-pacientes.html'">REGRESAR</button>
+          <button type="button" class="accion-btn regresar"
+            onclick="window.location.href='menu-agendamiento-pacientes.html'">REGRESAR</button>
         </div>
       </form>
     </section>
@@ -124,10 +126,12 @@
       'oftalmología': ['Dra. Carmen Torres'],
       'medicina-interna': ['Dr. Pablo Aguirre', 'Dra. Marisol Sánchez']
     };
+
     function cargarMedicos() {
       const especialidad = document.getElementById('especialidad').value;
       const medicoSelect = document.getElementById('medico');
-      medicoSelect.innerHTML = '<option value="">Seleccione especialidad primero...</option>';
+      medicoSelect.innerHTML = '<option value="">Seleccione un médico...</option>';
+
       if (especialidad && medicosPorEspecialidad[especialidad]) {
         medicosPorEspecialidad[especialidad].forEach(nombre => {
           const option = document.createElement('option');
@@ -138,18 +142,29 @@
       }
       document.getElementById('hora-cita').innerHTML = '<option value="">Seleccione fecha y médico primero...</option>';
     }
+
+    // Event Listeners para cargar horarios
     document.getElementById('medico').addEventListener('change', cargarHorarios);
     document.getElementById('fecha-cita').addEventListener('change', cargarHorarios);
+
     function cargarHorarios() {
       const medico = document.getElementById('medico').value;
       const fecha = document.getElementById('fecha-cita').value;
       const horaSelect = document.getElementById('hora-cita');
+
       if (medico && fecha) {
+        // NOTA: Horarios ajustados a intervalos de 20 minutos 
+        // para coincidir con la configuración de la Agenda Médica del sistema.
         const horarios = [
-          '08:00', '08:30', '09:00', '09:30', '10:00', '10:30',
-          '11:00', '11:30', '14:00', '14:30', '15:00', '15:30',
-          '16:00', '16:30', '17:00', '17:30'
+          "08:00", "08:20", "08:40",
+          "09:00", "09:20", "09:40",
+          "10:00", "10:20", "10:40",
+          "11:00", "11:20", "11:40",
+          "14:00", "14:20", "14:40",
+          "15:00", "15:20", "15:40",
+          "16:00", "16:20", "16:40"
         ];
+
         horaSelect.innerHTML = '<option value="">Seleccione un horario...</option>';
         horarios.forEach(hora => {
           const option = document.createElement('option');
@@ -159,6 +174,7 @@
         });
       }
     }
+
     function agendarCita(event) {
       event.preventDefault();
       alert("¡Cita agendada exitosamente!\n\nLe enviaremos un recordatorio por correo o SMS.");
@@ -168,4 +184,5 @@
     }
   </script>
 </body>
+
 </html>

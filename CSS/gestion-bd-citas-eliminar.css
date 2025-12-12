@@ -30,16 +30,19 @@ body {
   justify-content: center;
   align-items: center;
 }
+
 .navbar-logo-nombre-centro {
   display: flex;
   align-items: center;
   gap: 0.7rem;
 }
+
 .navbar-logo {
   width: 36px;
   height: 36px;
   border-radius: 50%;
 }
+
 .navbar-title {
   font-size: 1.25rem;
   color: #1565c0;
@@ -60,6 +63,7 @@ body {
   box-shadow: 0 2px 6px rgba(79, 195, 247, 0.05);
   padding: 1.1rem 0.7rem 0.8rem 0.7rem;
 }
+
 .dashboard-title,
 .modulo-header h2 {
   font-size: 1.45rem;
@@ -67,6 +71,7 @@ body {
   letter-spacing: 1.5px;
   margin-top: 0.5rem;
 }
+
 .breadcrumb {
   font-size: 1.1rem;
   color: #1565c0;
@@ -199,9 +204,11 @@ textarea:disabled {
 .accion-btn.buscar {
   background: #1565c0;
 }
+
 .accion-btn.regresar {
   background: #0d47a1;
 }
+
 .accion-btn.eliminar {
   background: #f44336;
 }
@@ -235,6 +242,7 @@ footer {
   text-align: left;
   padding-left: 2px;
 }
+
 .mensaje-paciente.exito {
   color: #388e3c;
   background: #e8f5e9;
@@ -242,6 +250,7 @@ footer {
   padding: 2px 6px;
   border-radius: 5px;
 }
+
 .mensaje-paciente.error {
   color: #b71c1c;
   background: #fff3f3;
@@ -257,32 +266,59 @@ footer {
     width: 94vw;
     padding: 1rem 1.5rem 1.5rem 1.5rem;
   }
+
   .seccion {
     padding: 1rem;
   }
 }
+
 @media (max-width: 600px) {
   .botones-accion {
     flex-direction: column;
   }
+
   .accion-btn {
     width: 100%;
     min-width: unset;
   }
+
   .dashboard-title,
   .modulo-header h2 {
     font-size: 1.2rem;
   }
 }
+
 @media (max-width: 450px) {
   .navbar-logo {
     width: 28px;
     height: 28px;
   }
+
   .navbar-title {
     font-size: 1rem;
   }
+
   .gestion-section {
     padding: 0.8rem 1rem;
   }
+}
+
+
+/* ESTILOS DE MENSAJES */
+.mensaje-paciente {
+  font-size: 0.9rem;
+  margin-top: 8px;
+  font-weight: 600;
+  min-height: 1.2em;
+  text-align: center;
+}
+
+.mensaje-paciente.exito {
+  color: #2e7d32;
+  /* Verde éxito */
+}
+
+.mensaje-paciente.error {
+  color: #c62828;
+  /* Rojo error */
 }

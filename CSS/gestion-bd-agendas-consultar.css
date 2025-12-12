@@ -30,16 +30,19 @@ body {
   justify-content: center;
   align-items: center;
 }
+
 .navbar-logo-nombre-centro {
   display: flex;
   align-items: center;
   gap: 0.7rem;
 }
+
 .navbar-logo {
   width: 36px;
   height: 36px;
   border-radius: 50%;
 }
+
 .navbar-title {
   font-size: 1.25rem;
   color: #1565c0;
@@ -60,6 +63,7 @@ body {
   box-shadow: 0 2px 6px rgba(79, 195, 247, 0.05);
   padding: 1.1rem 0.7rem 0.8rem 0.7rem;
 }
+
 .dashboard-title,
 .modulo-header h2 {
   font-size: 1.45rem;
@@ -67,6 +71,7 @@ body {
   letter-spacing: 1.5px;
   margin-top: 0.5rem;
 }
+
 .breadcrumb {
   font-size: 1.1rem;
   color: #1565c0;
@@ -183,6 +188,7 @@ textarea:disabled {
 .accion-btn.buscar {
   background: #1565c0;
 }
+
 .accion-btn.regresar {
   background: #0d47a1;
 }
@@ -241,6 +247,7 @@ footer {
     width: 28px;
     height: 28px;
   }
+
   .navbar-title {
     font-size: 1rem;
   }
@@ -248,4 +255,39 @@ footer {
   .gestion-section {
     padding: 0.8rem 1rem;
   }
+}
+
+/* NUEVOS ESTILOS PARA HORARIOS Y FECHAS */
+.fila-flexible {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+
+.columna-flexible {
+  flex: 1;
+  min-width: 200px;
+}
+
+.contenedor-dias {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  padding: 0.8rem;
+  background: #e3eaec;
+  /* Fondo gris para indicar deshabilitado */
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+
+.dia-label {
+  font-weight: normal;
+  color: #555;
+  /* Texto más oscuro pero suave */
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }

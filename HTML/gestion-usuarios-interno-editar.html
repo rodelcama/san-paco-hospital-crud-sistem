@@ -108,5 +108,150 @@
         Contacto: <a href="mailto:info@sanpaco.com">info@sanpaco.com</a>
       </p>
     </footer>
+
+<script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const inputCodigo = document.getElementById('codigo-interno');
+        let datalist = document.getElementById('lista-codigos-internos');
+        const form = document.querySelector('.gestion-usuarios-form');
+        let usuarioActual = null;
+
+        // CORRECCIÓN: Función para limpiar de raíz el formulario y sobreescribir valores de prueba del HTML
+        function limpiarFormularioCompleto() {
+          if (form) form.reset();
+          
+          // Forzamos que todos los campos queden vacíos (eliminando cualquier "value" por defecto)
+          const campos = ['codigo-interno', 'tipo-interno', 'nombre', 'apellido', 'tipo-documento', 'numero-documento', 'password'];
+          campos.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.value = '';
+          });
+
+          // Manejar el campo de login que puede llamarse 'login' o 'usuario-login'
+          const inputLogin = document.getElementById('login') || document.getElementById('usuario-login');
+          if (inputLogin) inputLogin.value = '';
+
+          // Desmarcar todos los checkboxes de permisos
+          document.querySelectorAll('input[name="permiso"]').forEach(checkbox => checkbox.checked = false);
+          
+          usuarioActual = null;
+        }
+
+        // Función para refrescar el datalist con los datos reales de LocalStorage
+        function actualizarDatalist() {
+          const usuariosGuardados = JSON.parse(localStorage.getItem('usuariosInternos')) || [];
+          if (!datalist && inputCodigo) {
+            datalist = document.createElement('datalist');
+            datalist.id = 'lista-codigos-internos';
+            inputCodigo.setAttribute('list', 'lista-codigos-internos');
+            inputCodigo.parentNode.appendChild(datalist);
+          }
+          if (datalist) {
+            datalist.innerHTML = '';
+            usuariosGuardados.forEach(usuario => {
+              const option = document.createElement('option');
+              option.value = usuario.codigo;
+              option.textContent = `${usuario.codigo} - ${usuario.nombre} ${usuario.apellido}`;
+              datalist.appendChild(option);
+            });
+          }
+        }
+
+        // Inicializar la pantalla borrando los ejemplos quemados al cargar la página
+        limpiarFormularioCompleto();
+        actualizarDatalist();
+
+        // Escuchar cuando se digita o selecciona un código para precargar sus datos reales
+        if (inputCodigo) {
+          inputCodigo.addEventListener('input', function() {
+            const usuariosGuardados = JSON.parse(localStorage.getItem('usuariosInternos')) || [];
+            const codigoBuscado = this.value;
+            usuarioActual = usuariosGuardados.find(u => u.codigo === codigoBuscado);
+
+            if (usuarioActual) {
+              if (document.getElementById('tipo-interno')) document.getElementById('tipo-interno').value = usuarioActual.tipo;
+              if (document.getElementById('nombre')) document.getElementById('nombre').value = usuarioActual.nombre;
+              if (document.getElementById('apellido')) document.getElementById('apellido').value = usuarioActual.apellido;
+              if (document.getElementById('tipo-documento')) document.getElementById('tipo-documento').value = usuarioActual.tipoDocumento;
+              if (document.getElementById('numero-documento')) document.getElementById('numero-documento').value = usuarioActual.numeroDocumento;
+              
+              const inputLogin = document.getElementById('login') || document.getElementById('usuario-login');
+              if (inputLogin) inputLogin.value = usuarioActual.login;
+              
+              if (document.getElementById('password')) document.getElementById('password').value = usuarioActual.password;
+
+              document.querySelectorAll('input[name="permiso"]').forEach(checkbox => {
+                checkbox.checked = usuarioActual.permisos.includes(checkbox.value);
+              });
+            } else {
+              // Si borran el código o digitan algo inexistente, limpiamos todo excepto el código actual
+              const codigoTemporal = this.value;
+              limpiarFormularioCompleto();
+              inputCodigo.value = codigoTemporal;
+            }
+          });
+        }
+
+        // Función del botón "Regenerar" contraseña
+        const btnRegenerar = document.querySelector('.btn-generar-pass');
+        if (btnRegenerar) {
+          btnRegenerar.addEventListener('click', function() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*';
+            let pass = '';
+            for (let i = 0; i < 10; i++) {
+              pass += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            if (document.getElementById('password')) document.getElementById('password').value = pass;
+          });
+        }
+
+        // Procesar el formulario cuando el Administrador guarde los cambios
+        if (form) {
+          form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            if (!usuarioActual) {
+              alert('Por favor, seleccione primero un código de usuario válido para modificar.');
+              return;
+            }
+
+            let usuariosGuardados = JSON.parse(localStorage.getItem('usuariosInternos')) || [];
+
+            // Capturar permisos actualizados
+            const permisosActualizados = [];
+            document.querySelectorAll('input[name="permiso"]:checked').forEach((checkbox) => {
+              permisosActualizados.push(checkbox.value);
+            });
+
+            // Asignar los nuevos datos al objeto original
+            usuarioActual.tipo = document.getElementById('tipo-interno').value;
+            usuarioActual.nombre = document.getElementById('nombre').value;
+            usuarioActual.apellido = document.getElementById('apellido').value;
+            usuarioActual.tipoDocumento = document.getElementById('tipo-documento').value;
+            usuarioActual.numeroDocumento = document.getElementById('numero-documento').value;
+            
+            const inputLogin = document.getElementById('login') || document.getElementById('usuario-login');
+            if (inputLogin) usuarioActual.login = inputLogin.value;
+            
+            if (document.getElementById('password')) usuarioActual.password = document.getElementById('password').value;
+            usuarioActual.permisos = permisosActualizados;
+
+            // Guardar cambios en el arreglo
+            const index = usuariosGuardados.findIndex(u => u.codigo === usuarioActual.codigo);
+            if (index !== -1) {
+              usuariosGuardados[index] = usuarioActual;
+              localStorage.setItem('usuariosInternos', JSON.stringify(usuariosGuardados));
+              
+              alert('¡Usuario modificado con éxito en el sistema!');
+              
+              // Limpiar por completo todo para la siguiente acción y actualizar la lista desplegable
+              limpiarFormularioCompleto();
+              actualizarDatalist();
+            }
+          });
+        }
+      });
+    </script>
+
   </body>
 </html>

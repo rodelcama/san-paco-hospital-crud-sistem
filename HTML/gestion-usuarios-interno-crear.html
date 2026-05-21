@@ -130,19 +130,22 @@
         document.getElementById('password').value = pass;
       });
 
-      // 3. Generar un código de empleado único al cargar la página
-      document.addEventListener('DOMContentLoaded', () => {
-        // Leemos si ya hay usuarios, si no, es un arreglo vacío
+      // Función independiente para calcular y asignar el código consecutivo automáticamente
+      function asignarSiguienteCodigo() {
         const usuariosGuardados = JSON.parse(localStorage.getItem('usuariosInternos')) || [];
-        // Creamos el código sumando 1 a la cantidad de usuarios que existan
         const nuevoCodigo = 'EMP-' + String(usuariosGuardados.length + 1).padStart(5, '0');
         document.getElementById('codigo-interno').value = nuevoCodigo;
+      }
+
+      // 3. Generar un código de empleado único al cargar la página
+      document.addEventListener('DOMContentLoaded', () => {
+        asignarSiguienteCodigo();
       });
 
       // 4. Guardar en LocalStorage al hacer clic en "CREAR"
       const form = document.querySelector('.gestion-usuarios-form');
       form.addEventListener('submit', function(e) {
-        e.preventDefault(); // Evita que la página se recargue al enviar el formulario
+        e.preventDefault(); // Evita que la página se recargue
 
         // Capturar los permisos seleccionados
         const permisosSeleccionados = [];
@@ -161,7 +164,7 @@
           login: document.getElementById('usuario-login').value,
           password: document.getElementById('password').value,
           permisos: permisosSeleccionados,
-          estado: 'Activo' // Añadimos un estado por defecto
+          estado: 'Activo'
         };
 
         // Obtener usuarios previos
@@ -180,10 +183,11 @@
 
         alert('¡Usuario creado con éxito!');
 
-        // Redirigir al menú anterior después de crear
-        window.location.href = 'acciones-crud-interno.html';
+        // CORRECCIÓN APLICADA: Limpiar formulario y mantener la vista lista para otro registro
+        form.reset();
+        asignarSiguienteCodigo(); 
       });
-    </script> 
+    </script>
     
   </body>
 </html>

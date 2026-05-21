@@ -94,5 +94,65 @@
         Contacto: <a href="mailto:info@sanpaco.com">info@sanpaco.com</a>
       </p>
     </footer>
+
+<script>
+      document.addEventListener('DOMContentLoaded', () => {
+        // 1. Obtener los usuarios que creamos y guardamos en LocalStorage
+        const usuariosGuardados = JSON.parse(localStorage.getItem('usuariosInternos')) || [];
+
+        // 2. Llenar la lista desplegable (datalist) con los usuarios reales
+        const datalist = document.getElementById('lista-codigos-internos');
+        datalist.innerHTML = ''; // Limpiamos los datos de prueba quemados
+        
+        usuariosGuardados.forEach(usuario => {
+          const option = document.createElement('option');
+          option.value = usuario.codigo;
+          option.textContent = `${usuario.codigo} - ${usuario.nombre} ${usuario.apellido}`;
+          datalist.appendChild(option);
+        });
+
+        // 3. Limpiar los campos del formulario al cargar la página (para borrar los datos quemados)
+        function limpiarCampos() {
+          document.getElementById('tipo-interno').value = '';
+          document.getElementById('nombre').value = '';
+          document.getElementById('apellido').value = '';
+          document.getElementById('tipo-documento').value = '';
+          document.getElementById('numero-documento').value = '';
+          document.getElementById('login').value = '';
+          document.querySelectorAll('input[name="permiso"]').forEach(checkbox => checkbox.checked = false);
+        }
+        
+        limpiarCampos();
+
+        // 4. Escuchar cuando el usuario selecciona o escribe un código para llenar los datos
+        const inputCodigo = document.getElementById('codigo-interno');
+        
+        inputCodigo.addEventListener('input', function() {
+          const codigoBuscado = this.value;
+          
+          // Buscar en el LocalStorage el usuario que tenga ese código exacto
+          const usuarioEncontrado = usuariosGuardados.find(u => u.codigo === codigoBuscado);
+
+          if (usuarioEncontrado) {
+            // Si lo encuentra, llenamos todos los inputs con la información de ese usuario
+            document.getElementById('tipo-interno').value = usuarioEncontrado.tipo;
+            document.getElementById('nombre').value = usuarioEncontrado.nombre;
+            document.getElementById('apellido').value = usuarioEncontrado.apellido;
+            document.getElementById('tipo-documento').value = usuarioEncontrado.tipoDocumento;
+            document.getElementById('numero-documento').value = usuarioEncontrado.numeroDocumento;
+            document.getElementById('login').value = usuarioEncontrado.login;
+
+            // Marcamos solo las casillas de los permisos que el usuario tenga asignados
+            document.querySelectorAll('input[name="permiso"]').forEach(checkbox => {
+              checkbox.checked = usuarioEncontrado.permisos.includes(checkbox.value);
+            });
+          } else {
+            // Si el código no existe o el usuario borra lo que escribió, limpiamos la pantalla
+            limpiarCampos();
+          }
+        });
+      });
+    </script>
+
   </body>
 </html>

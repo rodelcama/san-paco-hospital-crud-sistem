@@ -100,5 +100,119 @@
         Contacto: <a href="mailto:info@sanpaco.com">info@sanpaco.com</a>
       </p>
     </footer>
+
+<script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const inputCodigo = document.getElementById('codigo-interno');
+        let datalist = document.getElementById('lista-codigos-internos');
+        const form = document.querySelector('.gestion-usuarios-form');
+        let usuarioActual = null;
+
+        // Función para limpiar de raíz el formulario y sobreescribir valores de prueba
+        function limpiarFormularioCompleto() {
+          if (form) form.reset();
+          
+          const campos = ['codigo-interno', 'tipo-interno', 'nombre', 'apellido', 'tipo-documento', 'numero-documento'];
+          campos.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.value = '';
+          });
+
+          const inputLogin = document.getElementById('login') || document.getElementById('usuario-login');
+          if (inputLogin) inputLogin.value = '';
+
+          document.querySelectorAll('input[name="permiso"]').forEach(checkbox => checkbox.checked = false);
+          
+          usuarioActual = null;
+        }
+
+        // Función para refrescar el datalist
+        function actualizarDatalist() {
+          const usuariosGuardados = JSON.parse(localStorage.getItem('usuariosInternos')) || [];
+          if (!datalist && inputCodigo) {
+            datalist = document.createElement('datalist');
+            datalist.id = 'lista-codigos-internos';
+            inputCodigo.setAttribute('list', 'lista-codigos-internos');
+            inputCodigo.parentNode.appendChild(datalist);
+          }
+          if (datalist) {
+            datalist.innerHTML = '';
+            usuariosGuardados.forEach(usuario => {
+              const option = document.createElement('option');
+              option.value = usuario.codigo;
+              option.textContent = `${usuario.codigo} - ${usuario.nombre} ${usuario.apellido}`;
+              datalist.appendChild(option);
+            });
+          }
+        }
+
+        // Inicializar pantalla limpia
+        limpiarFormularioCompleto();
+        actualizarDatalist();
+
+        // Escuchar cuando se digita o selecciona un código
+        if (inputCodigo) {
+          inputCodigo.addEventListener('input', function() {
+            const usuariosGuardados = JSON.parse(localStorage.getItem('usuariosInternos')) || [];
+            const codigoBuscado = this.value;
+            usuarioActual = usuariosGuardados.find(u => u.codigo === codigoBuscado);
+
+            if (usuarioActual) {
+              if (document.getElementById('tipo-interno')) document.getElementById('tipo-interno').value = usuarioActual.tipo;
+              if (document.getElementById('nombre')) document.getElementById('nombre').value = usuarioActual.nombre;
+              if (document.getElementById('apellido')) document.getElementById('apellido').value = usuarioActual.apellido;
+              if (document.getElementById('tipo-documento')) document.getElementById('tipo-documento').value = usuarioActual.tipoDocumento;
+              if (document.getElementById('numero-documento')) document.getElementById('numero-documento').value = usuarioActual.numeroDocumento;
+              
+              const inputLogin = document.getElementById('login') || document.getElementById('usuario-login');
+              if (inputLogin) inputLogin.value = usuarioActual.login;
+
+              document.querySelectorAll('input[name="permiso"]').forEach(checkbox => {
+                checkbox.checked = usuarioActual.permisos.includes(checkbox.value);
+              });
+            } else {
+              const codigoTemporal = this.value;
+              limpiarFormularioCompleto();
+              inputCodigo.value = codigoTemporal;
+            }
+          });
+        }
+
+        // CORRECCIÓN: Buscar directamente el botón de ELIMINAR por su clase o por su texto
+        const btnEliminar = document.querySelector('.accion-btn.eliminar') || 
+                            Array.from(document.querySelectorAll('button')).find(b => b.textContent.trim().toUpperCase() === 'ELIMINAR');
+
+        if (btnEliminar) {
+          // Escuchar el clic directo sobre el botón, ignorando el "submit" del formulario
+          btnEliminar.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            if (!usuarioActual) {
+              alert('Por favor, seleccione primero un código de usuario válido para eliminar.');
+              return;
+            }
+
+            // Alerta de confirmación de seguridad
+            const confirmacion = confirm(`¿Está seguro que desea ELIMINAR permanentemente al usuario ${usuarioActual.nombre} ${usuarioActual.apellido}? Esta acción no se puede deshacer.`);
+            
+            if (confirmacion) {
+              let usuariosGuardados = JSON.parse(localStorage.getItem('usuariosInternos')) || [];
+              
+              // Filtrar la base de datos para conservar todos los usuarios EXCEPTO el que queremos eliminar
+              usuariosGuardados = usuariosGuardados.filter(u => u.codigo !== usuarioActual.codigo);
+              
+              // Guardar la nueva lista en LocalStorage
+              localStorage.setItem('usuariosInternos', JSON.stringify(usuariosGuardados));
+              
+              alert('¡Usuario eliminado con éxito del sistema!');
+              
+              limpiarFormularioCompleto();
+              actualizarDatalist();
+            }
+          });
+        }
+      });
+    </script>
+
   </body>
 </html>

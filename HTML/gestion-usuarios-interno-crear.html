@@ -107,8 +107,8 @@
       </p>
     </footer>
 
-        <script>
-      // Función para actualizar usuario/login con el número de documento
+    <script>
+      // 1. Función para actualizar usuario/login con el número de documento
       function actualizarUsuarioLogin() {
         const numeroDocumento = document.getElementById('numero-documento').value;
         const usuarioLogin = document.getElementById('usuario-login');
@@ -119,6 +119,71 @@
           usuarioLogin.value = '';
         }
       }
-    </script>
+
+      // 2. Función para generar contraseña aleatoria con el botón "Regenerar"
+      document.querySelector('.btn-generar-pass').addEventListener('click', function() {
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*';
+        let pass = '';
+        for (let i = 0; i < 10; i++) {
+          pass += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        document.getElementById('password').value = pass;
+      });
+
+      // 3. Generar un código de empleado único al cargar la página
+      document.addEventListener('DOMContentLoaded', () => {
+        // Leemos si ya hay usuarios, si no, es un arreglo vacío
+        const usuariosGuardados = JSON.parse(localStorage.getItem('usuariosInternos')) || [];
+        // Creamos el código sumando 1 a la cantidad de usuarios que existan
+        const nuevoCodigo = 'EMP-' + String(usuariosGuardados.length + 1).padStart(5, '0');
+        document.getElementById('codigo-interno').value = nuevoCodigo;
+      });
+
+      // 4. Guardar en LocalStorage al hacer clic en "CREAR"
+      const form = document.querySelector('.gestion-usuarios-form');
+      form.addEventListener('submit', function(e) {
+        e.preventDefault(); // Evita que la página se recargue al enviar el formulario
+
+        // Capturar los permisos seleccionados
+        const permisosSeleccionados = [];
+        document.querySelectorAll('input[name="permiso"]:checked').forEach((checkbox) => {
+          permisosSeleccionados.push(checkbox.value);
+        });
+
+        // Crear el objeto del nuevo usuario con los datos de los inputs
+        const nuevoUsuario = {
+          codigo: document.getElementById('codigo-interno').value,
+          tipo: document.getElementById('tipo-interno').value,
+          nombre: document.getElementById('nombre').value,
+          apellido: document.getElementById('apellido').value,
+          tipoDocumento: document.getElementById('tipo-documento').value,
+          numeroDocumento: document.getElementById('numero-documento').value,
+          login: document.getElementById('usuario-login').value,
+          password: document.getElementById('password').value,
+          permisos: permisosSeleccionados,
+          estado: 'Activo' // Añadimos un estado por defecto
+        };
+
+        // Obtener usuarios previos
+        let usuariosGuardados = JSON.parse(localStorage.getItem('usuariosInternos')) || [];
+
+        // Validación: Evitar crear dos usuarios con la misma cédula
+        const existe = usuariosGuardados.find(u => u.numeroDocumento === nuevoUsuario.numeroDocumento);
+        if(existe) {
+          alert('Error: Ya existe un usuario registrado con este número de documento.');
+          return;
+        }
+
+        // Guardar el nuevo usuario en el arreglo y luego en LocalStorage
+        usuariosGuardados.push(nuevoUsuario);
+        localStorage.setItem('usuariosInternos', JSON.stringify(usuariosGuardados));
+
+        alert('¡Usuario creado con éxito!');
+
+        // Redirigir al menú anterior después de crear
+        window.location.href = 'acciones-crud-interno.html';
+      });
+    </script> 
+    
   </body>
 </html>
